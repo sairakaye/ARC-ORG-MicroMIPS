@@ -1,10 +1,12 @@
-package sample;
+package MicroMIPS.src.sample;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+
+import java.util.ArrayList;
 
 public class Controller {
     @FXML
@@ -34,8 +36,56 @@ public class Controller {
 
     private String[] savedCode;
 
+    private ArrayList<Instruction> instructions = new ArrayList<>();
+
     @FXML
-    public void processCode() {
+    private void processCode() {
         savedCode = codingArea.getText().split("\\n");
+        makeInstructions();
+    }
+
+    @FXML
+    public void clear() {
+        codingArea.clear();
+        instructions.clear();
+    }
+
+    private void makeInstructions() {
+
+        for(String line : savedCode) {
+            String[] temp = line.split(" ");
+
+            switch (temp[0]) {
+                case "LD":
+                    instructions.add(new LD(line));
+                    break;
+
+                case "SD":
+                    instructions.add(new SD(line));
+                    break;
+
+                case "DADDIU":
+                    instructions.add(new DADDIU(line));
+                    break;
+
+                case "DADDU":
+                    instructions.add(new DADDU(line));
+                    break;
+
+                case "BC":
+                    // TODO fix implementation of this
+                    instructions.add(new BC(line));
+                    break;
+
+                case "BEQC":
+                    // TODO fix implementation of this and create BEQC class
+                    break;
+
+                case "XORI":
+                    instructions.add(new XORI(line));
+                    break;
+            }
+        }
+
     }
 }

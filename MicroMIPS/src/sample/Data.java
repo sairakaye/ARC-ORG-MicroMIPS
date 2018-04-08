@@ -1,4 +1,4 @@
-package sample;
+package MicroMIPS.src.sample;
 
 public class Data {
 
