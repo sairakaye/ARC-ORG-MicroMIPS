@@ -1,4 +1,4 @@
-package MicroMIPS.src.sample;
+package sample;
 
 public class XORI extends Instruction {
 

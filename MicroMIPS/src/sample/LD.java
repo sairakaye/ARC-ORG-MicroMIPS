@@ -1,4 +1,4 @@
-package MicroMIPS.src.sample;
+package sample;
 
 class LD extends Instruction{
 

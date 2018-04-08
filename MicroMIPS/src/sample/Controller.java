@@ -1,4 +1,4 @@
-package MicroMIPS.src.sample;
+package sample;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -36,11 +36,17 @@ public class Controller {
 
     private String[] savedCode;
 
-    private ArrayList<Instruction> instructions = new ArrayList<>();
+    private ArrayList<Instruction> instructions = new ArrayList<Instruction>();
 
     @FXML
     private void processCode() {
         savedCode = codingArea.getText().split("\\n");
+
+        for (String code: savedCode) {
+
+        }
+
+
         makeInstructions();
     }
 
