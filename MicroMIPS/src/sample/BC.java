@@ -1,4 +1,4 @@
-package MicroMIPS.src.sample;
+package sample;
 
 public class BC extends Instruction {
 
@@ -10,5 +10,11 @@ public class BC extends Instruction {
         // TODO fix this
         setVariable("");
 
+    }
+
+    @Override
+    //TODO: FIX TOHEX ALGO
+    public String toHex() {
+        return "";
     }
 }

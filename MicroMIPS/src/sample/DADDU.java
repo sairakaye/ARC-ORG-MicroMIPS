@@ -1,4 +1,6 @@
-package MicroMIPS.src.sample;
+package sample;
+
+import java.math.BigInteger;
 
 class DADDU extends Instruction{
 
@@ -25,5 +27,12 @@ class DADDU extends Instruction{
 
         setSa("00000");
         setFunc("10101");
+    }
+
+    @Override
+    public String toHex(){
+        BigInteger dec = new BigInteger(getOPCode() + getRs() + getRt() + getRd() + getSa() + getFunc(), 2);
+
+        return dec.toString(16);
     }
 }

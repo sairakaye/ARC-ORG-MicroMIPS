@@ -14,108 +14,92 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
-   <children>
-      <MenuBar prefHeight="25.0" prefWidth="1400.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Go To" />
-          <Menu mnemonicParsing="false" text="Run">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Run Single Cycle" />
-                  <MenuItem mnemonicParsing="false" text="Run Continuously" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <TabPane layoutX="14.0" layoutY="38.0" prefHeight="645.0" prefWidth="1376.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Load">
-               <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <TextArea fx:id="codingArea" layoutX="38.0" layoutY="57.0" prefHeight="479.0" prefWidth="620.0" />
-                        <TableView layoutX="714.0" layoutY="57.0" prefHeight="532.0" prefWidth="620.0">
-                          <columns>
-                            <TableColumn prefWidth="120.0" text="Instruction" />
-                              <TableColumn prefWidth="90.0" text="Hex" />
-                            <TableColumn prefWidth="65.0" text="B: 31-26" />
-                              <TableColumn prefWidth="65.0" text="B: 25-21" />
-                              <TableColumn prefWidth="65.0" text="B: 20-16" />
-                              <TableColumn prefWidth="65.0" text="B: 15-11" />
-                              <TableColumn prefWidth="65.0" text="B: 10-6" />
-                              <TableColumn prefWidth="65.0" text="B: 5-0" />
-                          </columns>
-                        </TableView>
-                        <Button fx:id="loadButton" layoutX="432.0" layoutY="549.0" mnemonicParsing="false" onAction="#testingButton" prefHeight="41.0" prefWidth="103.0" text="Load" />
-                        <Button layoutX="554.0" layoutY="549.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="103.0" text="Reset" />
-                        <Label layoutX="38.0" layoutY="11.0" prefHeight="37.0" prefWidth="260.0" text="MicroMIPS">
-                           <font>
-                              <Font name="System Bold" size="25.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="714.0" layoutY="30.0" text="Opcode">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-               </content></Tab>
-          <Tab text="Main">
-               <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <TableView layoutX="14.0" layoutY="41.0" prefHeight="256.0" prefWidth="306.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="Address" />
-                            <TableColumn prefWidth="75.0" text="Opcode" />
-                              <TableColumn prefWidth="75.0" text="Label" />
-                              <TableColumn prefWidth="79.19999694824219" text="Instruction" />
-                          </columns>
-                        </TableView>
-                        <TableView layoutX="14.0" layoutY="346.0" prefHeight="256.0" prefWidth="306.0">
-                           <columns>
-                              <TableColumn prefWidth="75.0" text="Address" />
-                              <TableColumn prefWidth="159.1999969482422" text="Representation" />
-                              <TableColumn prefWidth="70.4000244140625" text="Label" />
-                              <TableColumn prefWidth="70.4000244140625" text="Code" />
-                           </columns>
-                        </TableView>
-                        <ListView layoutX="356.0" layoutY="41.0" prefHeight="563.0" prefWidth="217.0" />
-                        <TableView layoutX="596.0" layoutY="41.0" prefHeight="564.0" prefWidth="741.0">
-                          <columns>
-                            <TableColumn prefWidth="121.0" text="Cycle" />
-                          </columns>
-                        </TableView>
-                        <Label layoutX="14.0" layoutY="14.0" text="Instruction Memory">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="14.0" layoutY="319.0" text="Data Memory">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="356.0" layoutY="14.0" text="Registers">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="596.0" layoutY="14.0" text="Pipeline">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-               </content></Tab>
-        </tabs>
-      </TabPane>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MicroMIPS.src.sample.Controller">
+    <MenuBar prefHeight="25.0" prefWidth="1400.0">
+        <Menu mnemonicParsing="false" text="File">
+            <MenuItem mnemonicParsing="false" text="Close" />
+        </Menu>
+        <Menu mnemonicParsing="false" text="Go To" />
+        <Menu mnemonicParsing="false" text="Run">
+            <MenuItem mnemonicParsing="false" text="Run Single Cycle" />
+            <MenuItem mnemonicParsing="false" text="Run Continuously" />
+        </Menu>
+    </MenuBar>
+    <TabPane layoutX="14.0" layoutY="38.0" prefHeight="645.0" prefWidth="1376.0" tabClosingPolicy="UNAVAILABLE">
+        <Tab text="Load">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                <TextArea fx:id="codingArea" layoutX="38.0" layoutY="57.0" prefHeight="479.0" prefWidth="620.0" />
+                <TableView layoutX="714.0" layoutY="57.0" prefHeight="532.0" prefWidth="620.0">
+                    <columns>
+                        <TableColumn prefWidth="120.0" text="Instruction" />
+                        <TableColumn prefWidth="100.800048828125" text="Hex" />
+                        <TableColumn prefWidth="66.39996337890625" text="B: 31-26" />
+                        <TableColumn prefWidth="66.4000244140625" text="B: 25-21" />
+                        <TableColumn prefWidth="64.7999267578125" text="B: 20-16" />
+                        <TableColumn prefWidth="67.199951171875" text="B: 15-11" />
+                        <TableColumn prefWidth="71.2000732421875" text="B: 10-6" />
+                        <TableColumn prefWidth="64.7998046875" text="B: 5-0" />
+                    </columns>
+                </TableView>
+                <Button fx:id="loadButton" layoutX="432.0" layoutY="549.0" mnemonicParsing="false" onAction="#processCode" prefHeight="41.0" prefWidth="103.0" text="Load" />
+                <Button layoutX="554.0" layoutY="549.0" mnemonicParsing="false" onAction="#clear" prefHeight="41.0" prefWidth="103.0" text="Reset" />
+                <Label layoutX="38.0" layoutY="11.0" prefHeight="37.0" prefWidth="260.0" text="MicroMIPS">
+                    <font>
+                        <Font name="System Bold" size="25.0" />
+                    </font>
+                </Label>
+                <Label layoutX="714.0" layoutY="30.0" text="Opcode">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+            </AnchorPane>
+        </Tab>
+        <Tab text="Main">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                <TableView layoutX="14.0" layoutY="41.0" prefHeight="256.0" prefWidth="306.0">
+                    <columns>
+                        <TableColumn prefWidth="75.0" text="Address" />
+                        <TableColumn prefWidth="75.0" text="Opcode" />
+                        <TableColumn prefWidth="75.0" text="Label" />
+                        <TableColumn prefWidth="79.19999694824219" text="Instruction" />
+                    </columns>
+                </TableView>
+                <TableView layoutX="14.0" layoutY="346.0" prefHeight="256.0" prefWidth="306.0">
+                    <columns>
+                        <TableColumn prefWidth="75.0" text="Address" />
+                        <TableColumn prefWidth="159.1999969482422" text="Representation" />
+                        <TableColumn prefWidth="70.4000244140625" text="Label" />
+                        <TableColumn prefWidth="70.4000244140625" text="Code" />
+                    </columns>
+                </TableView>
+                <ListView layoutX="356.0" layoutY="41.0" prefHeight="563.0" prefWidth="217.0" />
+                <TableView layoutX="596.0" layoutY="41.0" prefHeight="564.0" prefWidth="741.0">
+                    <columns>
+                        <TableColumn prefWidth="121.0" text="Cycle" />
+                    </columns>
+                </TableView>
+                <Label layoutX="14.0" layoutY="14.0" text="Instruction Memory">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+                <Label layoutX="14.0" layoutY="319.0" text="Data Memory">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+                <Label layoutX="356.0" layoutY="14.0" text="Registers">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+                <Label layoutX="596.0" layoutY="14.0" text="Pipeline">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+            </AnchorPane>
+        </Tab>
+    </TabPane>
 </AnchorPane>

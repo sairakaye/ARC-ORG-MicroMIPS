@@ -1,6 +1,6 @@
-package MicroMIPS.src.sample;
+package sample;
 
-public class Instruction {
+public abstract class Instruction {
 
     Instruction() {
 
@@ -19,6 +19,9 @@ public class Instruction {
     }
 
     public void setRs(String rs) {
+        while (rs.length() < 5){
+            rs = "0" + rs;
+        }
         Rs = rs;
     }
 
@@ -27,6 +30,9 @@ public class Instruction {
     }
 
     public void setRt(String rt) {
+        while (rt.length() < 5){
+            rt = "0" + rt;
+        }
         Rt = rt;
     }
 
@@ -51,6 +57,9 @@ public class Instruction {
     }
 
     public void setRd(String rd) {
+        while (rd.length() < 5){
+            rd = "0" + rd;
+        }
         Rd = rd;
     }
 
@@ -77,6 +86,8 @@ public class Instruction {
     public void setVariable(String variable) {
         this.variable = variable;
     }
+
+    public abstract String toHex();
 
     private String OPCode;
     private String Rs;
