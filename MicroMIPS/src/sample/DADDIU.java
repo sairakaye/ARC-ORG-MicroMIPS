@@ -25,6 +25,10 @@ class DADDIU extends Instruction{
         String rt = first[1].replaceAll("\\D+", "");
         in = Integer.parseInt(rt);
         setRt(Integer.toString(in, 2));
+
+        System.out.println(rs);
+        System.out.println(rt);
+        System.out.println(Imm);
     }
 
     @Override

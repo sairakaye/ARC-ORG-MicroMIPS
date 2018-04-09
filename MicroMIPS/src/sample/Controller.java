@@ -16,23 +16,23 @@ public class Controller {
     @FXML
     private TextArea codingArea;
     @FXML
-    private TableView opcodeTable;
+    private TableView<OpcodeTableItem> opcodeTable;
     @FXML
-    private TableColumn colInstruction;
+    private TableColumn<OpcodeTableItem, String> colInstruction;
     @FXML
-    private TableColumn colHexOpcode;
+    private TableColumn<OpcodeTableItem, String>  colHexOpcode;
     @FXML
-    private TableColumn colBit31to26;
+    private TableColumn<OpcodeTableItem, String>  colBit31to26;
     @FXML
-    private TableColumn colBit25to21;
+    private TableColumn<OpcodeTableItem, String>  colBit25to21;
     @FXML
-    private TableColumn colBit20to16;
+    private TableColumn<OpcodeTableItem, String>  colBit20to16;
     @FXML
-    private TableColumn colBit15to11;
+    private TableColumn<OpcodeTableItem, String>  colBit15to11;
     @FXML
-    private TableColumn colBit10t06;
+    private TableColumn<OpcodeTableItem, String>  colBit10t06;
     @FXML
-    private TableColumn colBit5to0;
+    private TableColumn<OpcodeTableItem, String>  colBit5to0;
 
     private String[] savedCode;
 
@@ -40,14 +40,30 @@ public class Controller {
 
     @FXML
     private void processCode() {
+        boolean error = false;
         savedCode = codingArea.getText().split("\\n");
 
+        /* This will be use for error handling in code
         for (String code: savedCode) {
 
         }
 
 
+
+        if (!error) {
+            makeInstructions();
+        } else {
+            // display here the error dialog
+        }
+        */
         makeInstructions();
+
+        ArrayList<OpcodeTableItem> opcodeTableItems = new ArrayList<>();
+
+        for (Instruction i: instructions) {
+
+        }
+
     }
 
     @FXML
@@ -59,7 +75,7 @@ public class Controller {
     private void makeInstructions() {
 
         for(String line : savedCode) {
-            String[] temp = line.split(" ");
+            String[] temp = line.split("\\s+");
 
             switch (temp[0]) {
                 case "LD":

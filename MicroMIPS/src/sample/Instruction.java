@@ -89,13 +89,13 @@ public abstract class Instruction {
 
     public abstract String toHex();
 
-    private String OPCode;
-    private String Rs;
-    private String Rt;
-    private String Rd;
-    private String Imm;
-    private String Sa;
-    private String Func;
-    private String Address;
-    private String variable;
+    protected String OPCode;
+    protected String Rs;
+    protected String Rt;
+    protected String Rd;
+    protected String Imm;
+    protected String Sa;
+    protected String Func;
+    protected String Address;
+    protected String variable;
 }
