@@ -17,6 +17,8 @@ public class Controller implements Initializable{
 
     @FXML private Button resetButton;
 
+    @FXML private Button runButton;
+
     @FXML private TextArea codingArea;
 
     @FXML private ListView register_list;
