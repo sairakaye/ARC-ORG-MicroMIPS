@@ -3,9 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -15,17 +12,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
-    <MenuBar prefHeight="25.0" prefWidth="1400.0">
-        <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" text="Close" />
-        </Menu>
-        <Menu mnemonicParsing="false" text="Go To" />
-        <Menu mnemonicParsing="false" text="Run">
-            <MenuItem mnemonicParsing="false" text="Run Single Cycle" />
-            <MenuItem mnemonicParsing="false" text="Run Continuously" />
-        </Menu>
-    </MenuBar>
-    <TabPane layoutX="14.0" layoutY="38.0" prefHeight="645.0" prefWidth="1376.0" tabClosingPolicy="UNAVAILABLE">
+    <TabPane layoutX="14.0" layoutY="16.0" prefHeight="668.0" prefWidth="1376.0" tabClosingPolicy="UNAVAILABLE">
         <Tab text="Load">
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                 <TextArea fx:id="codingArea" layoutX="38.0" layoutY="57.0" prefHeight="479.0" prefWidth="620.0" />
@@ -55,7 +42,7 @@
                 </Label>
             </AnchorPane>
         </Tab>
-        <Tab text="Main">
+        <Tab onSelectionChanged="#showCyclePane" text="Main">
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                 <TableView layoutX="14.0" layoutY="41.0" prefHeight="256.0" prefWidth="306.0">
                     <columns>
@@ -73,7 +60,7 @@
                         <TableColumn prefWidth="70.4000244140625" text="Code" />
                     </columns>
                 </TableView>
-                <ListView layoutX="356.0" layoutY="41.0" prefHeight="563.0" prefWidth="217.0" />
+                <ListView fx:id="register_list" layoutX="356.0" layoutY="41.0" prefHeight="495.0" prefWidth="218.0" />
                 <Label layoutX="14.0" layoutY="14.0" text="Instruction Memory">
                     <font>
                         <Font name="System Bold" size="15.0" />
@@ -94,7 +81,8 @@
                         <Font name="System Bold" size="15.0" />
                     </font>
                 </Label>
-            <TextArea editable="false" layoutX="596.0" layoutY="41.0" prefHeight="564.0" prefWidth="741.0" />
+            <TextArea layoutX="596.0" layoutY="41.0" prefHeight="564.0" prefWidth="741.0" />
+            <Button layoutX="356.0" layoutY="550.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="218.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000;" text="Run One Cycle" />
             </AnchorPane>
         </Tab>
     </TabPane>
