@@ -10,15 +10,19 @@ public class XORI extends Instruction {
         setOPCode("001110");
 
         String[] reg = line.split(",");
+
+        
+
+
         String rs = reg[1].replaceAll("\\D+", "");
         in = Integer.parseInt(rs);
         setRs(Integer.toString(in, 2));
 
-        String imm = Integer.toString(Integer.parseInt(reg[0].replaceAll("\\D+",""), 16), 2);
+        StringBuilder imm = new StringBuilder(Integer.toString(Integer.parseInt(reg[0].replaceAll("\\D+", ""), 16), 2));
         while (imm.length() < 16){
-            imm = "0" + imm;
+            imm.insert(0, "0");
         }
-        setImm(imm);
+        setImm(imm.toString());
 
         String[] first = reg[0].split(" ");
 
