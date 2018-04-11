@@ -60,8 +60,24 @@ public class Controller {
 
         ArrayList<OpcodeTableItem> opcodeTableItems = new ArrayList<>();
 
-        for (Instruction i: instructions) {
+        for (int i = 0; i < instructions.size(); i++){
+            Instruction ins = instructions.get(i);
 
+            if (ins instanceof DADDIU)
+                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
+            else if (ins instanceof DADDU)
+                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                                                         ins.getRt(), ins.getRd(), ins.getSa(), ins.getFunc()));
+            else if (ins instanceof LD)
+                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
+            else if (ins instanceof SD)
+                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
+            else if (ins instanceof XORI)
+                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
         }
 
     }
@@ -101,6 +117,7 @@ public class Controller {
 
                 case "BEQC":
                     // TODO fix implementation of this and create BEQC class
+                    instructions.add(new BEQC(line));
                     break;
 
                 case "XORI":
