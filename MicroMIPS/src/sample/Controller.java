@@ -171,7 +171,6 @@ public class Controller implements Initializable{
     private ObservableList<String> values;
     private HashMap<Integer, Instruction> instructions;
     private int NPC;
-    private String IR;
     private String A;
     private String B;
     private String Imm;
