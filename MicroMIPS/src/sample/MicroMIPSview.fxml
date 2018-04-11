@@ -94,7 +94,7 @@
                         <Font name="System Bold" size="15.0" />
                     </font>
                 </Label>
-            <TextArea layoutX="596.0" layoutY="41.0" prefHeight="564.0" prefWidth="741.0" />
+            <TextArea editable="false" layoutX="596.0" layoutY="41.0" prefHeight="564.0" prefWidth="741.0" />
             </AnchorPane>
         </Tab>
     </TabPane>
