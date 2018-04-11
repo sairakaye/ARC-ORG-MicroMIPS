@@ -100,6 +100,12 @@ public class Controller implements Initializable{
         for(String line : savedCode) {
             String[] temp = line.split("\\s+");
 
+            if (temp[0].indexOf("\\:") > 0) {
+                String[] parsed = temp[0].split(" ");
+                temp[0] = parsed[1];
+            }
+
+
             switch (temp[0]) {
                 case "LD":
                     instructions.put(NPC, new LD(line));
