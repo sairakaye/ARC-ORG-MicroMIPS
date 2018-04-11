@@ -33,6 +33,25 @@ class DADDU extends Instruction{
     public String toHex(){
         BigInteger dec = new BigInteger(getOPCode() + getRs() + getRt() + getRd() + getSa() + getFunc(), 2);
 
-        return dec.toString(16);
+        hex = dec.toString(16);
+        if (hex.length() < 8)
+            for (int i = hex.length(); i < 8; i++)
+                hex = "0" + hex;
+
+        return hex;
+    }
+
+    public String getIR21to25() {
+        String big = new BigInteger(hex, 16).toString(2);
+
+        return "";
+    }
+
+    public String getIR16to20() {
+        return "";
+    }
+
+    public String getR15to0() {
+        return "";
     }
 }
