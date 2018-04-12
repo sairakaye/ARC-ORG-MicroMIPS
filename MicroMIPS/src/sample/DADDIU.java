@@ -36,7 +36,7 @@ class DADDIU extends Instruction{
     }
 
     @Override
-    public String toHex(){
+    public String toHex() {
         BigInteger dec = new BigInteger(getOPCode() + getRs() + getRt() + getImm(), 2);
 
         hex = dec.toString(16);

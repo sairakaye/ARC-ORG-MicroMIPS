@@ -103,7 +103,6 @@ public class Controller implements Initializable{
             } else if (toUse.startsWith("BC")) {
                 isValid = checkingBC(labels, code);
 
-
                 if (!isValid) {
                     System.out.println("Error in line: " + code);
                     return;
@@ -178,13 +177,29 @@ public class Controller implements Initializable{
         System.out.println("ALUOUTPUT: " + ALUOutput);
         System.out.println("COND: " + cond);
 
-        System.out.println("PC: " + NPC);
-        System.out.println("LMD: ");
-        System.out.println("Range: ");
+        if (getNewPC(instructions.get(currPC))) {}
+
+        else {
+            System.out.println("PC: " + NPC);
+        }
+
+        if (instructions.get(currPC) instanceof LD) {
+
+        } else
+            System.out.println("LMD: n/a");
+
+        if (instructions.get(currPC) instanceof SD) {
+
+        } else
+            System.out.println("Range: n/a");
 
         System.out.println("Rn: ");
         currIns++;
 }
+
+    private boolean getNewPC(Instruction instruction) {
+        return instruction instanceof BC || instruction instanceof BEQC;
+    }
 
     private void makeInstructions() {
         for(String line : savedCode) {
