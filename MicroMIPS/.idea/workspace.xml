@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4ee8ce20-4814-4418-abfd-d6cc51424b29" name="Default" comment="">
+    <list default="true" id="4ee8ce20-4814-4418-abfd-d6cc51424b29" name="Default" comment="Added temporary if else for SD and LD">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/out/production/MicroMIPS/sample/MicroMIPSview.fxml" afterPath="$PROJECT_DIR$/out/production/MicroMIPS/sample/MicroMIPSview.fxml" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller.java" afterPath="$PROJECT_DIR$/src/sample/Controller.java" />
+      <change beforePath="$PROJECT_DIR$/src/sample/DADDIU.java" afterPath="$PROJECT_DIR$/src/sample/DADDIU.java" />
+      <change beforePath="$PROJECT_DIR$/src/sample/MicroMIPSview.fxml" afterPath="$PROJECT_DIR$/src/sample/MicroMIPSview.fxml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,17 +22,16 @@
       <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="484" column="57" lean-forward="false" selection-start-line="484" selection-start-column="57" selection-end-line="484" selection-end-column="57" />
+            <state relative-caret-position="417">
+              <caret line="166" column="42" lean-forward="true" selection-start-line="166" selection-start-column="42" selection-end-line="166" selection-end-column="42" />
               <folding>
                 <element signature="method#showCyclePane#0;class#Controller#0" expanded="false" />
                 <element signature="method#processCode#0;class#Controller#0" expanded="false" />
-                <element signature="method#clear#0;class#Controller#0" expanded="false" />
                 <element signature="method#getNewPC#0;class#Controller#0" expanded="false" />
                 <element signature="method#makeInstructions#0;class#Controller#0" expanded="false" />
-                <element signature="method#initialize#0;class#Controller#0" expanded="false" />
                 <element signature="method#performOperation#0;class#Controller#0" expanded="false" />
                 <element signature="method#checkingDADDIU#0;class#Controller#0" expanded="false" />
+                <element signature="method#checkingXORI#0;class#Controller#0" expanded="false" />
                 <element signature="method#checkingLD#0;class#Controller#0" expanded="false" />
                 <element signature="method#checkingSD#0;class#Controller#0" expanded="false" />
                 <element signature="method#checkingDADDU#0;class#Controller#0" expanded="false" />
@@ -41,8 +45,8 @@
       <file leaf-file-name="MicroMIPSview.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/MicroMIPSview.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="18" column="50" lean-forward="false" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
+            <state relative-caret-position="138">
+              <caret line="17" column="50" lean-forward="false" selection-start-line="17" selection-start-column="50" selection-end-line="17" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -54,8 +58,8 @@
       <file leaf-file-name="XORI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/XORI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+            <state relative-caret-position="157">
+              <caret line="46" column="27" lean-forward="false" selection-start-line="46" selection-start-column="27" selection-end-line="46" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -64,8 +68,8 @@
       <file leaf-file-name="DADDIU.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/DADDIU.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1240">
-              <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+            <state relative-caret-position="131">
+              <caret line="37" column="0" lean-forward="true" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -74,8 +78,8 @@
       <file leaf-file-name="DADDU.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/DADDU.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="74" column="5" lean-forward="false" selection-start-line="73" selection-start-column="22" selection-end-line="74" selection-end-column="5" />
+            <state relative-caret-position="104">
+              <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -94,7 +98,7 @@
       <file leaf-file-name="OpcodeTableItem.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/OpcodeTableItem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
+            <state relative-caret-position="170">
               <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding>
                 <element signature="e#1167#1168#0" expanded="true" />
@@ -107,8 +111,28 @@
       <file leaf-file-name="LD.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/LD.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="884">
-              <caret line="34" column="82" lean-forward="false" selection-start-line="34" selection-start-column="82" selection-end-line="34" selection-end-column="82" />
+            <state relative-caret-position="157">
+              <caret line="36" column="21" lean-forward="false" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BC.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/BC.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-294">
+              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BEQC.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/BEQC.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="52">
+              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -120,8 +144,17 @@
     <findStrings>
       <find>instructions</find>
       <find>System.out.println</find>
-      <find>Sys</find>
       <find>border</find>
+      <find>syst</find>
+      <find>system</find>
+      <find>instructions = new</find>
+      <find>syste</find>
+      <find>SYstem.out.println</find>
+      <find>SYs</find>
+      <find>system.ou</find>
+      <find>Sys</find>
+      <find>PC</find>
+      <find>nPC</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -140,8 +173,8 @@
         <option value="$PROJECT_DIR$/src/sample/LD.java" />
         <option value="$PROJECT_DIR$/src/sample/SD.java" />
         <option value="$PROJECT_DIR$/src/sample/MicroMIPSview.fxml" />
-        <option value="$PROJECT_DIR$/src/sample/DADDIU.java" />
         <option value="$PROJECT_DIR$/src/sample/DADDU.java" />
+        <option value="$PROJECT_DIR$/src/sample/DADDIU.java" />
         <option value="$PROJECT_DIR$/src/sample/Controller.java" />
       </list>
     </option>
@@ -153,7 +186,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-10" />
+    <option name="x" value="233" />
+    <option name="y" value="-9" />
     <option name="width" value="980" />
     <option name="height" value="1040" />
   </component>
@@ -191,6 +225,15 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="sample" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="MicroMIPS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+            <path>
+              <item name="MicroMIPS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 9.0 &gt;" type="70bed36:NamedLibraryElementNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -208,6 +251,10 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="extract.method.default.visibility" value="private" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.146875" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -326,7 +373,7 @@
       <workItem from="1523447187199" duration="45000" />
       <workItem from="1523451621457" duration="1600000" />
       <workItem from="1523459723985" duration="342000" />
-      <workItem from="1523494391842" duration="5339000" />
+      <workItem from="1523494391842" duration="8152000" />
     </task>
     <task id="LOCAL-00001" summary="Made the registers and changed the instructions to a hashmap">
       <created>1523462616433</created>
@@ -370,25 +417,32 @@
       <option name="project" value="LOCAL" />
       <updated>1523527087168</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added temporary if else for SD and LD">
+      <created>1523527223615</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1523527223615</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26750000" />
+    <option name="totallyTimeSpent" value="29563000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295711" sideWeight="0.49791667" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295711" sideWeight="0.49583334" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295711" sideWeight="0.50208336" order="13" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295711" sideWeight="0.50625" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295711" sideWeight="0.49583334" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295711" sideWeight="0.49791667" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295711" sideWeight="0.49375" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -489,12 +543,11 @@
           <folding>
             <element signature="method#showCyclePane#0;class#Controller#0" expanded="false" />
             <element signature="method#processCode#0;class#Controller#0" expanded="false" />
-            <element signature="method#clear#0;class#Controller#0" expanded="false" />
             <element signature="method#getNewPC#0;class#Controller#0" expanded="false" />
             <element signature="method#makeInstructions#0;class#Controller#0" expanded="false" />
-            <element signature="method#initialize#0;class#Controller#0" expanded="false" />
             <element signature="method#performOperation#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingDADDIU#0;class#Controller#0" expanded="false" />
+            <element signature="method#checkingXORI#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingLD#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingSD#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingDADDU#0;class#Controller#0" expanded="false" />
@@ -543,12 +596,11 @@
           <folding>
             <element signature="method#showCyclePane#0;class#Controller#0" expanded="false" />
             <element signature="method#processCode#0;class#Controller#0" expanded="false" />
-            <element signature="method#clear#0;class#Controller#0" expanded="false" />
             <element signature="method#getNewPC#0;class#Controller#0" expanded="false" />
             <element signature="method#makeInstructions#0;class#Controller#0" expanded="false" />
-            <element signature="method#initialize#0;class#Controller#0" expanded="false" />
             <element signature="method#performOperation#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingDADDIU#0;class#Controller#0" expanded="false" />
+            <element signature="method#checkingXORI#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingLD#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingSD#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingDADDU#0;class#Controller#0" expanded="false" />
@@ -581,12 +633,11 @@
           <folding>
             <element signature="method#showCyclePane#0;class#Controller#0" expanded="false" />
             <element signature="method#processCode#0;class#Controller#0" expanded="false" />
-            <element signature="method#clear#0;class#Controller#0" expanded="false" />
             <element signature="method#getNewPC#0;class#Controller#0" expanded="false" />
             <element signature="method#makeInstructions#0;class#Controller#0" expanded="false" />
-            <element signature="method#initialize#0;class#Controller#0" expanded="false" />
             <element signature="method#performOperation#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingDADDIU#0;class#Controller#0" expanded="false" />
+            <element signature="method#checkingXORI#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingLD#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingSD#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingDADDU#0;class#Controller#0" expanded="false" />
@@ -619,12 +670,11 @@
           <folding>
             <element signature="method#showCyclePane#0;class#Controller#0" expanded="false" />
             <element signature="method#processCode#0;class#Controller#0" expanded="false" />
-            <element signature="method#clear#0;class#Controller#0" expanded="false" />
             <element signature="method#getNewPC#0;class#Controller#0" expanded="false" />
             <element signature="method#makeInstructions#0;class#Controller#0" expanded="false" />
-            <element signature="method#initialize#0;class#Controller#0" expanded="false" />
             <element signature="method#performOperation#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingDADDIU#0;class#Controller#0" expanded="false" />
+            <element signature="method#checkingXORI#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingLD#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingSD#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingDADDU#0;class#Controller#0" expanded="false" />
@@ -681,12 +731,11 @@
           <folding>
             <element signature="method#showCyclePane#0;class#Controller#0" expanded="false" />
             <element signature="method#processCode#0;class#Controller#0" expanded="false" />
-            <element signature="method#clear#0;class#Controller#0" expanded="false" />
             <element signature="method#getNewPC#0;class#Controller#0" expanded="false" />
             <element signature="method#makeInstructions#0;class#Controller#0" expanded="false" />
-            <element signature="method#initialize#0;class#Controller#0" expanded="false" />
             <element signature="method#performOperation#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingDADDIU#0;class#Controller#0" expanded="false" />
+            <element signature="method#checkingXORI#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingLD#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingSD#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingDADDU#0;class#Controller#0" expanded="false" />
@@ -703,12 +752,11 @@
           <folding>
             <element signature="method#showCyclePane#0;class#Controller#0" expanded="false" />
             <element signature="method#processCode#0;class#Controller#0" expanded="false" />
-            <element signature="method#clear#0;class#Controller#0" expanded="false" />
             <element signature="method#getNewPC#0;class#Controller#0" expanded="false" />
             <element signature="method#makeInstructions#0;class#Controller#0" expanded="false" />
-            <element signature="method#initialize#0;class#Controller#0" expanded="false" />
             <element signature="method#performOperation#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingDADDIU#0;class#Controller#0" expanded="false" />
+            <element signature="method#checkingXORI#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingLD#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingSD#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingDADDU#0;class#Controller#0" expanded="false" />
@@ -741,12 +789,11 @@
           <folding>
             <element signature="method#showCyclePane#0;class#Controller#0" expanded="false" />
             <element signature="method#processCode#0;class#Controller#0" expanded="false" />
-            <element signature="method#clear#0;class#Controller#0" expanded="false" />
             <element signature="method#getNewPC#0;class#Controller#0" expanded="false" />
             <element signature="method#makeInstructions#0;class#Controller#0" expanded="false" />
-            <element signature="method#initialize#0;class#Controller#0" expanded="false" />
             <element signature="method#performOperation#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingDADDIU#0;class#Controller#0" expanded="false" />
+            <element signature="method#checkingXORI#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingLD#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingSD#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingDADDU#0;class#Controller#0" expanded="false" />
@@ -779,12 +826,11 @@
           <folding>
             <element signature="method#showCyclePane#0;class#Controller#0" expanded="false" />
             <element signature="method#processCode#0;class#Controller#0" expanded="false" />
-            <element signature="method#clear#0;class#Controller#0" expanded="false" />
             <element signature="method#getNewPC#0;class#Controller#0" expanded="false" />
             <element signature="method#makeInstructions#0;class#Controller#0" expanded="false" />
-            <element signature="method#initialize#0;class#Controller#0" expanded="false" />
             <element signature="method#performOperation#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingDADDIU#0;class#Controller#0" expanded="false" />
+            <element signature="method#checkingXORI#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingLD#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingSD#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingDADDU#0;class#Controller#0" expanded="false" />
@@ -818,22 +864,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/BC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/BEQC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Instruction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="642">
@@ -863,30 +893,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/LD.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="884">
-          <caret line="34" column="82" lean-forward="false" selection-start-line="34" selection-start-column="82" selection-end-line="34" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/XORI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/DADDU.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="74" column="5" lean-forward="false" selection-start-line="73" selection-start-column="22" selection-end-line="74" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
@@ -895,9 +901,60 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/MicroMIPSview.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="17" column="50" lean-forward="false" selection-start-line="17" selection-start-column="50" selection-end-line="17" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/XORI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="46" column="27" lean-forward="false" selection-start-line="46" selection-start-column="27" selection-end-line="46" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/LD.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="36" column="21" lean-forward="false" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/BC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-294">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/BEQC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/DADDU.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/OpcodeTableItem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
+        <state relative-caret-position="170">
           <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding>
             <element signature="e#1167#1168#0" expanded="true" />
@@ -906,38 +963,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/MicroMIPSview.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="18" column="50" lean-forward="false" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/DADDIU.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1240">
-          <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+        <state relative-caret-position="131">
+          <caret line="37" column="0" lean-forward="true" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="484" column="57" lean-forward="false" selection-start-line="484" selection-start-column="57" selection-end-line="484" selection-end-column="57" />
+        <state relative-caret-position="417">
+          <caret line="166" column="42" lean-forward="true" selection-start-line="166" selection-start-column="42" selection-end-line="166" selection-end-column="42" />
           <folding>
             <element signature="method#showCyclePane#0;class#Controller#0" expanded="false" />
             <element signature="method#processCode#0;class#Controller#0" expanded="false" />
-            <element signature="method#clear#0;class#Controller#0" expanded="false" />
             <element signature="method#getNewPC#0;class#Controller#0" expanded="false" />
             <element signature="method#makeInstructions#0;class#Controller#0" expanded="false" />
-            <element signature="method#initialize#0;class#Controller#0" expanded="false" />
             <element signature="method#performOperation#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingDADDIU#0;class#Controller#0" expanded="false" />
+            <element signature="method#checkingXORI#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingLD#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingSD#0;class#Controller#0" expanded="false" />
             <element signature="method#checkingDADDU#0;class#Controller#0" expanded="false" />
@@ -950,9 +995,80 @@
   </component>
   <component name="masterDetails">
     <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Python 3.6 interpreter library</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>9.0</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>MicroMIPS</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
       <state key="ProjectJDKs.UI">
         <settings>
           <last-edited>Java 9.0.1</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
           <splitter-proportions>
             <option name="proportions">
               <list>

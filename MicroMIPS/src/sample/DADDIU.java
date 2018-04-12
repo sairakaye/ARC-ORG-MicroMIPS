@@ -11,13 +11,19 @@ class DADDIU extends Instruction{
 
         String[] reg = line.split(",");
         String rs = reg[0].replaceAll("\\D+", "");
-        System.out.println("0: " + reg[0] + " 1: " + reg[1] + " 2: " + reg[2]);
+        //System.out.println("0: " + reg[0] + " 1: " + reg[1] + " 2: " + reg[2]);
         in = Integer.parseInt(rs);
         setRs(Integer.toString(in, 2));
 
 //        System.out.println(Integer.parseInt(reg[0].replaceAll("\\D+", ""), 16));
 //        System.out.println(BigInteger.valueOf(Long.parseLong(reg[0].replaceAll("\\D+", ""), 16)));
-        String[] immediate = reg[2].split("#");
+        String[] immediate = null;
+
+        if (reg[2].indexOf("#") > 0)
+             immediate = reg[2].split("#");
+        else if (reg[2].indexOf("x") > 0)
+            immediate = reg[2].split("x");
+
         String imm = Integer.toString(Integer.parseInt(immediate[1], 16), 2);
         while (imm.length() < 16){
             imm = "0" + imm;
@@ -30,9 +36,9 @@ class DADDIU extends Instruction{
         in = Integer.parseInt(rt);
         setRt(Integer.toString(in, 2));
 
-        System.out.println(rs);
-        System.out.println(rt);
-        System.out.println(Imm);
+//        System.out.println(rs);
+//        System.out.println(rt);
+//        System.out.println(Imm);
     }
 
     @Override

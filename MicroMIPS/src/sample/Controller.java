@@ -177,14 +177,16 @@ public class Controller implements Initializable{
         System.out.println("ALUOUTPUT: " + ALUOutput);
         System.out.println("COND: " + cond);
 
-        if (getNewPC(instructions.get(currPC))) {}
-
-        else {
-            System.out.println("PC: " + NPC);
+        if (getNewPC(instructions.get(currPC))) {
+            PC = ALUOutput;
+            System.out.println("PC: " + PC);
         }
+        else
+            System.out.println("PC: " + NPC);
 
         if (instructions.get(currPC) instanceof LD) {
-
+            LMD = ALUOutput;
+            System.out.println("LMD: " + LMD);
         } else
             System.out.println("LMD: n/a");
 
@@ -193,7 +195,12 @@ public class Controller implements Initializable{
         } else
             System.out.println("Range: n/a");
 
-        System.out.println("Rn: ");
+        if (instructions.get(currPC) instanceof BC || instructions.get(currPC) instanceof BEQC)
+            System.out.println("Rn: n/a");
+        else {
+
+        }
+
         currIns++;
 }
 
@@ -255,7 +262,7 @@ public class Controller implements Initializable{
         instructions = new HashMap<>();
     }
 
-    public void performOperation(Instruction ins){
+    private void performOperation(Instruction ins){
         BigInteger aluOut;
         BigInteger a = new BigInteger(A, 16);
         BigInteger b = new BigInteger(B, 16);
@@ -314,7 +321,7 @@ public class Controller implements Initializable{
         }
     }
 
-    public boolean checkingDADDIU(String codeLine) {
+    private boolean checkingDADDIU(String codeLine) {
         ArrayList<String> codeParts = new ArrayList<String>();
         String[] splitter = codeLine.split(",");
 
@@ -388,8 +395,8 @@ public class Controller implements Initializable{
                     return false;
                 }
 
-                for (String c : codeParts)
-                    System.out.println(c);
+//                for (String c : codeParts)
+//                    System.out.println(c);
 
                 // Assuming all is correct
                 try {
@@ -415,7 +422,7 @@ public class Controller implements Initializable{
         return false;
     }
 
-    public boolean checkingXORI(String codeLine) {
+    private boolean checkingXORI(String codeLine) {
         ArrayList<String> codeParts = new ArrayList<String>();
         String[] splitter = codeLine.split(",");
 
@@ -489,8 +496,8 @@ public class Controller implements Initializable{
                     return false;
                 }
 
-                for (String c : codeParts)
-                    System.out.println(c);
+//                for (String c : codeParts)
+//                    System.out.println(c);
 
                 // Assuming all is correct
                 try {
@@ -516,7 +523,7 @@ public class Controller implements Initializable{
         return false;
     }
 
-    public boolean checkingLD(String codeLine) {
+    private boolean checkingLD(String codeLine) {
         ArrayList<String> codeParts = new ArrayList<String>();
         String[] splitter = codeLine.split(",");
 
@@ -556,7 +563,7 @@ public class Controller implements Initializable{
                     }
                 }
 
-                System.out.println(splitter[1].trim());
+                //System.out.println(splitter[1].trim());
 
                 String[] offsetBase = splitter[1].trim().split("[\\(\\)]");
 
@@ -580,7 +587,7 @@ public class Controller implements Initializable{
         return false;
     }
 
-    public boolean checkingSD(String codeLine) {
+    private boolean checkingSD(String codeLine) {
         ArrayList<String> codeParts = new ArrayList<String>();
         String[] splitter = codeLine.split(",");
 
@@ -620,7 +627,7 @@ public class Controller implements Initializable{
                     }
                 }
 
-                System.out.println(splitter[1].trim());
+                //System.out.println(splitter[1].trim());
 
                 String[] offsetBase = splitter[1].trim().split("[\\(\\)]");
 
@@ -644,7 +651,7 @@ public class Controller implements Initializable{
         return false;
     }
 
-    public boolean checkingDADDU(String codeLine) {
+    private boolean checkingDADDU(String codeLine) {
         ArrayList<String> codeParts = new ArrayList<String>();
         String[] splitter = codeLine.split(",");
 
@@ -696,8 +703,8 @@ public class Controller implements Initializable{
                 else
                     return false;
 
-                for (String c: codeParts)
-                    System.out.println(c);
+//                for (String c: codeParts)
+//                    System.out.println(c);
 
                 try {
                     int rd, rs, rt;
@@ -724,7 +731,7 @@ public class Controller implements Initializable{
         return false;
     }
 
-    public boolean checkingBC(ArrayList<String> labels, String codeLine) {
+    private boolean checkingBC(ArrayList<String> labels, String codeLine) {
         ArrayList<String> codeParts = new ArrayList<String>();
         String[] splitter = codeLine.split("\\s+");
 
@@ -745,8 +752,8 @@ public class Controller implements Initializable{
                 codeParts.add(splitter[1].trim());
                 codeParts.add(splitter[2].trim());
 
-                for (String s : codeParts)
-                    System.out.println(s);
+//                for (String s : codeParts)
+//                    System.out.println(s);
 
                 for (String l : labels)
                     if (codeParts.get(2).equalsIgnoreCase(l)) {
@@ -762,7 +769,7 @@ public class Controller implements Initializable{
         }
     }
 
-    public boolean checkingBEQC(ArrayList<String> labels, String codeLine) {
+    private boolean checkingBEQC(ArrayList<String> labels, String codeLine) {
         ArrayList<String> codeParts = new ArrayList<String>();
         String[] splitter = codeLine.split(",");
 
@@ -809,7 +816,7 @@ public class Controller implements Initializable{
                     return false;
 
                 // for offset
-                System.out.println(splitter[2].trim());
+                //System.out.println(splitter[2].trim());
                 codeParts.add(splitter[2].trim());
 
                 try {
@@ -820,7 +827,7 @@ public class Controller implements Initializable{
                         rs = Integer.parseInt(codeParts.get(2).substring(codeParts.get(2).indexOf("R") + 1));
                         rt = Integer.parseInt(codeParts.get(3).substring(codeParts.get(3).indexOf("R") + 1));
 
-                        System.out.println(rs + " < " + rt);
+                        //System.out.println(rs + " < " + rt);
 
 
                         for (String l : labels)
