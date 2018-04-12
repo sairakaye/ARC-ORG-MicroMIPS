@@ -39,6 +39,8 @@ public class Controller implements Initializable{
 
     @FXML private Button gotoButton;
 
+    @FXML private Button insertButton;
+
     @FXML private TableView<OpcodeTableItem> opcodeTable;
 
     @FXML private TableView<MemDataTableItem> memDataTable;
@@ -541,6 +543,10 @@ public class Controller implements Initializable{
         refreshRegisters();
     }
 
+    @FXML
+    private void setContentInMemory() {
+
+    }
 
     @FXML
     private void gotoMemory() {
