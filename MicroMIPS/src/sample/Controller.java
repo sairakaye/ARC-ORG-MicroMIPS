@@ -35,6 +35,10 @@ public class Controller implements Initializable{
 
     @FXML private TextArea errorField;
 
+    @FXML private TextField gotoField;
+
+    @FXML private Button gotoButton;
+
     @FXML private TableView<OpcodeTableItem> opcodeTable;
 
     @FXML private TableView<MemDataTableItem> memDataTable;
@@ -99,6 +103,8 @@ public class Controller implements Initializable{
                     toUse = code.substring(code.indexOf(":") + 1).trim();
                 else
                     toUse = code;
+
+                System.out.println(toUse);
 
                 if (toUse.startsWith("LD")) {
                     isValid = checkingLD(code);
@@ -358,10 +364,18 @@ public class Controller implements Initializable{
                 System.out.println("Rn: " + ALUOutput);
             }
 
-            else if (instructions.get(currPC) instanceof BC || instructions.get(currPC) instanceof BEQC || instructions.get(currPC) instanceof SD)
+            else if (instructions.get(currPC) instanceof BC || instructions.get(currPC) instanceof BEQC)
                 System.out.println("Rn: n/a");
 
-            else if (instructions.get(currPC) instanceof DADDIU || instructions.get(currPC) instanceof XORI) {
+            else if (instructions.get(currPC) instanceof SD) {
+                int memory = instructions.get(currPC).getIR16to20();
+                System.out.println(memory);
+
+
+
+
+
+            } else if (instructions.get(currPC) instanceof DADDIU || instructions.get(currPC) instanceof XORI) {
                 int register = instructions.get(currPC).getIR16to20();
                 System.out.println(register);
                 String target = "R" + register;
@@ -398,6 +412,7 @@ public class Controller implements Initializable{
         for(String line : savedCode) {
             String[] temp = null;
 
+            // Medyo buggy pag may space from the label to the instruction.
             if (line.contains(":")) {
                 temp = line.trim().substring(line.indexOf(":")+1).split("\\s+");
             } else {
@@ -511,6 +526,43 @@ public class Controller implements Initializable{
     }
 
 
+    @FXML
+    private void gotoMemory() {
+        String toSearch = gotoField.getText();
+        memDataTable.getSelectionModel().select(null);
+        instructionMemTable.getSelectionModel().select(null);
+
+        try {
+            int digit = Integer.parseInt(toSearch, 16);
+            boolean found = false;
+            if (digit >= 0 && digit <= 255) {
+                for (int i = 0; i < memDataTableItems.size(); i++) {
+                    if (memDataTableItems.get(i).getAddress().equalsIgnoreCase(toSearch)) {
+                        memDataTable.scrollTo(i);
+                        memDataTable.getSelectionModel().select(i);
+                        found = true;
+                        break;
+                    }
+                }
+            } else {
+                for (int i = 0; i < insMemTableItems.size(); i++) {
+                    if (insMemTableItems.get(i).getAddress().equalsIgnoreCase(toSearch)) {
+                        instructionMemTable.scrollTo(i);
+                        instructionMemTable.getSelectionModel().select(i);
+                        found = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!found) {
+                // error dialog
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         NPC = 100;
@@ -586,6 +638,11 @@ public class Controller implements Initializable{
                 }
             }
             ALUOutput = ALUOutput.toUpperCase();
+
+            if (Integer.parseInt(ins.getRt()) <= 0) {
+                ALUOutput = "0000000000000000";
+            }
+
             cond = 0;
         } else if (ins instanceof DADDU) {
             aluOut = a.add(b);
@@ -598,6 +655,11 @@ public class Controller implements Initializable{
                 }
             }
             ALUOutput = ALUOutput.toUpperCase();
+
+            if (Integer.parseInt(ins.getRd()) <= 0) {
+                ALUOutput = "0000000000000000";
+            }
+
             cond = 0;
         } else if (ins instanceof LD) {
             aluOut = a.add(imm);
@@ -610,6 +672,7 @@ public class Controller implements Initializable{
                 }
             }
             ALUOutput = ALUOutput.toUpperCase();
+
             cond = 0;
         } else if (ins instanceof SD) {
             aluOut = a.add(imm);
@@ -622,6 +685,11 @@ public class Controller implements Initializable{
                 }
             }
             ALUOutput = ALUOutput.toUpperCase();
+
+            if (Integer.parseInt(ins.getRt()) <= 0) {
+                ALUOutput = "0000000000000000";
+            }
+
             cond = 0;
         } else if (ins instanceof XORI) {
             aluOut = a.or(imm);
@@ -630,6 +698,11 @@ public class Controller implements Initializable{
                 ALUOutput = "0" + ALUOutput;
             }
             ALUOutput = ALUOutput.toUpperCase();
+
+            if (Integer.parseInt(ins.getRt()) <= 0) {
+                ALUOutput = "0000000000000000";
+            }
+
             cond = 0;
         } else if (ins instanceof BC) {
             BigInteger nNPC = new BigInteger(Integer.toString(NPC));
