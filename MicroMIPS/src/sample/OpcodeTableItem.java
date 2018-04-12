@@ -15,6 +15,15 @@ public class OpcodeTableItem {
     public OpcodeTableItem(String instruction, String opcodeHex, String bit26to31,
                            String bit21to25, String bit16to20, String bit11to15,
                            String bit6to10, String bit0to5) {
+        this.instruction = new SimpleStringProperty("");
+        this.opcodeHex = new SimpleStringProperty("");
+        this.bit26to31 = new SimpleStringProperty("");
+        this.bit21to25 = new SimpleStringProperty("");
+        this.bit16to20 = new SimpleStringProperty("");
+        this.bit11to15 = new SimpleStringProperty("");
+        this.bit6to10 = new SimpleStringProperty("");
+        this.bit0to5 = new SimpleStringProperty("");
+
         setInstruction(instruction);
         setOpcodeHex(opcodeHex);
         setBit0to5(bit0to5);

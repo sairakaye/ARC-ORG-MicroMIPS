@@ -127,30 +127,28 @@ public class Controller implements Initializable{
                 System.out.println("Invalid instruction.");
             }
         }
-
         makeInstructions();
 
         opcodeTableItems = new ArrayList<>();
+        for (int i = 0; i < instructions.size(); i++){
+            Instruction ins = instructions.get(i);
 
-//        for (int i = 0; i < instructions.size(); i++){
-//            Instruction ins = instructions.get(i);
-//
-//            if (ins instanceof DADDIU)
-//                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-//                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
-//            else if (ins instanceof DADDU)
-//                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-//                                                         ins.getRt(), ins.getRd(), ins.getSa(), ins.getFunc()));
-//            else if (ins instanceof LD)
-//                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-//                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
-//            else if (ins instanceof SD)
-//                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-//                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
-//            else if (ins instanceof XORI)
-//                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-//                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
-//        }
+            if (ins instanceof DADDIU)
+                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
+            else if (ins instanceof DADDU)
+                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                                                         ins.getRt(), ins.getRd(), ins.getSa(), ins.getFunc()));
+            else if (ins instanceof LD)
+                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
+            else if (ins instanceof SD)
+                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
+            else if (ins instanceof XORI)
+                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
+        }
     }
 
     @FXML
@@ -229,12 +227,12 @@ public class Controller implements Initializable{
             }
             NPC += 4;
         }
-        NPC = 0;
+        NPC = 100;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        NPC = 0;
+        NPC = 100;
         currIns = 0;
         registers = new HashMap<>();
         instructions = new HashMap<>();
@@ -291,11 +289,30 @@ public class Controller implements Initializable{
             }
             cond = 0;
         } else if (ins instanceof XORI) {
-
+            aluOut = a.or(imm);
+            ALUOutput = aluOut.toString(16);
+            while(ALUOutput.length() < 16){
+                ALUOutput = "0" + ALUOutput;
+            }
+            cond = 0;
         } else if (ins instanceof BC) {
-
+            BigInteger nNPC = new BigInteger(Integer.toString(NPC));
+            aluOut = nNPC.add(imm.divide(new BigInteger("4")));
+            ALUOutput = aluOut.toString(16);
+            while (ALUOutput.length() < 16){
+                ALUOutput = "0" + ALUOutput;
+            }
+            cond = 1;
         } else if (ins instanceof BEQC) {
-
+            BigInteger nNPC = new BigInteger(Integer.toString(NPC));
+            aluOut = nNPC.add(imm.divide(new BigInteger("4")));
+            ALUOutput = aluOut.toString(16);
+            while (ALUOutput.length() < 16){
+                ALUOutput = "0" + ALUOutput;
+            }
+            if (registers.get("R" + Integer.parseInt(A, 16)).equals(registers.get("R" + Integer.parseInt(B, 16))))
+                cond = 1;
+            else cond = 0;
         }
     }
 
@@ -852,5 +869,4 @@ public class Controller implements Initializable{
     private int cond;
     private String PC;
     private String LMD;
-
 }
