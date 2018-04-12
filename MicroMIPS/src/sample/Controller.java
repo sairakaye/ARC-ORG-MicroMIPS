@@ -231,6 +231,12 @@ public class Controller implements Initializable{
         codingArea.clear();
         instructions.clear();
         currIns = 0;
+        A = new String();
+        B = new String();
+        Imm = new String();
+        ALUOutput = new String();
+        PC = new String();
+        LMD = new String();
         NPC = 100;
 
         insMemTableItems = new ArrayList<>();
@@ -302,7 +308,20 @@ public class Controller implements Initializable{
                 System.out.println("PC: " + NPC);
 
             if (instructions.get(currPC) instanceof LD) {
-                LMD = ALUOutput;
+                //start with address i + 7 because little endian
+                int ctr = 7;
+                LMD = "";
+                for (int i = 0; i < memDataTableItems.size(); i++){
+                    if (memDataTableItems.get(i).getAddress().equalsIgnoreCase(ALUOutput.substring(12))){
+                        System.out.println("found");
+                        while (ctr >= 0){
+                            LMD = LMD + memDataTableItems.get(i + ctr).getRepresentation();
+                            ctr--;
+                        }
+                        break;
+                    }
+                }
+
                 System.out.println("LMD: " + LMD);
             } else
                 System.out.println("LMD: n/a");
@@ -311,10 +330,12 @@ public class Controller implements Initializable{
                 int ctr = 0;
                 int llimit = A.length() - 2;
                 int ulimit = A.length();
+                String reg = registers.get("R" + Integer.parseInt(B, 16));
                 for (int i = 0; i < memDataTableItems.size(); i++){
                     if (ALUOutput.substring(12).equalsIgnoreCase(memDataTableItems.get(i).getAddress())){
+                        System.out.println("found");
                         while (ctr < 7) {
-                            memDataTableItems.get(i + ctr).setRepresentation(A.substring(llimit, ulimit));
+                            memDataTableItems.get(i + ctr).setRepresentation(reg.substring(llimit, ulimit));
                             llimit -= 2;
                             ulimit -= 2;
                             ctr++;
@@ -326,6 +347,7 @@ public class Controller implements Initializable{
                 memAddrCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("address"));
                 memDataCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("representation"));
                 memDataTable.setItems(mem);
+                memDataTable.refresh();
             } else
                 System.out.println("Range: n/a");
 
@@ -496,6 +518,12 @@ public class Controller implements Initializable{
         registers = new HashMap<>();
         instructions = new HashMap<>();
         memDataTableItems = new ArrayList<>();
+        A = new String("");
+        B = new String("");
+        Imm = new String("");
+        ALUOutput = new String("");
+        PC = new String("");
+        LMD = new String("");
 
         for (int i = 0; i < 256; i++){
             String memAdd = Integer.toHexString(i).toUpperCase();
