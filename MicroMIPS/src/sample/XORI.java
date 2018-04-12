@@ -41,4 +41,26 @@ public class XORI extends Instruction {
 
         return hex;
     }
+
+    @Override
+    public int getIR21to25(){
+        return Integer.parseInt(getRs(), 2);
+    }
+
+    @Override
+    public int getIR16to20(){
+        return Integer.parseInt(getRt(), 2);
+    }
+
+    @Override
+    public String getR15to0(){
+        String nString = "";
+
+        while (nString.length() < 12){
+            nString = nString + "0";
+        }
+        nString += hex.substring(4, 8);
+
+        return nString;
+    }
 }

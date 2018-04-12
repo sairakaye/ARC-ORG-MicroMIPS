@@ -71,7 +71,7 @@ public class Controller implements Initializable{
         */
         makeInstructions();
 
-        ArrayList<OpcodeTableItem> opcodeTableItems = new ArrayList<>();
+        opcodeTableItems = new ArrayList<>();
 
         for (int i = 0; i < instructions.size(); i++){
             Instruction ins = instructions.get(i);
@@ -92,11 +92,6 @@ public class Controller implements Initializable{
                 opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
                                                          ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
         }
-
-//        for (Instruction i: instructions) {
-//
-//        }
-
     }
 
     @FXML
@@ -108,9 +103,26 @@ public class Controller implements Initializable{
 
     @FXML
     private void runOneCycle() {
+        currPC = NPC;
         System.out.println("IR: " + instructions.get(NPC).toHex());
         NPC += 4;
         System.out.println("NPC: " + NPC);
+
+        A = registers.get("R" + instructions.get(currPC).getIR21to25());
+        System.out.println("A: " + A);
+        B = registers.get("R" + instructions.get(currPC).getIR16to20());
+        System.out.println("B: " + B);
+        Imm = instructions.get(currPC).getR15to0();
+        System.out.println("IMM: " + Imm);
+        
+        System.out.println("ALUOUTPUT: ");
+        System.out.println("COND: ");
+
+        System.out.println("PC: " + NPC);
+        System.out.println("LMD: ");
+        System.out.println("Range: ");
+
+        System.out.println("Rn: ");
 }
 
     private void makeInstructions() {
@@ -166,10 +178,25 @@ public class Controller implements Initializable{
         instructions = new HashMap<>();
     }
 
+    public void performOperation(String instruction){
+        switch(instruction){
+            case "DADDIU": break;
+            case "DADDU": break;
+            case "XORI": break;
+            case "BEQC": break;
+            case "BC": break;
+            case "LD": break;
+            case "SD": break;
+        }
+    }
+
+
     private String[] savedCode;
     private HashMap<String, String> registers;
     private ObservableList<String> values;
     private HashMap<Integer, Instruction> instructions;
+    ArrayList<OpcodeTableItem> opcodeTableItems;
+    private int currPC;
     private int NPC;
     private String A;
     private String B;
