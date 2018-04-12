@@ -53,10 +53,10 @@
                         <TableColumn prefWidth="79.19999694824219" text="Instruction" />
                     </columns>
                 </TableView>
-                <TableView layoutX="14.0" layoutY="316.0" prefHeight="210.0" prefWidth="306.0" style="-fx-border-color: #000000;">
+                <TableView fx:id="memDataTable" layoutX="14.0" layoutY="316.0" prefHeight="210.0" prefWidth="306.0" style="-fx-border-color: #000000;">
                     <columns>
-                        <TableColumn prefWidth="75.0" text="Address" />
-                        <TableColumn prefWidth="227.20004272460938" text="Representation" />
+                        <TableColumn fx:id="memAddrCol" prefWidth="75.0" text="Address" />
+                        <TableColumn fx:id="memDataCol" prefWidth="227.20004272460938" text="Representation" />
                     </columns>
                 </TableView>
                 <ListView fx:id="register_list" layoutX="356.0" layoutY="41.0" prefHeight="495.0" prefWidth="218.0" style="-fx-border-color: #000000;" />

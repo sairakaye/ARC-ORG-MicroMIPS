@@ -25,6 +25,12 @@ public class Controller implements Initializable{
 
     @FXML private TableView<OpcodeTableItem> opcodeTable;
 
+    @FXML private TableView<MemDataTableItem> memDataTable;
+
+    @FXML private TableColumn<MemDataTableItem, String> memAddrCol;
+
+    @FXML private TableColumn<MemDataTableItem, String> memDataCol;
+
     @FXML private TableColumn<OpcodeTableItem, String> colInstruction;
 
     @FXML private TableColumn<OpcodeTableItem, String>  colHexOpcode;
@@ -191,7 +197,7 @@ public class Controller implements Initializable{
 
             if (getNewPC(instructions.get(currPC))) {
             } else {
-                System.out.println("PC:x` " + NPC);
+                System.out.println("PC: " + NPC);
             }
 
             if (instructions.get(currPC) instanceof LD) {
@@ -206,9 +212,8 @@ public class Controller implements Initializable{
 
             System.out.println("Rn: ");
             currIns++;
-        } else{
+        } else
             System.out.println("Reached the end of the codes. Please reset and type new codes");
-        }
 }
 
     private boolean getNewPC(Instruction instruction) {
@@ -248,7 +253,7 @@ public class Controller implements Initializable{
                     break;
 
                 case "BEQC":
-                    // TODO fix implementation of this and create BEQC class
+                    // TODO fix implementation of this
                     instructions.put(NPC, new BEQC(line));
                     break;
 
@@ -267,8 +272,21 @@ public class Controller implements Initializable{
         currIns = 0;
         registers = new HashMap<>();
         instructions = new HashMap<>();
+        dataSegments = new HashMap<>();
+        memDataTableItems = new ArrayList<>();
 
+        for (int i = 0; i < 256; i++){
+            String memAdd = Integer.toHexString(i).toUpperCase();
+            while (memAdd.length() < 4)
+                memAdd = "0" + memAdd;
+            memDataTableItems.add(new MemDataTableItem(memAdd, "00"));
+            dataSegments.put(memAdd, "00");
+        }
 
+        ObservableList<MemDataTableItem> initialMem = FXCollections.observableArrayList(memDataTableItems);
+        memAddrCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("address"));
+        memDataCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("representation"));
+        memDataTable.setItems(initialMem);
     }
 
     public void performOperation(Instruction ins){
@@ -871,7 +889,9 @@ public class Controller implements Initializable{
     private HashMap<String, String> registers;
     private ObservableList<String> values;
     private HashMap<Integer, Instruction> instructions;
+    private HashMap<String, String> dataSegments;
     ArrayList<OpcodeTableItem> opcodeTableItems;
+    private ArrayList<MemDataTableItem> memDataTableItems;
     private int currPC;
     private int NPC;
     private static int currIns;
