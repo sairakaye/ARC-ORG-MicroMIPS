@@ -53,29 +53,25 @@ public class Controller implements Initializable{
 
     @FXML
     private void processCode() {
-        boolean isValid = false;
+        boolean error = false;
         savedCode = codingArea.getText().split("\\n");
 
+        /* This will be use for error handling in code
         for (String code: savedCode) {
-            if (code.contains("DADDIU"))
-                isValid = checkingDADDIU(code);
-            else if (code.contains("XORI"))
-                isValid = checkingXORI(code);
 
-            System.out.println(isValid);
         }
 
-        /*
+
 
         if (!error) {
             makeInstructions();
         } else {
             // display here the error dialog
         }
-
+        */
         makeInstructions();
 
-        ArrayList<OpcodeTableItem> opcodeTableItems = new ArrayList<>();
+        opcodeTableItems = new ArrayList<>();
 
         for (int i = 0; i < instructions.size(); i++){
             Instruction ins = instructions.get(i);
@@ -96,11 +92,6 @@ public class Controller implements Initializable{
                 opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
                                                          ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
         }
-
-//        for (Instruction i: instructions) {
-//
-//        }
-*/
     }
 
     @FXML
@@ -112,9 +103,26 @@ public class Controller implements Initializable{
 
     @FXML
     private void runOneCycle() {
+        currPC = NPC;
         System.out.println("IR: " + instructions.get(NPC).toHex());
         NPC += 4;
         System.out.println("NPC: " + NPC);
+
+        A = registers.get("R" + instructions.get(currPC).getIR21to25());
+        System.out.println("A: " + A);
+        B = registers.get("R" + instructions.get(currPC).getIR16to20());
+        System.out.println("B: " + B);
+        Imm = instructions.get(currPC).getR15to0();
+        System.out.println("IMM: " + Imm);
+        
+        System.out.println("ALUOUTPUT: ");
+        System.out.println("COND: ");
+
+        System.out.println("PC: " + NPC);
+        System.out.println("LMD: ");
+        System.out.println("Range: ");
+
+        System.out.println("Rn: ");
 }
 
     private void makeInstructions() {
@@ -170,208 +178,25 @@ public class Controller implements Initializable{
         instructions = new HashMap<>();
     }
 
-    public boolean checkingDADDIU(String codeLine) {
-        ArrayList<String> codeParts = new ArrayList<String>();
-        String[] splitter = codeLine.split(",");
-
-        try {
-            if (splitter[0].contains(":")) {
-                // label
-                codeParts.add(splitter[0].substring(0, splitter[0].indexOf(":")));
-
-                // rt
-                String[] checker2 = splitter[0].substring(splitter[0].indexOf(":") + 1).trim().split("\\s+");
-
-                if (checker2[0].equalsIgnoreCase("DADDIU")) {
-                    codeParts.add(checker2[0]);
-
-                    if (checker2[1].startsWith("R")) {
-                        codeParts.add(checker2[1]);
-                    } else {
-                        return false;
-                    }
-                } else {
-                    return false;
-                }
-
-            } else {
-                String[] checker2 = splitter[0].trim().split("\\s+");
-
-                if (checker2[0].equalsIgnoreCase("DADDIU")) {
-                    codeParts.add(checker2[0]);
-                    if (checker2[1].startsWith("R")) {
-                        codeParts.add(checker2[1]);
-                    } else {
-                        return false;
-                    }
-                } else {
-                    return false;
-                }
-            }
-
-            // for rs
-            if (splitter[1].trim().startsWith("R")) {
-                codeParts.add(splitter[1].trim());
-            } else {
-                return false;
-            }
-
-            String immediate = splitter[2].trim();
-
-            try {
-                if (immediate.startsWith("#")) {
-                    Integer toDecimal = Integer.parseInt(immediate.substring(immediate.indexOf("#") + 1), 16);
-
-                    if (!(toDecimal >= 0 && toDecimal <= 65535)) {
-                        return false;
-                    } else {
-                        codeParts.add(immediate.substring(immediate.indexOf("#")));
-                    }
-                } else if (immediate.startsWith("0x")) {
-                    int toDecimal = Integer.parseInt(immediate.substring(immediate.indexOf("x") + 1), 16);
-
-                    if (!(toDecimal >= 0 && toDecimal <= 65535)) {
-                        return false;
-                    } else {
-                        codeParts.add(immediate.substring(immediate.indexOf("0")));
-                    }
-                } else {
-                    int toDecimal = Integer.parseInt(immediate.substring(0));
-                    codeParts.add(Integer.toString(toDecimal));
-                }
-            } catch (Exception e) {
-                return false;
-            }
-
-            for (String c: codeParts)
-                System.out.println(c);
-
-            // Assuming all is correct
-            try {
-                int rt, rs;
-                if (!codeParts.get(0).equalsIgnoreCase("DADDIU")) {
-                    rt = Integer.parseInt(codeParts.get(2).substring(codeParts.get(2).indexOf("R") + 1));
-                    rs = Integer.parseInt(codeParts.get(3).substring(codeParts.get(3).indexOf("R") + 1));
-                } else {
-                    rt = Integer.parseInt(codeParts.get(1).substring(codeParts.get(1).indexOf("R") + 1));
-                    rs = Integer.parseInt(codeParts.get(2).substring(codeParts.get(2).indexOf("R") + 1));
-                }
-
-                if ((rt >= 0 && rt <= 31) && (rs >= 0 && rs <= 31))
-                    return true;
-            } catch (Exception e) {
-                return false;
-            }
-        } catch (Exception e) {
-            return false;
+    public void performOperation(String instruction){
+        switch(instruction){
+            case "DADDIU": break;
+            case "DADDU": break;
+            case "XORI": break;
+            case "BEQC": break;
+            case "BC": break;
+            case "LD": break;
+            case "SD": break;
         }
-
-        return false;
     }
 
-    public boolean checkingXORI(String codeLine) {
-        ArrayList<String> codeParts = new ArrayList<String>();
-        String[] splitter = codeLine.split(",");
-
-        try {
-            if (splitter[0].contains(":")) {
-                // label
-                codeParts.add(splitter[0].substring(0, splitter[0].indexOf(":")));
-
-                // rt
-                String[] checker2 = splitter[0].substring(splitter[0].indexOf(":") + 1).trim().split("\\s+");
-
-                if (checker2[0].equalsIgnoreCase("XORI")) {
-                    codeParts.add(checker2[0]);
-
-                    if (checker2[1].startsWith("R")) {
-                        codeParts.add(checker2[1]);
-                    } else {
-                        return false;
-                    }
-                } else {
-                    return false;
-                }
-
-            } else {
-                String[] checker2 = splitter[0].trim().split("\\s+");
-
-                if (checker2[0].equalsIgnoreCase("XORI")) {
-                    codeParts.add(checker2[0]);
-                    if (checker2[1].startsWith("R")) {
-                        codeParts.add(checker2[1]);
-                    } else {
-                        return false;
-                    }
-                } else {
-                    return false;
-                }
-            }
-
-            // for r2
-            if (splitter[1].trim().startsWith("R")) {
-                codeParts.add(splitter[1].trim());
-            } else {
-                return false;
-            }
-
-            String immediate = splitter[2].trim();
-
-            try {
-                if (immediate.startsWith("#")) {
-                    Integer toDecimal = Integer.parseInt(immediate.substring(immediate.indexOf("#") + 1), 16);
-
-                    if (!(toDecimal >= 0 && toDecimal <= 65535)) {
-                        return false;
-                    } else {
-                        codeParts.add(immediate.substring(immediate.indexOf("#")));
-                    }
-                } else if (immediate.startsWith("0x")) {
-                    int toDecimal = Integer.parseInt(immediate.substring(immediate.indexOf("x") + 1), 16);
-
-                    if (!(toDecimal >= 0 && toDecimal <= 65535)) {
-                        return false;
-                    } else {
-                        codeParts.add(immediate.substring(immediate.indexOf("0")));
-                    }
-                } else {
-                    int toDecimal = Integer.parseInt(immediate.substring(0));
-                    codeParts.add(Integer.toString(toDecimal));
-                }
-            } catch (Exception e) {
-                return false;
-            }
-
-            for (String c: codeParts)
-                System.out.println(c);
-
-            // Assuming all is correct
-            try {
-                int rt, rs;
-                if (!codeParts.get(0).equalsIgnoreCase("XORI")) {
-                    rt = Integer.parseInt(codeParts.get(2).substring(codeParts.get(2).indexOf("R") + 1));
-                    rs = Integer.parseInt(codeParts.get(3).substring(codeParts.get(3).indexOf("R") + 1));
-                } else {
-                    rt = Integer.parseInt(codeParts.get(1).substring(codeParts.get(1).indexOf("R") + 1));
-                    rs = Integer.parseInt(codeParts.get(2).substring(codeParts.get(2).indexOf("R") + 1));
-                }
-
-                if ((rt >= 0 && rt <= 31) && (rs >= 0 && rs <= 31))
-                    return true;
-            } catch (Exception e) {
-                return false;
-            }
-        } catch (Exception e) {
-            return false;
-        }
-
-        return false;
-    }
 
     private String[] savedCode;
     private HashMap<String, String> registers;
     private ObservableList<String> values;
     private HashMap<Integer, Instruction> instructions;
+    ArrayList<OpcodeTableItem> opcodeTableItems;
+    private int currPC;
     private int NPC;
     private String A;
     private String B;

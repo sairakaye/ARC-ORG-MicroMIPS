@@ -89,11 +89,11 @@ public abstract class Instruction {
         this.variable = variable;
     }
 
-//    public abstract int getIR21to25();
-//
-//    public abstract int getIR16to20();
-//
-//    public abstract String getR15to0();
+    public abstract int getIR21to25();
+
+    public abstract int getIR16to20();
+
+    public abstract String getR15to0();
 
     public abstract String toHex();
 

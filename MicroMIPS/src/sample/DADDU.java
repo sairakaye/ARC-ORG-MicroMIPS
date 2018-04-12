@@ -26,7 +26,7 @@ class DADDU extends Instruction{
         setRt(Integer.toString(in, 2));
 
         setSa("00000");
-        setFunc("10101");
+        setFunc("101101");
     }
 
     @Override
@@ -41,17 +41,40 @@ class DADDU extends Instruction{
         return hex;
     }
 
-    public String getIR21to25() {
-        String big = new BigInteger(hex, 16).toString(2);
+    // get index for A on 2nd cycle
+    public int getIR21to25() {
+        return Integer.parseInt(getRs(), 2);
 
-        return "";
+        //return Integer.toString(index);
     }
 
-    public String getIR16to20() {
-        return "";
+    // get index for B on 2nd cycle
+    public int getIR16to20() {
+        return Integer.parseInt(getRt(), 2);
+
+        //return Integer.toString(index);
     }
 
+    // IMM for 2nd Cycle
     public String getR15to0() {
-        return "";
+        String nString = "";
+
+        while (nString.length() < 12){
+            nString = nString + "0";
+        }
+        nString += hex.substring(4, 8);
+        if (hex.substring(4,8).charAt(0) >= '8'){
+            nString = "";
+            while (nString.length() < 12){
+                nString = nString + "F";
+            }
+            nString += hex.substring(4, 8);
+        }
+
+        return nString;
+    }
+
+    public static void main(String[] args){
+        new DADDU("DADDU R1, R3, R5");
     }
 }
