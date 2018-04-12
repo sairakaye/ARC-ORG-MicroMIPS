@@ -97,22 +97,22 @@
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Button>
-            <Label layoutX="356.0" layoutY="469.0" text="Selected Register:">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Label>
-            <Label fx:id="selected" layoutX="491.0" layoutY="469.0" text="R0">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Label>
-            <Button layoutX="356.0" layoutY="536.0" mnemonicParsing="false" onAction="#changeValue" prefHeight="26.0" prefWidth="218.0" style="-fx-border-color: #000000;" text="Change Value">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
-            <TextField fx:id="newValueField" layoutX="356.0" layoutY="499.0" prefHeight="26.0" prefWidth="218.0" />
+                <Label layoutX="356.0" layoutY="469.0" text="Selected Register:">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+                <Label fx:id="selected" layoutX="491.0" layoutY="469.0" text="R0">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+                <Button layoutX="356.0" layoutY="536.0" mnemonicParsing="false" onAction="#changeValue" prefHeight="26.0" prefWidth="218.0" style="-fx-border-color: #000000;" text="Change Value">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+                <TextField fx:id="newValueField" layoutX="356.0" layoutY="499.0" prefHeight="26.0" prefWidth="218.0" />
             </AnchorPane>
         </Tab>
     </TabPane>
