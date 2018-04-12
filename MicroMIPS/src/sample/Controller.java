@@ -3,10 +3,16 @@ package sample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
 import java.util.ArrayList;
@@ -401,15 +407,37 @@ public class Controller implements Initializable{
         NPC = 100;
     }
 
+    private void selectR0(Stage stage) {
+        Parent viewParent;
+        try {
+            viewParent = FXMLLoader.load(getClass().getResource("InvalidRegister.fxml"));
+            Scene sc = new Scene(viewParent);
+
+            stage.setScene(sc);
+            stage.show();
+
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     @FXML
     private void changeRegisterValue() {
+        selected.setText("R1");
 
         String selectedRegister = (String) register_list.getSelectionModel().getSelectedItem();
         String[] temp = selectedRegister.split("=");
-
-        selected.setText(temp[0]);
         selectedR = temp[0];
 
+        selectedR = selectedR.replaceAll("\\s","");
+        if (selectedR.equals("R0")) {
+            final Stage invalid = new Stage();
+            invalid.initModality(Modality.APPLICATION_MODAL);
+
+            selectR0(invalid);
+        } else
+            selected.setText(temp[0]);
     }
 
     @FXML
