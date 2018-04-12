@@ -53,7 +53,7 @@
                         <TableColumn fx:id="insMemColInstruction" prefWidth="163.6000518798828" text="Instruction" />
                     </columns>
                 </TableView>
-                <TableView fx:id="memDataTable" layoutX="14.0" layoutY="316.0" prefHeight="210.0" prefWidth="306.0" style="-fx-border-color: #000000;">
+                <TableView fx:id="memDataTable" layoutX="14.0" layoutY="291.0" prefHeight="210.0" prefWidth="306.0" style="-fx-border-color: #000000;">
                     <columns>
                         <TableColumn fx:id="memAddrCol" editable="false" prefWidth="75.0" text="Address" />
                         <TableColumn fx:id="memDataCol" prefWidth="227.20004272460938" sortable="false" text="Representation" />
@@ -65,7 +65,7 @@
                         <Font name="System Bold" size="15.0" />
                     </font>
                 </Label>
-                <Label layoutX="14.0" layoutY="289.0" text="Data Memory">
+                <Label layoutX="12.0" layoutY="263.0" text="Data Memory">
                     <font>
                         <Font name="System Bold" size="15.0" />
                     </font>
@@ -85,13 +85,13 @@
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font></Button>
-                <Label layoutX="14.0" layoutY="539.0" text="Go To:">
+                <Label layoutX="15.0" layoutY="551.0" text="Go To:">
                     <font>
                         <Font name="System Bold" size="15.0" />
                     </font>
                 </Label>
-                <TextField layoutX="14.0" layoutY="573.0" prefHeight="26.0" prefWidth="207.0" />
-                <Button alignment="CENTER" layoutX="245.0" layoutY="571.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="74.0" style="-fx-border-color: #000000;" text="Go!">
+                <TextField layoutX="14.0" layoutY="512.0" prefHeight="26.0" prefWidth="207.0" />
+                <Button fx:id="gotoButton" alignment="CENTER" layoutX="246.0" layoutY="571.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="74.0" style="-fx-border-color: #000000;" text="Go!">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
@@ -112,6 +112,12 @@
                     </font>
                 </Button>
                 <TextField fx:id="newValueField" layoutX="356.0" layoutY="499.0" prefHeight="26.0" prefWidth="218.0" />
+            <TextField fx:id="gotoField" layoutX="14.0" layoutY="572.0" prefHeight="26.0" prefWidth="207.0" />
+            <Button fx:id="insertButton" alignment="CENTER" layoutX="246.0" layoutY="511.0" mnemonicParsing="false" onAction="#setContentInMemory" prefHeight="26.0" prefWidth="74.0" style="-fx-border-color: #000000;" text="Insert">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
             </AnchorPane>
         </Tab>
     </TabPane>

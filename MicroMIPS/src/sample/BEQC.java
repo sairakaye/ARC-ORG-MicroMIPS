@@ -15,6 +15,7 @@ public class BEQC extends Instruction {
         // TODO fix this
         String rs = temp[0].replaceAll("\\D+", "");
         in = Integer.parseInt(rs);
+        System.out.println();
         setRs(Integer.toString(in, 2));
 
         String rt = temp[1].replaceAll("\\D+", "");
