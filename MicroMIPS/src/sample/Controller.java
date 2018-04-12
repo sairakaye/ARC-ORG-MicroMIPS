@@ -167,45 +167,48 @@ public class Controller implements Initializable{
     private void clear() {
         codingArea.clear();
         instructions.clear();
-        NPC = 0;
+        NPC = 100;
     }
 
     @FXML
     private void runOneCycle() {
-        currPC = NPC;
-        System.out.println("IR: " + instructions.get(NPC).toHex());
-        NPC += 4;
-        System.out.println("NPC: " + NPC);
+        if (currIns < instructions.size()) {
+            currPC = NPC;
+            System.out.println("IR: " + instructions.get(NPC).toHex());
+            NPC += 4;
+            System.out.println("NPC: " + NPC);
 
-        A = registers.get("R" + instructions.get(currPC).getIR21to25());
-        System.out.println("A: " + A);
-        B = registers.get("R" + instructions.get(currPC).getIR16to20());
-        System.out.println("B: " + B);
-        Imm = instructions.get(currPC).getR15to0();
-        System.out.println("IMM: " + Imm);
+            A = registers.get("R" + instructions.get(currPC).getIR21to25());
+            System.out.println("A: " + A);
+            B = registers.get("R" + instructions.get(currPC).getIR16to20());
+            System.out.println("B: " + B);
+            Imm = instructions.get(currPC).getR15to0();
+            System.out.println("IMM: " + Imm);
 
-        performOperation(instructions.get(currPC));
-        System.out.println("ALUOUTPUT: " + ALUOutput);
-        System.out.println("COND: " + cond);
+            performOperation(instructions.get(currPC));
+            System.out.println("ALUOUTPUT: " + ALUOutput);
+            System.out.println("COND: " + cond);
 
-        if (getNewPC(instructions.get(currPC))) {}
+            if (getNewPC(instructions.get(currPC))) {
+            } else {
+                System.out.println("PC:x` " + NPC);
+            }
 
-        else {
-            System.out.println("PC:x` " + NPC);
+            if (instructions.get(currPC) instanceof LD) {
+
+            } else
+                System.out.println("LMD: n/a");
+
+            if (instructions.get(currPC) instanceof SD) {
+
+            } else
+                System.out.println("Range: n/a");
+
+            System.out.println("Rn: ");
+            currIns++;
+        } else{
+            System.out.println("Reached the end of the codes. Please reset and type new codes");
         }
-
-        if (instructions.get(currPC) instanceof LD) {
-
-        } else
-            System.out.println("LMD: n/a");
-
-        if (instructions.get(currPC) instanceof SD) {
-
-        } else
-            System.out.println("Range: n/a");
-
-        System.out.println("Rn: ");
-        currIns++;
 }
 
     private boolean getNewPC(Instruction instruction) {
