@@ -578,9 +578,26 @@ public class Controller implements Initializable{
             }
 
             if (!found) {
-                // error dialog
+                final Stage invalid = new Stage();
+                invalid.initModality(Modality.APPLICATION_MODAL);
+
+                popUpInvalidAddress(invalid);
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void popUpInvalidAddress(Stage invalid) {
+        Parent viewParent;
+        try {
+            viewParent = FXMLLoader.load(getClass().getResource("InvalidGoTo.fxml"));
+            Scene sc = new Scene(viewParent);
+
+            invalid.setScene(sc);
+            invalid.show();
+
+        } catch(IOException e) {
             e.printStackTrace();
         }
     }
