@@ -3,15 +3,19 @@ package sample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Controller implements Initializable{
 
@@ -22,6 +26,10 @@ public class Controller implements Initializable{
     @FXML private TextArea codingArea;
 
     @FXML private ListView register_list;
+
+    @FXML private Label selected;
+
+    @FXML private TextField newValueField;
 
     @FXML private TableView<OpcodeTableItem> opcodeTable;
 
@@ -168,6 +176,7 @@ public class Controller implements Initializable{
         codingArea.clear();
         instructions.clear();
         NPC = 100;
+        currIns = 0;
     }
 
     @FXML
@@ -189,10 +198,11 @@ public class Controller implements Initializable{
             System.out.println("ALUOUTPUT: " + ALUOutput);
             System.out.println("COND: " + cond);
 
-            if (getNewPC(instructions.get(currPC))) {
-            } else {
-                System.out.println("PC:x` " + NPC);
-            }
+            if (instructions.get(currPC) instanceof BC || instructions.get(currPC) instanceof BEQC) {
+                PC = ALUOutput;
+                System.out.println("PC: " + PC);
+            } else
+                System.out.println("PC: " + NPC);
 
             if (instructions.get(currPC) instanceof LD) {
                 LMD = ALUOutput;
@@ -200,20 +210,48 @@ public class Controller implements Initializable{
             } else
                 System.out.println("LMD: n/a");
 
-            if (instructions.get(currPC) instanceof SD) {
+            if (instructions.get(currPC) instanceof LD) {
+                int register = instructions.get(currPC).getIR16to20();
+                String target = "R" + register;
+                registers.put(target, ALUOutput);
+                System.out.println("Rn: " + ALUOutput);
+            }
 
-            } else
-                System.out.println("Range: n/a");
+            else if (instructions.get(currPC) instanceof BC || instructions.get(currPC) instanceof BEQC || instructions.get(currPC) instanceof SD)
+                System.out.println("Rn: n/a");
 
-            System.out.println("Rn: ");
+            else if (instructions.get(currPC) instanceof DADDIU || instructions.get(currPC) instanceof XORI) {
+                int register = instructions.get(currPC).getIR16to20();
+                System.out.println(register);
+                String target = "R" + register;
+                registers.put(target, ALUOutput);
+                System.out.println("Rn: " + ALUOutput);
+            }
+
+            else if (instructions.get(currPC) instanceof DADDU) {
+                int register = Integer.parseInt(instructions.get(currPC).getRd(), 2);
+                String target = "R" + register;
+                registers.put(target, ALUOutput);
+                System.out.println("Rn: " + ALUOutput);
+            }
+
+            refreshRegisters();
+
             currIns++;
-        } else{
+        } else {
             System.out.println("Reached the end of the codes. Please reset and type new codes");
         }
 }
 
-    private boolean getNewPC(Instruction instruction) {
-        return instruction instanceof BC || instruction instanceof BEQC;
+    private void refreshRegisters() {
+        register_list.getItems().clear();
+
+        values = FXCollections.observableArrayList();
+
+        for (int i = 0; i < 32; i++)
+            values.add("R" + i + " = " + registers.get("R" + i));
+
+        register_list.setItems(values);
     }
 
     private void makeInstructions() {
@@ -261,6 +299,34 @@ public class Controller implements Initializable{
         }
         NPC = 100;
     }
+
+    @FXML
+    private void changeRegisterValue() {
+
+        String selectedRegister = (String) register_list.getSelectionModel().getSelectedItem();
+        String[] temp = selectedRegister.split("=");
+
+        selected.setText(temp[0]);
+        selectedR = temp[0];
+
+    }
+
+    @FXML
+    private void changeValue() {
+        String temp = newValueField.getText();
+
+        if (temp.length() < 16)
+            while (temp.length() < 16)
+                temp = "0" + temp;
+
+        temp = temp.replaceAll("\\s", "");
+        selectedR = selectedR.replaceAll("\\s", "");
+
+        registers.put(selectedR, temp);
+
+        refreshRegisters();
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -901,4 +967,5 @@ public class Controller implements Initializable{
     private int cond;
     private String PC;
     private String LMD;
+    private String selectedR;
 }
