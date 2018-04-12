@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <TabPane layoutX="14.0" layoutY="16.0" prefHeight="668.0" prefWidth="1376.0" tabClosingPolicy="UNAVAILABLE">
+        <Tab text="Load">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                <TextArea fx:id="codingArea" layoutX="38.0" layoutY="57.0" prefHeight="479.0" prefWidth="620.0" />
+                <TableView fx:id="opcodeTable" layoutX="714.0" layoutY="57.0" prefHeight="532.0" prefWidth="620.0">
+                    <columns>
+                        <TableColumn fx:id="colInstruction" prefWidth="120.0" text="Instruction" />
+                        <TableColumn fx:id="colHexOpcode" prefWidth="100.800048828125" text="Hex" />
+                        <TableColumn fx:id="colBit31to26" prefWidth="66.39996337890625" text="B: 31-26" />
+                        <TableColumn fx:id="colBit25to21" prefWidth="66.4000244140625" text="B: 25-21" />
+                        <TableColumn fx:id="colBit20to16" prefWidth="64.7999267578125" text="B: 20-16" />
+                        <TableColumn fx:id="colBit15to11" prefWidth="67.199951171875" text="B: 15-11" />
+                        <TableColumn fx:id="colBit10t06" prefWidth="71.2000732421875" text="B: 10-6" />
+                        <TableColumn fx:id="colBit5to0" prefWidth="64.7998046875" text="B: 5-0" />
+                    </columns>
+                </TableView>
+                <Button fx:id="loadButton" layoutX="432.0" layoutY="549.0" mnemonicParsing="false" onAction="#processCode" prefHeight="41.0" prefWidth="103.0" text="Load" />
+                <Button fx:id="resetButton" layoutX="554.0" layoutY="549.0" mnemonicParsing="false" onAction="#clear" prefHeight="41.0" prefWidth="103.0" text="Reset" />
+                <Label layoutX="38.0" layoutY="11.0" prefHeight="37.0" prefWidth="260.0" text="MicroMIPS">
+                    <font>
+                        <Font name="System Bold" size="25.0" />
+                    </font>
+                </Label>
+                <Label layoutX="714.0" layoutY="30.0" text="Opcode">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+            </AnchorPane>
+        </Tab>
+        <Tab onSelectionChanged="#showCyclePane" text="Main">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                <TableView layoutX="14.0" layoutY="41.0" prefHeight="256.0" prefWidth="306.0">
+                    <columns>
+                        <TableColumn prefWidth="75.0" text="Address" />
+                        <TableColumn prefWidth="75.0" text="Opcode" />
+                        <TableColumn prefWidth="75.0" text="Label" />
+                        <TableColumn prefWidth="79.19999694824219" text="Instruction" />
+                    </columns>
+                </TableView>
+                <TableView layoutX="14.0" layoutY="346.0" prefHeight="256.0" prefWidth="306.0">
+                    <columns>
+                        <TableColumn prefWidth="75.0" text="Address" />
+                        <TableColumn prefWidth="159.1999969482422" text="Representation" />
+                        <TableColumn prefWidth="70.4000244140625" text="Label" />
+                        <TableColumn prefWidth="70.4000244140625" text="Code" />
+                    </columns>
+                </TableView>
+                <ListView fx:id="register_list" layoutX="356.0" layoutY="41.0" prefHeight="495.0" prefWidth="218.0" />
+                <Label layoutX="14.0" layoutY="14.0" text="Instruction Memory">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+                <Label layoutX="14.0" layoutY="319.0" text="Data Memory">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+                <Label layoutX="356.0" layoutY="14.0" text="Registers">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+                <Label layoutX="596.0" layoutY="14.0" text="Pipeline">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+            <TextArea layoutX="596.0" layoutY="41.0" prefHeight="564.0" prefWidth="741.0" />
+            <Button layoutX="356.0" layoutY="550.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="218.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000;" text="Run One Cycle" />
+            </AnchorPane>
+        </Tab>
+    </TabPane>
+</AnchorPane>
