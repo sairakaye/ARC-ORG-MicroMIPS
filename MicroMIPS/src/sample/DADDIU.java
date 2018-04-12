@@ -11,7 +11,6 @@ class DADDIU extends Instruction{
 
         String[] reg = line.split(",");
         String rs = reg[1].replaceAll("\\D+", "");
-        //System.out.println("0: " + reg[0] + " 1: " + reg[1] + " 2: " + reg[2]);
         in = Integer.parseInt(rs);
         setRs(Integer.toString(in, 2));
 
@@ -30,7 +29,7 @@ class DADDIU extends Instruction{
 
         String[] first = reg[0].split(" ");
 
-        String rt = reg[0].replaceAll("\\D+", "");
+        String rt = first[1].replaceAll("\\D+", "");
         in = Integer.parseInt(rt);
         setRt(Integer.toString(in, 2));
     }

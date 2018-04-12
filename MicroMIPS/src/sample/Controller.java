@@ -230,6 +230,7 @@ public class Controller implements Initializable{
     private void clear() {
         codingArea.clear();
         instructions.clear();
+        currIns = 0;
         NPC = 100;
 
         insMemTableItems = new ArrayList<>();
