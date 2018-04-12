@@ -16,27 +16,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="306" column="54" selection-start-line="306" selection-start-column="54" selection-end-line="306" selection-end-column="54" />
+            <state relative-caret-position="187">
+              <caret line="132" lean-forward="true" selection-start-line="132" selection-end-line="132" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#checkingDADDIU#0;class#Controller#0" />
-                <element signature="e#10164#10172#0" expanded="true" />
-                <element signature="method#checkingXORI#0;class#Controller#0" />
-                <element signature="e#14176#14184#0" expanded="true" />
-                <element signature="method#checkingLD#0;class#Controller#0" />
-                <element signature="e#18180#18188#0" expanded="true" />
-                <element signature="method#checkingSD#0;class#Controller#0" />
-                <element signature="e#20280#20288#0" expanded="true" />
-                <element signature="method#checkingDADDU#0;class#Controller#0" />
-                <element signature="e#22383#22391#0" expanded="true" />
-                <element signature="method#checkingBC#0;class#Controller#0" />
-                <element signature="e#25556#25564#0" expanded="true" />
+                <element signature="e#12636#12644#0" expanded="true" />
+                <element signature="e#16561#16569#0" expanded="true" />
+                <element signature="e#20478#20486#0" expanded="true" />
+                <element signature="e#22521#22529#0" expanded="true" />
+                <element signature="e#24567#24575#0" expanded="true" />
+                <element signature="e#27654#27662#0" expanded="true" />
                 <element signature="method#checkingBEQC#0;class#Controller#0" />
-                <element signature="e#26828#26836#0" expanded="true" />
+                <element signature="e#28839#28847#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -112,7 +106,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BC.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BC.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/BC.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
@@ -206,7 +200,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
     <option name="y" value="-10" />
     <option name="width" value="1615" />
@@ -358,7 +352,7 @@
       <workItem from="1523451621457" duration="1600000" />
       <workItem from="1523459723985" duration="342000" />
       <workItem from="1523491965300" duration="81000" />
-      <workItem from="1523494318666" duration="21825000" />
+      <workItem from="1523494318666" duration="22073000" />
     </task>
     <task id="LOCAL-00001" summary="Made the registers and changed the instructions to a hashmap">
       <created>1523462616433</created>
@@ -392,7 +386,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33117000" />
+    <option name="totallyTimeSpent" value="33365000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -507,20 +501,14 @@
           <caret line="167" selection-start-line="167" selection-end-line="167" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#checkingDADDIU#0;class#Controller#0" />
-            <element signature="e#10164#10172#0" expanded="true" />
-            <element signature="method#checkingXORI#0;class#Controller#0" />
-            <element signature="e#14176#14184#0" expanded="true" />
-            <element signature="method#checkingLD#0;class#Controller#0" />
-            <element signature="e#18180#18188#0" expanded="true" />
-            <element signature="method#checkingSD#0;class#Controller#0" />
-            <element signature="e#20280#20288#0" expanded="true" />
-            <element signature="method#checkingDADDU#0;class#Controller#0" />
-            <element signature="e#22383#22391#0" expanded="true" />
-            <element signature="method#checkingBC#0;class#Controller#0" />
-            <element signature="e#25556#25564#0" expanded="true" />
+            <element signature="e#12636#12644#0" expanded="true" />
+            <element signature="e#16561#16569#0" expanded="true" />
+            <element signature="e#20478#20486#0" expanded="true" />
+            <element signature="e#22521#22529#0" expanded="true" />
+            <element signature="e#24567#24575#0" expanded="true" />
+            <element signature="e#27654#27662#0" expanded="true" />
             <element signature="method#checkingBEQC#0;class#Controller#0" />
-            <element signature="e#26828#26836#0" expanded="true" />
+            <element signature="e#28839#28847#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -571,20 +559,14 @@
           <caret line="116" column="34" selection-start-line="116" selection-start-column="34" selection-end-line="116" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#checkingDADDIU#0;class#Controller#0" />
-            <element signature="e#10164#10172#0" expanded="true" />
-            <element signature="method#checkingXORI#0;class#Controller#0" />
-            <element signature="e#14176#14184#0" expanded="true" />
-            <element signature="method#checkingLD#0;class#Controller#0" />
-            <element signature="e#18180#18188#0" expanded="true" />
-            <element signature="method#checkingSD#0;class#Controller#0" />
-            <element signature="e#20280#20288#0" expanded="true" />
-            <element signature="method#checkingDADDU#0;class#Controller#0" />
-            <element signature="e#22383#22391#0" expanded="true" />
-            <element signature="method#checkingBC#0;class#Controller#0" />
-            <element signature="e#25556#25564#0" expanded="true" />
+            <element signature="e#12636#12644#0" expanded="true" />
+            <element signature="e#16561#16569#0" expanded="true" />
+            <element signature="e#20478#20486#0" expanded="true" />
+            <element signature="e#22521#22529#0" expanded="true" />
+            <element signature="e#24567#24575#0" expanded="true" />
+            <element signature="e#27654#27662#0" expanded="true" />
             <element signature="method#checkingBEQC#0;class#Controller#0" />
-            <element signature="e#26828#26836#0" expanded="true" />
+            <element signature="e#28839#28847#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -622,20 +604,14 @@
         <state>
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#checkingDADDIU#0;class#Controller#0" />
-            <element signature="e#10164#10172#0" expanded="true" />
-            <element signature="method#checkingXORI#0;class#Controller#0" />
-            <element signature="e#14176#14184#0" expanded="true" />
-            <element signature="method#checkingLD#0;class#Controller#0" />
-            <element signature="e#18180#18188#0" expanded="true" />
-            <element signature="method#checkingSD#0;class#Controller#0" />
-            <element signature="e#20280#20288#0" expanded="true" />
-            <element signature="method#checkingDADDU#0;class#Controller#0" />
-            <element signature="e#22383#22391#0" expanded="true" />
-            <element signature="method#checkingBC#0;class#Controller#0" />
-            <element signature="e#25556#25564#0" expanded="true" />
+            <element signature="e#12636#12644#0" expanded="true" />
+            <element signature="e#16561#16569#0" expanded="true" />
+            <element signature="e#20478#20486#0" expanded="true" />
+            <element signature="e#22521#22529#0" expanded="true" />
+            <element signature="e#24567#24575#0" expanded="true" />
+            <element signature="e#27654#27662#0" expanded="true" />
             <element signature="method#checkingBEQC#0;class#Controller#0" />
-            <element signature="e#26828#26836#0" expanded="true" />
+            <element signature="e#28839#28847#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -660,20 +636,14 @@
           <caret line="93" column="25" selection-start-line="93" selection-start-column="25" selection-end-line="93" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#checkingDADDIU#0;class#Controller#0" />
-            <element signature="e#10164#10172#0" expanded="true" />
-            <element signature="method#checkingXORI#0;class#Controller#0" />
-            <element signature="e#14176#14184#0" expanded="true" />
-            <element signature="method#checkingLD#0;class#Controller#0" />
-            <element signature="e#18180#18188#0" expanded="true" />
-            <element signature="method#checkingSD#0;class#Controller#0" />
-            <element signature="e#20280#20288#0" expanded="true" />
-            <element signature="method#checkingDADDU#0;class#Controller#0" />
-            <element signature="e#22383#22391#0" expanded="true" />
-            <element signature="method#checkingBC#0;class#Controller#0" />
-            <element signature="e#25556#25564#0" expanded="true" />
+            <element signature="e#12636#12644#0" expanded="true" />
+            <element signature="e#16561#16569#0" expanded="true" />
+            <element signature="e#20478#20486#0" expanded="true" />
+            <element signature="e#22521#22529#0" expanded="true" />
+            <element signature="e#24567#24575#0" expanded="true" />
+            <element signature="e#27654#27662#0" expanded="true" />
             <element signature="method#checkingBEQC#0;class#Controller#0" />
-            <element signature="e#26828#26836#0" expanded="true" />
+            <element signature="e#28839#28847#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -698,20 +668,14 @@
           <caret line="93" column="25" selection-start-line="93" selection-start-column="25" selection-end-line="93" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#checkingDADDIU#0;class#Controller#0" />
-            <element signature="e#10164#10172#0" expanded="true" />
-            <element signature="method#checkingXORI#0;class#Controller#0" />
-            <element signature="e#14176#14184#0" expanded="true" />
-            <element signature="method#checkingLD#0;class#Controller#0" />
-            <element signature="e#18180#18188#0" expanded="true" />
-            <element signature="method#checkingSD#0;class#Controller#0" />
-            <element signature="e#20280#20288#0" expanded="true" />
-            <element signature="method#checkingDADDU#0;class#Controller#0" />
-            <element signature="e#22383#22391#0" expanded="true" />
-            <element signature="method#checkingBC#0;class#Controller#0" />
-            <element signature="e#25556#25564#0" expanded="true" />
+            <element signature="e#12636#12644#0" expanded="true" />
+            <element signature="e#16561#16569#0" expanded="true" />
+            <element signature="e#20478#20486#0" expanded="true" />
+            <element signature="e#22521#22529#0" expanded="true" />
+            <element signature="e#24567#24575#0" expanded="true" />
+            <element signature="e#27654#27662#0" expanded="true" />
             <element signature="method#checkingBEQC#0;class#Controller#0" />
-            <element signature="e#26828#26836#0" expanded="true" />
+            <element signature="e#28839#28847#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -750,20 +714,14 @@
           <caret line="106" lean-forward="true" selection-start-line="106" selection-end-line="106" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#checkingDADDIU#0;class#Controller#0" />
-            <element signature="e#10164#10172#0" expanded="true" />
-            <element signature="method#checkingXORI#0;class#Controller#0" />
-            <element signature="e#14176#14184#0" expanded="true" />
-            <element signature="method#checkingLD#0;class#Controller#0" />
-            <element signature="e#18180#18188#0" expanded="true" />
-            <element signature="method#checkingSD#0;class#Controller#0" />
-            <element signature="e#20280#20288#0" expanded="true" />
-            <element signature="method#checkingDADDU#0;class#Controller#0" />
-            <element signature="e#22383#22391#0" expanded="true" />
-            <element signature="method#checkingBC#0;class#Controller#0" />
-            <element signature="e#25556#25564#0" expanded="true" />
+            <element signature="e#12636#12644#0" expanded="true" />
+            <element signature="e#16561#16569#0" expanded="true" />
+            <element signature="e#20478#20486#0" expanded="true" />
+            <element signature="e#22521#22529#0" expanded="true" />
+            <element signature="e#24567#24575#0" expanded="true" />
+            <element signature="e#27654#27662#0" expanded="true" />
             <element signature="method#checkingBEQC#0;class#Controller#0" />
-            <element signature="e#26828#26836#0" expanded="true" />
+            <element signature="e#28839#28847#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -773,20 +731,14 @@
         <state>
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#checkingDADDIU#0;class#Controller#0" />
-            <element signature="e#10164#10172#0" expanded="true" />
-            <element signature="method#checkingXORI#0;class#Controller#0" />
-            <element signature="e#14176#14184#0" expanded="true" />
-            <element signature="method#checkingLD#0;class#Controller#0" />
-            <element signature="e#18180#18188#0" expanded="true" />
-            <element signature="method#checkingSD#0;class#Controller#0" />
-            <element signature="e#20280#20288#0" expanded="true" />
-            <element signature="method#checkingDADDU#0;class#Controller#0" />
-            <element signature="e#22383#22391#0" expanded="true" />
-            <element signature="method#checkingBC#0;class#Controller#0" />
-            <element signature="e#25556#25564#0" expanded="true" />
+            <element signature="e#12636#12644#0" expanded="true" />
+            <element signature="e#16561#16569#0" expanded="true" />
+            <element signature="e#20478#20486#0" expanded="true" />
+            <element signature="e#22521#22529#0" expanded="true" />
+            <element signature="e#24567#24575#0" expanded="true" />
+            <element signature="e#27654#27662#0" expanded="true" />
             <element signature="method#checkingBEQC#0;class#Controller#0" />
-            <element signature="e#26828#26836#0" expanded="true" />
+            <element signature="e#28839#28847#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -811,20 +763,14 @@
           <caret line="93" column="25" selection-start-line="93" selection-start-column="25" selection-end-line="93" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#checkingDADDIU#0;class#Controller#0" />
-            <element signature="e#10164#10172#0" expanded="true" />
-            <element signature="method#checkingXORI#0;class#Controller#0" />
-            <element signature="e#14176#14184#0" expanded="true" />
-            <element signature="method#checkingLD#0;class#Controller#0" />
-            <element signature="e#18180#18188#0" expanded="true" />
-            <element signature="method#checkingSD#0;class#Controller#0" />
-            <element signature="e#20280#20288#0" expanded="true" />
-            <element signature="method#checkingDADDU#0;class#Controller#0" />
-            <element signature="e#22383#22391#0" expanded="true" />
-            <element signature="method#checkingBC#0;class#Controller#0" />
-            <element signature="e#25556#25564#0" expanded="true" />
+            <element signature="e#12636#12644#0" expanded="true" />
+            <element signature="e#16561#16569#0" expanded="true" />
+            <element signature="e#20478#20486#0" expanded="true" />
+            <element signature="e#22521#22529#0" expanded="true" />
+            <element signature="e#24567#24575#0" expanded="true" />
+            <element signature="e#27654#27662#0" expanded="true" />
             <element signature="method#checkingBEQC#0;class#Controller#0" />
-            <element signature="e#26828#26836#0" expanded="true" />
+            <element signature="e#28839#28847#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -849,20 +795,14 @@
           <caret line="93" column="25" selection-start-line="93" selection-start-column="25" selection-end-line="93" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#checkingDADDIU#0;class#Controller#0" />
-            <element signature="e#10164#10172#0" expanded="true" />
-            <element signature="method#checkingXORI#0;class#Controller#0" />
-            <element signature="e#14176#14184#0" expanded="true" />
-            <element signature="method#checkingLD#0;class#Controller#0" />
-            <element signature="e#18180#18188#0" expanded="true" />
-            <element signature="method#checkingSD#0;class#Controller#0" />
-            <element signature="e#20280#20288#0" expanded="true" />
-            <element signature="method#checkingDADDU#0;class#Controller#0" />
-            <element signature="e#22383#22391#0" expanded="true" />
-            <element signature="method#checkingBC#0;class#Controller#0" />
-            <element signature="e#25556#25564#0" expanded="true" />
+            <element signature="e#12636#12644#0" expanded="true" />
+            <element signature="e#16561#16569#0" expanded="true" />
+            <element signature="e#20478#20486#0" expanded="true" />
+            <element signature="e#22521#22529#0" expanded="true" />
+            <element signature="e#24567#24575#0" expanded="true" />
+            <element signature="e#27654#27662#0" expanded="true" />
             <element signature="method#checkingBEQC#0;class#Controller#0" />
-            <element signature="e#26828#26836#0" expanded="true" />
+            <element signature="e#28839#28847#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -967,30 +907,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="306" column="54" selection-start-line="306" selection-start-column="54" selection-end-line="306" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#checkingDADDIU#0;class#Controller#0" />
-            <element signature="e#10164#10172#0" expanded="true" />
-            <element signature="method#checkingXORI#0;class#Controller#0" />
-            <element signature="e#14176#14184#0" expanded="true" />
-            <element signature="method#checkingLD#0;class#Controller#0" />
-            <element signature="e#18180#18188#0" expanded="true" />
-            <element signature="method#checkingSD#0;class#Controller#0" />
-            <element signature="e#20280#20288#0" expanded="true" />
-            <element signature="method#checkingDADDU#0;class#Controller#0" />
-            <element signature="e#22383#22391#0" expanded="true" />
-            <element signature="method#checkingBC#0;class#Controller#0" />
-            <element signature="e#25556#25564#0" expanded="true" />
-            <element signature="method#checkingBEQC#0;class#Controller#0" />
-            <element signature="e#26828#26836#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/BEQC.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1021,6 +937,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="132" lean-forward="true" selection-start-line="132" selection-end-line="132" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#12636#12644#0" expanded="true" />
+            <element signature="e#16561#16569#0" expanded="true" />
+            <element signature="e#20478#20486#0" expanded="true" />
+            <element signature="e#22521#22529#0" expanded="true" />
+            <element signature="e#24567#24575#0" expanded="true" />
+            <element signature="e#27654#27662#0" expanded="true" />
+            <element signature="method#checkingBEQC#0;class#Controller#0" />
+            <element signature="e#28839#28847#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="masterDetails">
     <states>
@@ -1038,7 +972,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited />
+          <last-edited>No facets are configured</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1085,7 +1019,7 @@
       </state>
       <state key="ProjectJDKs.UI">
         <settings>
-          <last-edited />
+          <last-edited>Java 9.0.1</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
