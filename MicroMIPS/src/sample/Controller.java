@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.math.BigInteger;
 import java.net.URL;
@@ -36,7 +37,7 @@ public class Controller implements Initializable{
 
     @FXML private TableColumn<OpcodeTableItem, String>  colBit15to11;
 
-    @FXML private TableColumn<OpcodeTableItem, String>  colBit10t06;
+    @FXML private TableColumn<OpcodeTableItem, String>  colBit10to6;
 
     @FXML private TableColumn<OpcodeTableItem, String>  colBit5to0;
 
@@ -131,25 +132,36 @@ public class Controller implements Initializable{
 
         opcodeTableItems = new ArrayList<>();
 
-//        for (int i = 0; i < instructions.size(); i++){
-//            Instruction ins = instructions.get(i);
-//
-//            if (ins instanceof DADDIU)
-//                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-//                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
-//            else if (ins instanceof DADDU)
-//                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-//                                                         ins.getRt(), ins.getRd(), ins.getSa(), ins.getFunc()));
-//            else if (ins instanceof LD)
-//                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-//                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
-//            else if (ins instanceof SD)
-//                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-//                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
-//            else if (ins instanceof XORI)
-//                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-//                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
-//        }
+        for (int i = 0; i < instructions.size(); i++){
+            Instruction ins = instructions.get(i);
+
+            if (ins instanceof DADDIU)
+                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
+            else if (ins instanceof DADDU)
+                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                                                         ins.getRt(), ins.getRd(), ins.getSa(), ins.getFunc()));
+            else if (ins instanceof LD)
+                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
+            else if (ins instanceof SD)
+                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
+            else if (ins instanceof XORI)
+                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
+        }
+
+        ObservableList<OpcodeTableItem> data = FXCollections.observableArrayList(opcodeTableItems);
+        colInstruction.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("instruction"));
+        colHexOpcode.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("opcodeHex"));
+        colBit31to26.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit26to31"));
+        colBit25to21.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit21to25"));
+        colBit20to16.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit16to20"));
+        colBit15to11.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit11to15"));
+        colBit10to6.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit6to10"));
+        colBit5to0.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit0to5"));
+        opcodeTable.setItems(data);
     }
 
     @FXML
@@ -180,7 +192,7 @@ public class Controller implements Initializable{
         if (getNewPC(instructions.get(currPC))) {}
 
         else {
-            System.out.println("PC: " + NPC);
+            System.out.println("PC:x` " + NPC);
         }
 
         if (instructions.get(currPC) instanceof LD) {
@@ -253,6 +265,8 @@ public class Controller implements Initializable{
         currIns = 0;
         registers = new HashMap<>();
         instructions = new HashMap<>();
+
+
     }
 
     public void performOperation(Instruction ins){
@@ -388,9 +402,6 @@ public class Controller implements Initializable{
                     return false;
                 }
 
-                for (String c : codeParts)
-                    System.out.println(c);
-
                 // Assuming all is correct
                 try {
                     int rt, rs;
@@ -489,9 +500,6 @@ public class Controller implements Initializable{
                     return false;
                 }
 
-                for (String c : codeParts)
-                    System.out.println(c);
-
                 // Assuming all is correct
                 try {
                     int rt, rs;
@@ -556,8 +564,6 @@ public class Controller implements Initializable{
                     }
                 }
 
-                System.out.println(splitter[1].trim());
-
                 String[] offsetBase = splitter[1].trim().split("[\\(\\)]");
 
                 int offset, base;
@@ -619,8 +625,6 @@ public class Controller implements Initializable{
                         return false;
                     }
                 }
-
-                System.out.println(splitter[1].trim());
 
                 String[] offsetBase = splitter[1].trim().split("[\\(\\)]");
 
@@ -696,9 +700,6 @@ public class Controller implements Initializable{
                 else
                     return false;
 
-                for (String c: codeParts)
-                    System.out.println(c);
-
                 try {
                     int rd, rs, rt;
                     if (!codeParts.get(0).equalsIgnoreCase("DADDU")) {
@@ -744,9 +745,6 @@ public class Controller implements Initializable{
                 codeParts.add(splitter[0].trim().substring(0, splitter[0].indexOf(":")));
                 codeParts.add(splitter[1].trim());
                 codeParts.add(splitter[2].trim());
-
-                for (String s : codeParts)
-                    System.out.println(s);
 
                 for (String l : labels)
                     if (codeParts.get(2).equalsIgnoreCase(l)) {
@@ -809,7 +807,6 @@ public class Controller implements Initializable{
                     return false;
 
                 // for offset
-                System.out.println(splitter[2].trim());
                 codeParts.add(splitter[2].trim());
 
                 try {
@@ -819,9 +816,6 @@ public class Controller implements Initializable{
                     if (!codeParts.get(0).equalsIgnoreCase("BEQC")) {
                         rs = Integer.parseInt(codeParts.get(2).substring(codeParts.get(2).indexOf("R") + 1));
                         rt = Integer.parseInt(codeParts.get(3).substring(codeParts.get(3).indexOf("R") + 1));
-
-                        System.out.println(rs + " < " + rt);
-
 
                         for (String l : labels)
                             if (codeParts.get(4).equalsIgnoreCase(l))
