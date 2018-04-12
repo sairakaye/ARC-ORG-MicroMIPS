@@ -353,6 +353,8 @@ public class Controller implements Initializable{
     }
 
     private void makeInstructions() {
+        int counter = 0;
+
         for(String line : savedCode) {
             String[] temp = null;
 
@@ -376,16 +378,45 @@ public class Controller implements Initializable{
                 instructions.put(NPC, new DADDU(line));
             } else if (temp[0].equalsIgnoreCase("BC")) {
                 System.out.println("BC executed");
-                instructions.put(NPC, new BC(line));
+                int dist = 0;
+                for (int i = 0; i < savedCode.length; i++){
+                    if (savedCode[i].contains(":")){
+                        String code[] = savedCode[i].split(":");
+                        if (temp[1].equals(code[0])){
+                            dist = i - counter;
+                            if (dist < 0)
+                                dist += 1;
+                            else
+                                dist -= 1;
+                            break;
+                        }
+                    }
+                }
+                instructions.put(NPC, new BC(line, dist));
             } else if (temp[0].equalsIgnoreCase("BEQC")) {
                 System.out.println("BEQC");
-                instructions.put(NPC, new BEQC(line));
+                int dist = 0;
+                for (int i = 0; i < savedCode.length; i++){
+                    if (savedCode[i].contains(":")){
+                        String code[] = savedCode[i].split(":");
+                        if (temp[2].equals(code[0])){
+                            dist = i - counter;
+                            if (dist < 0)
+                                dist += 1;
+                            else
+                                dist -= 1;
+                            break;
+                        }
+                    }
+                }
+                instructions.put(NPC, new BEQC(line, dist));
             } else if (temp[0].equalsIgnoreCase("XORI")) {
                 System.out.println("XORI");
                 instructions.put(NPC, new XORI(line));
             }
 
             NPC += 4;
+            counter++;
         }
         NPC = 100;
     }
@@ -1084,7 +1115,6 @@ public class Controller implements Initializable{
     private HashMap<String, String> registers;
     private ObservableList<String> values;
     private HashMap<Integer, Instruction> instructions;
-    private HashMap<String, String> dataSegments;
     private ArrayList<MemDataTableItem> memDataTableItems;
     private ArrayList<OpcodeTableItem> opcodeTableItems;
     private ArrayList<InstMemTableItem> insMemTableItems;
