@@ -303,6 +303,13 @@ public class Controller implements Initializable{
                         break;
                     }
                 }
+                ObservableList<MemDataTableItem> mem = FXCollections.observableArrayList(memDataTableItems);
+                memAddrCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("address"));
+                memDataCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("representation"));
+                memDataTable.setItems(mem);
+            } else
+                System.out.println("Range: n/a");
+
             if (instructions.get(currPC) instanceof LD) {
                 int register = instructions.get(currPC).getIR16to20();
                 String target = "R" + register;
@@ -320,35 +327,27 @@ public class Controller implements Initializable{
                 registers.put(target, ALUOutput);
                 System.out.println("Rn: " + ALUOutput);
             }
-                ObservableList<MemDataTableItem> mem = FXCollections.observableArrayList(memDataTableItems);
-                memAddrCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("address"));
-                memDataCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("representation"));
-                memDataTable.setItems(mem);
-            } else
-                System.out.println("Range: n/a");
 
-            if (instructions.get(currPC) instanceof DADDU) {
+            else if (instructions.get(currPC) instanceof DADDU) {
                 int register = Integer.parseInt(instructions.get(currPC).getRd(), 2);
                 String target = "R" + register;
                 registers.put(target, ALUOutput);
                 System.out.println("Rn: " + ALUOutput);
             }
-
             refreshRegisters();
-
             currIns++;
         } else
             System.out.println("Reached the end of the codes. Please reset and type new codes");
-}
+    }
 
     private void refreshRegisters() {
         register_list.getItems().clear();
-
         values = FXCollections.observableArrayList();
 
-        for (int i = 0; i < 32; i++)
+        for (int i = 0; i < 32; i++) {
             values.add("R" + i + " = " + registers.get("R" + i));
-
+            System.out.println("R" + i + " = " + registers.get("R" + i));
+        }
         register_list.setItems(values);
     }
 
