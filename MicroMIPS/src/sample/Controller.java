@@ -27,6 +27,8 @@ public class Controller implements Initializable{
 
     @FXML private TextField newValueField;
 
+    @FXML private TextArea errorField;
+
     @FXML private TableView<OpcodeTableItem> opcodeTable;
 
     @FXML private TableView<MemDataTableItem> memDataTable;
@@ -96,6 +98,7 @@ public class Controller implements Initializable{
                     isValid = checkingLD(code);
 
                     if (!isValid) {
+                        errorField.appendText("Error in line: " + code + "\n");
                         System.out.println("Error in line: " + code);
                         return;
                     }
@@ -104,6 +107,7 @@ public class Controller implements Initializable{
                     isValid = checkingSD(code);
 
                     if (!isValid) {
+                        errorField.appendText("Error in line: " + code + "\n");
                         System.out.println("Error in line: " + code);
                         return;
                     }
@@ -111,6 +115,7 @@ public class Controller implements Initializable{
                     isValid = checkingDADDIU(code);
 
                     if (!isValid) {
+                        errorField.appendText("Error in line: " + code + "\n");
                         System.out.println("Error in line: " + code);
                         return;
                     }
@@ -118,6 +123,7 @@ public class Controller implements Initializable{
                     isValid = checkingDADDU(code);
 
                     if (!isValid) {
+                        errorField.appendText("Error in line: " + code + "\n");
                         System.out.println("Error in line: " + code);
                         return;
                     }
@@ -125,6 +131,7 @@ public class Controller implements Initializable{
                     isValid = checkingBC(labels, code);
 
                     if (!isValid) {
+                        errorField.appendText("Error in line: " + code + "\n");
                         System.out.println("Error in line: " + code);
                         return;
                     }
@@ -133,6 +140,7 @@ public class Controller implements Initializable{
 
 
                     if (!isValid) {
+                        errorField.appendText("Error in line: " + code + "\n");
                         System.out.println("Error in line: " + code);
                         return;
                     }
@@ -140,10 +148,12 @@ public class Controller implements Initializable{
                     isValid = checkingXORI(code);
 
                     if (!isValid) {
+                        errorField.appendText("Error in line: " + code + "\n");
                         System.out.println("Error in line: " + code);
                         return;
                     }
                 } else {
+                    errorField.appendText("Invalid instruction!" + "\n" + code);
                     System.out.println("Invalid instruction.");
                 }
             }
@@ -255,6 +265,8 @@ public class Controller implements Initializable{
         memAddrCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("address"));
         memDataCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("representation"));
         memDataTable.setItems(initialMem);
+
+        errorField.clear();
     }
 
     @FXML
