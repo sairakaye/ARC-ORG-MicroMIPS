@@ -2,10 +2,6 @@ package sample;
 
 public abstract class Instruction {
 
-    Instruction() {
-
-    }
-
     public String getOPCode() {
         return OPCode;
     }
@@ -19,9 +15,11 @@ public abstract class Instruction {
     }
 
     public void setRs(String rs) {
-        while (rs.length() < 5){
-            rs = "0" + rs;
+        StringBuilder rsBuilder = new StringBuilder(rs);
+        while (rsBuilder.length() < 5){
+            rsBuilder.insert(0, "0");
         }
+        rs = rsBuilder.toString();
         Rs = rs;
     }
 
@@ -30,9 +28,11 @@ public abstract class Instruction {
     }
 
     public void setRt(String rt) {
-        while (rt.length() < 5){
-            rt = "0" + rt;
+        StringBuilder rtBuilder = new StringBuilder(rt);
+        while (rtBuilder.length() < 5){
+            rtBuilder.insert(0, "0");
         }
+        rt = rtBuilder.toString();
         Rt = rt;
     }
 
@@ -57,9 +57,11 @@ public abstract class Instruction {
     }
 
     public void setRd(String rd) {
-        while (rd.length() < 5){
-            rd = "0" + rd;
+        StringBuilder rdBuilder = new StringBuilder(rd);
+        while (rdBuilder.length() < 5){
+            rdBuilder.insert(0, "0");
         }
+        rd = rdBuilder.toString();
         Rd = rd;
     }
 
@@ -87,6 +89,12 @@ public abstract class Instruction {
         this.variable = variable;
     }
 
+//    public abstract int getIR21to25();
+//
+//    public abstract int getIR16to20();
+//
+//    public abstract String getR15to0();
+
     public abstract String toHex();
 
     protected String OPCode;
@@ -98,4 +106,5 @@ public abstract class Instruction {
     protected String Func;
     protected String Address;
     protected String variable;
+    protected String hex;
 }

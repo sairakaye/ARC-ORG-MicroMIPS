@@ -11,9 +11,6 @@ public class XORI extends Instruction {
 
         String[] reg = line.split(",");
 
-        
-
-
         String rs = reg[1].replaceAll("\\D+", "");
         in = Integer.parseInt(rs);
         setRs(Integer.toString(in, 2));
@@ -34,9 +31,14 @@ public class XORI extends Instruction {
     }
 
     @Override
-    public String toHex() {
+    public String toHex(){
         BigInteger dec = new BigInteger(getOPCode() + getRs() + getRt() + getImm(), 2);
 
-        return dec.toString(16);
+        hex = dec.toString(16);
+        if (hex.length() < 8)
+            for (int i = hex.length(); i < 8; i++)
+                hex = "0" + hex;
+
+        return hex;
     }
 }
