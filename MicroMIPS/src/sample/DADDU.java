@@ -66,15 +66,11 @@ class DADDU extends Instruction{
         if (hex.substring(4,8).charAt(0) >= '8'){
             nString = "";
             while (nString.length() < 12){
-                nString = nString + "F";
+                nString = nString + "f";
             }
             nString += hex.substring(4, 8);
         }
 
         return nString;
-    }
-
-    public static void main(String[] args){
-        new DADDU("DADDU R1, R3, R5");
     }
 }

@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
+import java.math.BigInteger;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,25 +74,25 @@ public class Controller implements Initializable{
 
         opcodeTableItems = new ArrayList<>();
 
-        for (int i = 0; i < instructions.size(); i++){
-            Instruction ins = instructions.get(i);
-
-            if (ins instanceof DADDIU)
-                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
-            else if (ins instanceof DADDU)
-                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-                                                         ins.getRt(), ins.getRd(), ins.getSa(), ins.getFunc()));
-            else if (ins instanceof LD)
-                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
-            else if (ins instanceof SD)
-                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
-            else if (ins instanceof XORI)
-                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
-        }
+//        for (int i = 0; i < instructions.size(); i++){
+//            Instruction ins = instructions.get(i);
+//
+//            if (ins instanceof DADDIU)
+//                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+//                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
+//            else if (ins instanceof DADDU)
+//                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+//                                                         ins.getRt(), ins.getRd(), ins.getSa(), ins.getFunc()));
+//            else if (ins instanceof LD)
+//                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+//                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
+//            else if (ins instanceof SD)
+//                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+//                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
+//            else if (ins instanceof XORI)
+//                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+//                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
+//        }
     }
 
     @FXML
@@ -114,15 +115,17 @@ public class Controller implements Initializable{
         System.out.println("B: " + B);
         Imm = instructions.get(currPC).getR15to0();
         System.out.println("IMM: " + Imm);
-        
-        System.out.println("ALUOUTPUT: ");
-        System.out.println("COND: ");
+
+        performOperation(instructions.get(currPC));
+        System.out.println("ALUOUTPUT: " + ALUOutput);
+        System.out.println("COND: " + cond);
 
         System.out.println("PC: " + NPC);
         System.out.println("LMD: ");
         System.out.println("Range: ");
 
         System.out.println("Rn: ");
+        currIns++;
 }
 
     private void makeInstructions() {
@@ -174,19 +177,67 @@ public class Controller implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         NPC = 0;
+        currIns = 0;
         registers = new HashMap<>();
         instructions = new HashMap<>();
     }
 
-    public void performOperation(String instruction){
-        switch(instruction){
-            case "DADDIU": break;
-            case "DADDU": break;
-            case "XORI": break;
-            case "BEQC": break;
-            case "BC": break;
-            case "LD": break;
-            case "SD": break;
+    public void performOperation(Instruction ins){
+        BigInteger aluOut;
+        BigInteger a = new BigInteger(A, 16);
+        BigInteger b = new BigInteger(B, 16);
+        BigInteger imm = new BigInteger(Imm, 16);
+
+        if (ins instanceof DADDIU) {
+            aluOut = a.add(imm);
+            ALUOutput = aluOut.toString(16);
+            while (ALUOutput.length() < 16){
+                if (ALUOutput.charAt(0) >= '8'){
+                    ALUOutput = "f" + ALUOutput;
+                } else{
+                    ALUOutput = "0" + ALUOutput;
+                }
+            }
+            cond = 0;
+        } else if (ins instanceof DADDU) {
+            aluOut = a.add(b);
+            ALUOutput = aluOut.toString(16);
+            while (ALUOutput.length() < 16){
+                if (ALUOutput.charAt(0) >= '8'){
+                    ALUOutput = "f" + ALUOutput;
+                } else{
+                    ALUOutput = "0" + ALUOutput;
+                }
+            }
+            cond = 0;
+        } else if (ins instanceof LD) {
+            aluOut = a.add(imm);
+            ALUOutput = aluOut.toString(16);
+            while (ALUOutput.length() < 16){
+                if (ALUOutput.charAt(0) >= '8'){
+                    ALUOutput = "f" + ALUOutput;
+                } else{
+                    ALUOutput = "0" + ALUOutput;
+                }
+            }
+            cond = 0;
+        } else if (ins instanceof SD) {
+            aluOut = a.add(imm);
+            ALUOutput = aluOut.toString(16);
+            while (ALUOutput.length() < 16){
+                if (ALUOutput.charAt(0) >= '8'){
+                    ALUOutput = "f" + ALUOutput;
+                } else{
+                    ALUOutput = "0" + ALUOutput;
+                }
+            }
+            cond = 0;
+        } else if (ins instanceof XORI) {
+
+        } else if (ins instanceof BC) {
+
+        } else if (ins instanceof BEQC) {
+
         }
     }
 
@@ -198,6 +249,7 @@ public class Controller implements Initializable{
     ArrayList<OpcodeTableItem> opcodeTableItems;
     private int currPC;
     private int NPC;
+    private static int currIns;
     private String A;
     private String B;
     private String Imm;
