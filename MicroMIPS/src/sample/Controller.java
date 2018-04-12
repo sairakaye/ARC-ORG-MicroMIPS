@@ -574,12 +574,15 @@ public class Controller implements Initializable{
 
         if (ins instanceof DADDIU) {
             aluOut = a.add(imm);
-            ALUOutput = aluOut.toString(16);
-            while (ALUOutput.length() < 16){
-                if (ALUOutput.charAt(0) >= '8'){
-                    ALUOutput = "f" + ALUOutput;
-                } else{
+            if (aluOut.intValue() > 0){
+                ALUOutput = aluOut.toString(16);
+                while (ALUOutput.length() < 16)
                     ALUOutput = "0" + ALUOutput;
+            }
+            else{
+                ALUOutput = aluOut.toString(16);
+                while (ALUOutput.length() < 16){
+                    ALUOutput = "f" + ALUOutput;
                 }
             }
             ALUOutput = ALUOutput.toUpperCase();
