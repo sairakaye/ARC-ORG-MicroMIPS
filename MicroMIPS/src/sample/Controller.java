@@ -11,7 +11,6 @@ import java.math.BigInteger;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
@@ -328,7 +327,7 @@ public class Controller implements Initializable{
             } else
                 System.out.println("Range: n/a");
 
-            else if (instructions.get(currPC) instanceof DADDU) {
+            if (instructions.get(currPC) instanceof DADDU) {
                 int register = Integer.parseInt(instructions.get(currPC).getRd(), 2);
                 String target = "R" + register;
                 registers.put(target, ALUOutput);
