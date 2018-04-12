@@ -11,6 +11,7 @@ import java.math.BigInteger;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
@@ -24,6 +25,14 @@ public class Controller implements Initializable{
     @FXML private ListView register_list;
 
     @FXML private TableView<OpcodeTableItem> opcodeTable;
+
+    @FXML private TableView<InstMemTableItem> instructionMemTable;
+
+    @FXML private TableColumn<InstMemTableItem, String> insMemColAddr;
+
+    @FXML private TableColumn<InstMemTableItem, String> insMemOpcode;
+
+    @FXML private TableColumn<InstMemTableItem, String> insMemColInstruction;
 
     @FXML private TableColumn<OpcodeTableItem, String> colInstruction;
 
@@ -59,99 +68,163 @@ public class Controller implements Initializable{
         savedCode = codingArea.getText().split("\\n");
         ArrayList<String> labels = new ArrayList<>();
 
-        for (String code: savedCode) {
-            if (code.contains(":"))
-                labels.add(code.substring(0 ,code.indexOf(":")));
-        }
+        if (savedCode.length <= 127) {
 
-        for (String code: savedCode) {
-            String toUse = null;
-
-            if (code.contains(":"))
-                toUse = code.substring(code.indexOf(":"));
-            else
-                toUse = code;
-
-            if (toUse.startsWith("LD")) {
-                isValid = checkingLD(code);
-
-                if (!isValid) {
-                    System.out.println("Error in line: " + code);
-                    return;
-                }
-
-            } else if (toUse.startsWith("SD")) {
-                isValid = checkingSD(code);
-
-                if (!isValid) {
-                    System.out.println("Error in line: " + code);
-                    return;
-                }
-            } else if (toUse.startsWith("DADDIU")) {
-                isValid = checkingDADDIU(code);
-
-                if (!isValid) {
-                    System.out.println("Error in line: " + code);
-                    return;
-                }
-            } else if (toUse.startsWith("DADDU")) {
-                isValid = checkingDADDU(code);
-
-                if (!isValid) {
-                    System.out.println("Error in line: " + code);
-                    return;
-                }
-            } else if (toUse.startsWith("BC")) {
-                isValid = checkingBC(labels, code);
-
-                if (!isValid) {
-                    System.out.println("Error in line: " + code);
-                    return;
-                }
-            } else if (toUse.startsWith("BEQC")) {
-                isValid = checkingBEQC(labels, code);
-
-
-                if (!isValid) {
-                    System.out.println("Error in line: " + code);
-                    return;
-                }
-            } else if (toUse.startsWith("XORI")) {
-                isValid = checkingXORI(code);
-
-                if (!isValid) {
-                    System.out.println("Error in line: " + code);
-                    return;
-                }
-            } else {
-                System.out.println("Invalid instruction.");
+            for (String code : savedCode) {
+                if (code.contains(":"))
+                    labels.add(code.substring(0, code.indexOf(":")));
             }
+
+            for (String code : savedCode) {
+                String toUse = null;
+
+                if (code.contains(":"))
+                    toUse = code.substring(code.indexOf(":") + 1).trim();
+                else
+                    toUse = code;
+
+                if (toUse.startsWith("LD")) {
+                    isValid = checkingLD(code);
+
+                    if (!isValid) {
+                        System.out.println("Error in line: " + code);
+                        return;
+                    }
+
+                } else if (toUse.startsWith("SD")) {
+                    isValid = checkingSD(code);
+
+                    if (!isValid) {
+                        System.out.println("Error in line: " + code);
+                        return;
+                    }
+                } else if (toUse.startsWith("DADDIU")) {
+                    isValid = checkingDADDIU(code);
+
+                    if (!isValid) {
+                        System.out.println("Error in line: " + code);
+                        return;
+                    }
+                } else if (toUse.startsWith("DADDU")) {
+                    isValid = checkingDADDU(code);
+
+                    if (!isValid) {
+                        System.out.println("Error in line: " + code);
+                        return;
+                    }
+                } else if (toUse.startsWith("BC")) {
+                    isValid = checkingBC(labels, code);
+
+                    if (!isValid) {
+                        System.out.println("Error in line: " + code);
+                        return;
+                    }
+                } else if (toUse.startsWith("BEQC")) {
+                    isValid = checkingBEQC(labels, code);
+
+
+                    if (!isValid) {
+                        System.out.println("Error in line: " + code);
+                        return;
+                    }
+                } else if (toUse.startsWith("XORI")) {
+                    isValid = checkingXORI(code);
+
+                    if (!isValid) {
+                        System.out.println("Error in line: " + code);
+                        return;
+                    }
+                } else {
+                    System.out.println("Invalid instruction.");
+                }
+            }
+            makeInstructions();
+
+            opcodeTableItems = new ArrayList<>();
+
+            int i = 0;
+            for (Instruction ins : instructions.values()) {
+                if (ins instanceof DADDIU) {
+                    System.out.println(ins.toHex());
+                    OpcodeTableItem item = new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                            ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16));
+                    opcodeTableItems.add(item);
+                    insMemTableItems.get(i).setOpcodeHex(ins.toHex());
+                    insMemTableItems.get(i).setInstruction(savedCode[i]);
+                } else if (ins instanceof DADDU) {
+                    OpcodeTableItem item = new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                            ins.getRt(), ins.getRd(), ins.getSa(), ins.getFunc());
+                    opcodeTableItems.add(item);
+                    insMemTableItems.get(i).setOpcodeHex(ins.toHex());
+                    insMemTableItems.get(i).setInstruction(savedCode[i]);
+                } else if (ins instanceof LD) {
+                    OpcodeTableItem item = new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                            ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16));
+                    opcodeTableItems.add(item);
+                    insMemTableItems.get(i).setOpcodeHex(ins.toHex());
+                    insMemTableItems.get(i).setInstruction(savedCode[i]);
+                } else if (ins instanceof SD) {
+                    OpcodeTableItem item = new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                            ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16));
+                    opcodeTableItems.add(item);
+                    insMemTableItems.get(i).setOpcodeHex(ins.toHex());
+                    insMemTableItems.get(i).setInstruction(savedCode[i]);
+                } else if (ins instanceof XORI) {
+                    OpcodeTableItem item = new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                            ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16));
+                    opcodeTableItems.add(item);
+                    insMemTableItems.get(i).setOpcodeHex(ins.toHex());
+                    insMemTableItems.get(i).setInstruction(savedCode[i]);
+                }
+
+                i++;
+            }
+
+            ObservableList<OpcodeTableItem> data = FXCollections.observableArrayList(opcodeTableItems);
+            colInstruction.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("instruction"));
+            colHexOpcode.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("opcodeHex"));
+            colBit31to26.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit26to31"));
+            colBit25to21.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit21to25"));
+            colBit20to16.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit16to20"));
+            colBit15to11.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit11to15"));
+            colBit10to6.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit6to10"));
+            colBit5to0.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit0to5"));
+            opcodeTable.setItems(data);
+
+            ObservableList<InstMemTableItem> data2 = FXCollections.observableArrayList(insMemTableItems);
+            insMemColAddr.setCellValueFactory(new PropertyValueFactory<InstMemTableItem, String>("address"));
+            insMemOpcode.setCellValueFactory(new PropertyValueFactory<InstMemTableItem, String>("opcodeHex"));
+            insMemColInstruction.setCellValueFactory(new PropertyValueFactory<InstMemTableItem, String>("instruction"));
+            instructionMemTable.setItems(data2);
+        } else {
+            System.out.println("Instructions cannot fit into the memory.");
         }
-        makeInstructions();
+    }
+
+    @FXML
+    private void clear() {
+        codingArea.clear();
+        instructions.clear();
+        NPC = 100;
+
+        insMemTableItems = new ArrayList<>();
+
+        for (int i = 256; i <= 508; i+=4) {
+            insMemTableItems.add(new InstMemTableItem(0+Integer.toHexString(i).toUpperCase(), "", ""));
+        }
+
+        insMemTableItems.add(new InstMemTableItem("01FF","", ""));
+
+        ObservableList<InstMemTableItem> data1 = FXCollections.observableArrayList(insMemTableItems);
+        insMemColAddr.setCellValueFactory(new PropertyValueFactory<InstMemTableItem, String>("address"));
+        insMemOpcode.setCellValueFactory(new PropertyValueFactory<InstMemTableItem, String>("opcodeHex"));
+        insMemColInstruction.setCellValueFactory(new PropertyValueFactory<InstMemTableItem, String>("instruction"));
+        instructionMemTable.setItems(data1);
 
         opcodeTableItems = new ArrayList<>();
+        opcodeTableItems.add(null);
 
-        for (int i = 0; i < instructions.size(); i++){
-            Instruction ins = instructions.get(i);
-
-            if (ins instanceof DADDIU)
-                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
-            else if (ins instanceof DADDU)
-                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-                                                         ins.getRt(), ins.getRd(), ins.getSa(), ins.getFunc()));
-            else if (ins instanceof LD)
-                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
-            else if (ins instanceof SD)
-                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
-            else if (ins instanceof XORI)
-                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
-        }
-
-        ObservableList<OpcodeTableItem> data = FXCollections.observableArrayList(opcodeTableItems);
+        ObservableList<OpcodeTableItem> data2 = FXCollections.observableArrayList(opcodeTableItems);
         colInstruction.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("instruction"));
         colHexOpcode.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("opcodeHex"));
         colBit31to26.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit26to31"));
@@ -160,14 +233,8 @@ public class Controller implements Initializable{
         colBit15to11.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit11to15"));
         colBit10to6.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit6to10"));
         colBit5to0.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit0to5"));
-        opcodeTable.setItems(data);
-    }
+        opcodeTable.setItems(data2);
 
-    @FXML
-    private void clear() {
-        codingArea.clear();
-        instructions.clear();
-        NPC = 100;
     }
 
     @FXML
@@ -217,45 +284,37 @@ public class Controller implements Initializable{
 
     private void makeInstructions() {
         for(String line : savedCode) {
+            String[] temp = null;
 
-            String[] temp = line.split("\\s+");
-
-            if (temp[0].indexOf("\\:") > 0) {
-                String[] parsed = temp[0].split(" ");
-                temp[0] = parsed[1];
+            if (line.contains(":")) {
+                temp = line.trim().substring(line.indexOf(":")+1).split("\\s+");
+            } else {
+                temp = line.trim().split("\\s+");
             }
 
-            switch (temp[0]) {
-                case "LD":
-                    instructions.put(NPC, new LD(line));
-                    break;
-
-                case "SD":
-                    instructions.put(NPC, new SD(line));
-                    break;
-
-                case "DADDIU":
-                    instructions.put(NPC, new DADDIU(line));
-                    break;
-
-                case "DADDU":
-                    instructions.put(NPC, new DADDU(line));
-                    break;
-
-                case "BC":
-                    // TODO fix implementation of this
-                    instructions.put(NPC, new BC(line));
-                    break;
-
-                case "BEQC":
-                    // TODO fix implementation of this and create BEQC class
-                    instructions.put(NPC, new BEQC(line));
-                    break;
-
-                case "XORI":
-                    instructions.put(NPC, new XORI(line));
-                    break;
+            if (temp[0].equalsIgnoreCase("LD")) {
+                System.out.println("LD executed");
+                instructions.put(NPC, new LD(line));
+            } else if (temp[0].equalsIgnoreCase("SD")) {
+                System.out.println("SD executed");
+                instructions.put(NPC, new SD(line));
+            } else if (temp[0].equalsIgnoreCase("DADDIU")) {
+                System.out.println("DADDIU executed");
+                instructions.put(NPC, new DADDIU(line));
+            } else if (temp[0].equalsIgnoreCase("DADDU")) {
+                System.out.println("DADDU executed");
+                instructions.put(NPC, new DADDU(line));
+            } else if (temp[0].equalsIgnoreCase("BC")) {
+                System.out.println("BC executed");
+                instructions.put(NPC, new BC(line));
+            } else if (temp[0].equalsIgnoreCase("BEQC")) {
+                System.out.println("BEQC");
+                instructions.put(NPC, new BEQC(line));
+            } else if (temp[0].equalsIgnoreCase("XORI")) {
+                System.out.println("XORI");
+                instructions.put(NPC, new XORI(line));
             }
+
             NPC += 4;
         }
         NPC = 100;
@@ -267,8 +326,33 @@ public class Controller implements Initializable{
         currIns = 0;
         registers = new HashMap<>();
         instructions = new HashMap<>();
+        insMemTableItems = new ArrayList<>();
 
+        for (int i = 256; i <= 508; i+=4) {
+            insMemTableItems.add(new InstMemTableItem(0+Integer.toHexString(i).toUpperCase(), "", ""));
+        }
 
+        insMemTableItems.add(new InstMemTableItem("01FF","", ""));
+
+        ObservableList<InstMemTableItem> items = FXCollections.observableArrayList(insMemTableItems);
+        insMemColAddr.setCellValueFactory(new PropertyValueFactory<InstMemTableItem, String>("address"));
+        insMemOpcode.setCellValueFactory(new PropertyValueFactory<InstMemTableItem, String>("opcodeHex"));
+        insMemColInstruction.setCellValueFactory(new PropertyValueFactory<InstMemTableItem, String>("instruction"));
+        instructionMemTable.setItems(items);
+
+        opcodeTableItems = new ArrayList<>();
+        opcodeTableItems.add(null);
+
+        ObservableList<OpcodeTableItem> data2 = FXCollections.observableArrayList(opcodeTableItems);
+        colInstruction.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("instruction"));
+        colHexOpcode.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("opcodeHex"));
+        colBit31to26.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit26to31"));
+        colBit25to21.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit21to25"));
+        colBit20to16.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit16to20"));
+        colBit15to11.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit11to15"));
+        colBit10to6.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit6to10"));
+        colBit5to0.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit0to5"));
+        opcodeTable.setItems(data2);
     }
 
     public void performOperation(Instruction ins){
@@ -585,7 +669,12 @@ public class Controller implements Initializable{
                     }
                 }
 
-                String[] offsetBase = splitter[1].trim().split("[\\(\\)]");
+                String[] offsetBase = null;
+
+                if (splitter[1].contains("(") && splitter[1].contains(")"))
+                    offsetBase = splitter[1].trim().split("[\\(\\)]");
+                else
+                    return false;
 
                 int offset, base;
 
@@ -647,7 +736,12 @@ public class Controller implements Initializable{
                     }
                 }
 
-                String[] offsetBase = splitter[1].trim().split("[\\(\\)]");
+                String[] offsetBase = null;
+
+                if (splitter[1].contains("(") && splitter[1].contains(")"))
+                    offsetBase = splitter[1].trim().split("[\\(\\)]");
+                else
+                    return false;
 
                 int offset, base;
 
@@ -871,7 +965,8 @@ public class Controller implements Initializable{
     private HashMap<String, String> registers;
     private ObservableList<String> values;
     private HashMap<Integer, Instruction> instructions;
-    ArrayList<OpcodeTableItem> opcodeTableItems;
+    private ArrayList<OpcodeTableItem> opcodeTableItems;
+    private ArrayList<InstMemTableItem> insMemTableItems;
     private int currPC;
     private int NPC;
     private static int currIns;
