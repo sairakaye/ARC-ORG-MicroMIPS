@@ -22,6 +22,7 @@ public class SD extends Instruction {
         in = Integer.parseInt(rs);
         setRs(Integer.toString(in, 2));
 
+        // store area can have letters since hex
         String imm = Integer.toString(Integer.parseInt(second[0].replaceAll("\\D+",""), 16), 2);
         while (imm.length() < 16){
             imm = "0" + imm;
@@ -62,7 +63,7 @@ public class SD extends Instruction {
         if (hex.substring(4,8).charAt(0) >= '8'){
             nString = "";
             while (nString.length() < 12){
-                nString = nString + "F";
+                nString = nString + "f";
             }
             nString += hex.substring(4, 8);
         }

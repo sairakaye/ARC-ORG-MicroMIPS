@@ -10,11 +10,15 @@ class DADDIU extends Instruction{
         setOPCode("011001");
 
         String[] reg = line.split(",");
-        String rs = reg[1].replaceAll("\\D+", "");
+        String rs = reg[0].replaceAll("\\D+", "");
+        System.out.println("0: " + reg[0] + " 1: " + reg[1] + " 2: " + reg[2]);
         in = Integer.parseInt(rs);
         setRs(Integer.toString(in, 2));
 
-        String imm = Integer.toString(Integer.parseInt(reg[0].replaceAll("\\D+",""), 16), 2);
+//        System.out.println(Integer.parseInt(reg[0].replaceAll("\\D+", ""), 16));
+//        System.out.println(BigInteger.valueOf(Long.parseLong(reg[0].replaceAll("\\D+", ""), 16)));
+        String[] immediate = reg[2].split("#");
+        String imm = Integer.toString(Integer.parseInt(immediate[1], 16), 2);
         while (imm.length() < 16){
             imm = "0" + imm;
         }
@@ -22,7 +26,7 @@ class DADDIU extends Instruction{
 
         String[] first = reg[0].split(" ");
 
-        String rt = first[1].replaceAll("\\D+", "");
+        String rt = reg[1].replaceAll("\\D+", "");
         in = Integer.parseInt(rt);
         setRt(Integer.toString(in, 2));
 
@@ -64,7 +68,7 @@ class DADDIU extends Instruction{
         if (hex.substring(4,8).charAt(0) >= '8'){
             nString = "";
             while (nString.length() < 12){
-                nString = nString + "F";
+                nString = nString + "f";
             }
             nString += hex.substring(4, 8);
         }
