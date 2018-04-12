@@ -41,6 +41,7 @@
                         <Font name="System Bold" size="15.0" />
                     </font>
                 </Label>
+            <TextArea fx:id="errorField" editable="false" layoutX="38.0" layoutY="548.0" prefHeight="43.0" prefWidth="384.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000;" />
             </AnchorPane>
         </Tab>
         <Tab onSelectionChanged="#showCyclePane" text="Main">

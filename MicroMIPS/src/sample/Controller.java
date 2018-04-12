@@ -3,10 +3,16 @@ package sample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
 import java.util.ArrayList;
@@ -26,6 +32,8 @@ public class Controller implements Initializable{
     @FXML private Label selected;
 
     @FXML private TextField newValueField;
+
+    @FXML private TextArea errorField;
 
     @FXML private TableView<OpcodeTableItem> opcodeTable;
 
@@ -96,6 +104,7 @@ public class Controller implements Initializable{
                     isValid = checkingLD(code);
 
                     if (!isValid) {
+                        errorField.appendText("Error in line: " + code + "\n");
                         System.out.println("Error in line: " + code);
                         return;
                     }
@@ -104,6 +113,7 @@ public class Controller implements Initializable{
                     isValid = checkingSD(code);
 
                     if (!isValid) {
+                        errorField.appendText("Error in line: " + code + "\n");
                         System.out.println("Error in line: " + code);
                         return;
                     }
@@ -111,6 +121,7 @@ public class Controller implements Initializable{
                     isValid = checkingDADDIU(code);
 
                     if (!isValid) {
+                        errorField.appendText("Error in line: " + code + "\n");
                         System.out.println("Error in line: " + code);
                         return;
                     }
@@ -118,6 +129,7 @@ public class Controller implements Initializable{
                     isValid = checkingDADDU(code);
 
                     if (!isValid) {
+                        errorField.appendText("Error in line: " + code + "\n");
                         System.out.println("Error in line: " + code);
                         return;
                     }
@@ -125,6 +137,7 @@ public class Controller implements Initializable{
                     isValid = checkingBC(labels, code);
 
                     if (!isValid) {
+                        errorField.appendText("Error in line: " + code + "\n");
                         System.out.println("Error in line: " + code);
                         return;
                     }
@@ -133,6 +146,7 @@ public class Controller implements Initializable{
 
 
                     if (!isValid) {
+                        errorField.appendText("Error in line: " + code + "\n");
                         System.out.println("Error in line: " + code);
                         return;
                     }
@@ -140,10 +154,12 @@ public class Controller implements Initializable{
                     isValid = checkingXORI(code);
 
                     if (!isValid) {
+                        errorField.appendText("Error in line: " + code + "\n");
                         System.out.println("Error in line: " + code);
                         return;
                     }
                 } else {
+                    errorField.appendText("Invalid instruction!" + "\n" + code);
                     System.out.println("Invalid instruction.");
                 }
             }
@@ -255,6 +271,8 @@ public class Controller implements Initializable{
         memAddrCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("address"));
         memDataCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("representation"));
         memDataTable.setItems(initialMem);
+
+        errorField.clear();
     }
 
     @FXML
@@ -303,6 +321,13 @@ public class Controller implements Initializable{
                         break;
                     }
                 }
+                ObservableList<MemDataTableItem> mem = FXCollections.observableArrayList(memDataTableItems);
+                memAddrCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("address"));
+                memDataCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("representation"));
+                memDataTable.setItems(mem);
+            } else
+                System.out.println("Range: n/a");
+
             if (instructions.get(currPC) instanceof LD) {
                 int register = instructions.get(currPC).getIR16to20();
                 String target = "R" + register;
@@ -320,35 +345,27 @@ public class Controller implements Initializable{
                 registers.put(target, ALUOutput);
                 System.out.println("Rn: " + ALUOutput);
             }
-                ObservableList<MemDataTableItem> mem = FXCollections.observableArrayList(memDataTableItems);
-                memAddrCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("address"));
-                memDataCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("representation"));
-                memDataTable.setItems(mem);
-            } else
-                System.out.println("Range: n/a");
 
-            if (instructions.get(currPC) instanceof DADDU) {
+            else if (instructions.get(currPC) instanceof DADDU) {
                 int register = Integer.parseInt(instructions.get(currPC).getRd(), 2);
                 String target = "R" + register;
                 registers.put(target, ALUOutput);
                 System.out.println("Rn: " + ALUOutput);
             }
-
             refreshRegisters();
-
             currIns++;
         } else
             System.out.println("Reached the end of the codes. Please reset and type new codes");
-}
+    }
 
     private void refreshRegisters() {
         register_list.getItems().clear();
-
         values = FXCollections.observableArrayList();
 
-        for (int i = 0; i < 32; i++)
+        for (int i = 0; i < 32; i++) {
             values.add("R" + i + " = " + registers.get("R" + i));
-
+            System.out.println("R" + i + " = " + registers.get("R" + i));
+        }
         register_list.setItems(values);
     }
 
@@ -421,15 +438,37 @@ public class Controller implements Initializable{
         NPC = 100;
     }
 
+    private void selectR0(Stage stage) {
+        Parent viewParent;
+        try {
+            viewParent = FXMLLoader.load(getClass().getResource("InvalidRegister.fxml"));
+            Scene sc = new Scene(viewParent);
+
+            stage.setScene(sc);
+            stage.show();
+
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     @FXML
     private void changeRegisterValue() {
+        selected.setText("R1");
 
         String selectedRegister = (String) register_list.getSelectionModel().getSelectedItem();
         String[] temp = selectedRegister.split("=");
-
-        selected.setText(temp[0]);
         selectedR = temp[0];
 
+        selectedR = selectedR.replaceAll("\\s","");
+        if (selectedR.equals("R0")) {
+            final Stage invalid = new Stage();
+            invalid.initModality(Modality.APPLICATION_MODAL);
+
+            selectR0(invalid);
+        } else
+            selected.setText(temp[0]);
     }
 
     @FXML
