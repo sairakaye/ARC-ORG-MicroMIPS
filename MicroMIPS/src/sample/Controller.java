@@ -127,7 +127,6 @@ public class Controller implements Initializable{
                 System.out.println("Invalid instruction.");
             }
         }
-
         makeInstructions();
 
         opcodeTableItems = new ArrayList<>();
@@ -168,51 +167,49 @@ public class Controller implements Initializable{
     private void clear() {
         codingArea.clear();
         instructions.clear();
-        NPC = 0;
+        NPC = 100;
     }
 
     @FXML
     private void runOneCycle() {
-        currPC = NPC;
-        System.out.println("IR: " + instructions.get(NPC).toHex());
-        NPC += 4;
-        System.out.println("NPC: " + NPC);
+        if (currIns < instructions.size()) {
+            currPC = NPC;
+            System.out.println("IR: " + instructions.get(NPC).toHex());
+            NPC += 4;
+            System.out.println("NPC: " + NPC);
 
-        A = registers.get("R" + instructions.get(currPC).getIR21to25());
-        System.out.println("A: " + A);
-        B = registers.get("R" + instructions.get(currPC).getIR16to20());
-        System.out.println("B: " + B);
-        Imm = instructions.get(currPC).getR15to0();
-        System.out.println("IMM: " + Imm);
+            A = registers.get("R" + instructions.get(currPC).getIR21to25());
+            System.out.println("A: " + A);
+            B = registers.get("R" + instructions.get(currPC).getIR16to20());
+            System.out.println("B: " + B);
+            Imm = instructions.get(currPC).getR15to0();
+            System.out.println("IMM: " + Imm);
 
-        performOperation(instructions.get(currPC));
-        System.out.println("ALUOUTPUT: " + ALUOutput);
-        System.out.println("COND: " + cond);
+            performOperation(instructions.get(currPC));
+            System.out.println("ALUOUTPUT: " + ALUOutput);
+            System.out.println("COND: " + cond);
 
-        if (getNewPC(instructions.get(currPC))) {}
+            if (getNewPC(instructions.get(currPC))) {
+            } else {
+                System.out.println("PC:x` " + NPC);
+            }
 
-        else {
-            System.out.println("PC:x` " + NPC);
+            if (instructions.get(currPC) instanceof LD) {
+                LMD = ALUOutput;
+                System.out.println("LMD: " + LMD);
+            } else
+                System.out.println("LMD: n/a");
+
+            if (instructions.get(currPC) instanceof SD) {
+
+            } else
+                System.out.println("Range: n/a");
+
+            System.out.println("Rn: ");
+            currIns++;
+        } else{
+            System.out.println("Reached the end of the codes. Please reset and type new codes");
         }
-
-        if (instructions.get(currPC) instanceof LD) {
-            LMD = ALUOutput;
-            System.out.println("LMD: " + LMD);
-        } else
-            System.out.println("LMD: n/a");
-
-        if (instructions.get(currPC) instanceof SD) {
-
-        } else
-            System.out.println("Range: n/a");
-
-        if (instructions.get(currPC) instanceof BC || instructions.get(currPC) instanceof BEQC)
-            System.out.println("Rn: n/a");
-        else {
-
-        }
-
-        currIns++;
 }
 
     private boolean getNewPC(Instruction instruction) {
@@ -262,12 +259,12 @@ public class Controller implements Initializable{
             }
             NPC += 4;
         }
-        NPC = 0;
+        NPC = 100;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        NPC = 0;
+        NPC = 100;
         currIns = 0;
         registers = new HashMap<>();
         instructions = new HashMap<>();
@@ -324,11 +321,30 @@ public class Controller implements Initializable{
             }
             cond = 0;
         } else if (ins instanceof XORI) {
-
+            aluOut = a.or(imm);
+            ALUOutput = aluOut.toString(16);
+            while(ALUOutput.length() < 16){
+                ALUOutput = "0" + ALUOutput;
+            }
+            cond = 0;
         } else if (ins instanceof BC) {
-
+            BigInteger nNPC = new BigInteger(Integer.toString(NPC));
+            aluOut = nNPC.add(imm.divide(new BigInteger("4")));
+            ALUOutput = aluOut.toString(16);
+            while (ALUOutput.length() < 16){
+                ALUOutput = "0" + ALUOutput;
+            }
+            cond = 1;
         } else if (ins instanceof BEQC) {
-
+            BigInteger nNPC = new BigInteger(Integer.toString(NPC));
+            aluOut = nNPC.add(imm.divide(new BigInteger("4")));
+            ALUOutput = aluOut.toString(16);
+            while (ALUOutput.length() < 16){
+                ALUOutput = "0" + ALUOutput;
+            }
+            if (registers.get("R" + Integer.parseInt(A, 16)).equals(registers.get("R" + Integer.parseInt(B, 16))))
+                cond = 1;
+            else cond = 0;
         }
     }
 
@@ -885,5 +901,4 @@ public class Controller implements Initializable{
     private int cond;
     private String PC;
     private String LMD;
-
 }
