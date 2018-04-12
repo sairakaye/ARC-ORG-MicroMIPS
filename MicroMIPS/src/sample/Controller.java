@@ -200,6 +200,19 @@ public class Controller implements Initializable{
                     opcodeTableItems.add(item);
                     insMemTableItems.get(i).setOpcodeHex(ins.toHex());
                     insMemTableItems.get(i).setInstruction(savedCode[i]);
+                } else if (ins instanceof BC){
+                    OpcodeTableItem item = new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getVariable().substring(0, 5),
+                            ins.getVariable().substring(5, 10), ins.getVariable().substring(10, 15), ins.getVariable().substring(15, 20),
+                            ins.getVariable().substring(20, 26));
+                    opcodeTableItems.add(item);
+                    insMemTableItems.get(i).setOpcodeHex(ins.toHex());
+                    insMemTableItems.get(i).setInstruction(savedCode[i]);
+                } else if (ins instanceof BEQC){
+                    OpcodeTableItem item = new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                            ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16));
+                    opcodeTableItems.add(item);
+                    insMemTableItems.get(i).setOpcodeHex(ins.toHex());
+                    insMemTableItems.get(i).setInstruction(savedCode[i]);
                 }
 
                 i++;
@@ -285,7 +298,10 @@ public class Controller implements Initializable{
     @FXML
     private void runOneCycle() {
         if (currIns < instructions.size()) {
-            currPC = NPC;
+            if (cond == 1)
+                currPC = NPC;
+            else
+                currPC = Integer.parseInt(PC);
             System.out.println("IR: " + instructions.get(NPC).toHex());
             NPC += 4;
             System.out.println("NPC: " + NPC);
