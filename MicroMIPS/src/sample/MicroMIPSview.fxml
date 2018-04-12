@@ -54,10 +54,8 @@
                 </TableView>
                 <TableView fx:id="memDataTable" layoutX="14.0" layoutY="316.0" prefHeight="210.0" prefWidth="306.0" style="-fx-border-color: #000000;">
                     <columns>
-                        <TableColumn fx:id="memAddrCol" prefWidth="75.0" text="Address" />
-                        <TableColumn fx:id="memDataCol" prefWidth="227.20004272460938" text="Representation" />
-                        <TableColumn prefWidth="99.99997329711914" text="Address" />
-                        <TableColumn prefWidth="202.8000030517578" text="Representation" />
+                        <TableColumn fx:id="memAddrCol" editable="false" prefWidth="75.0" text="Address" />
+                        <TableColumn fx:id="memDataCol" prefWidth="227.20004272460938" sortable="false" text="Representation" />
                     </columns>
                 </TableView>
                 <ListView fx:id="register_list" layoutX="356.0" layoutY="41.0" onMouseClicked="#changeRegisterValue" prefHeight="414.0" prefWidth="218.0" style="-fx-border-color: #000000;" />

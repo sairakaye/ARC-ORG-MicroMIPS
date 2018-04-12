@@ -245,6 +245,17 @@ public class Controller implements Initializable{
         colBit5to0.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit0to5"));
         opcodeTable.setItems(data2);
 
+        for (int i = 0; i < 256; i++){
+            String memAdd = Integer.toHexString(i).toUpperCase();
+            while (memAdd.length() < 4)
+                memAdd = "0" + memAdd;
+            memDataTableItems.add(new MemDataTableItem(memAdd, "00"));
+        }
+
+        ObservableList<MemDataTableItem> initialMem = FXCollections.observableArrayList(memDataTableItems);
+        memAddrCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("address"));
+        memDataCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("representation"));
+        memDataTable.setItems(initialMem);
     }
 
     @FXML
@@ -278,6 +289,21 @@ public class Controller implements Initializable{
             } else
                 System.out.println("LMD: n/a");
 
+            if (instructions.get(currPC) instanceof SD) {
+                int ctr = 0;
+                int llimit = A.length() - 2;
+                int ulimit = A.length();
+                for (int i = 0; i < memDataTableItems.size(); i++){
+                    if (ALUOutput.substring(12).equalsIgnoreCase(memDataTableItems.get(i).getAddress())){
+                        while (ctr < 7) {
+                            memDataTableItems.get(i + ctr).setRepresentation(A.substring(llimit, ulimit));
+                            llimit -= 2;
+                            ulimit -= 2;
+                            ctr++;
+                        }
+                        break;
+                    }
+                }
             if (instructions.get(currPC) instanceof LD) {
                 int register = instructions.get(currPC).getIR16to20();
                 String target = "R" + register;
@@ -295,6 +321,12 @@ public class Controller implements Initializable{
                 registers.put(target, ALUOutput);
                 System.out.println("Rn: " + ALUOutput);
             }
+                ObservableList<MemDataTableItem> mem = FXCollections.observableArrayList(memDataTableItems);
+                memAddrCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("address"));
+                memDataCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("representation"));
+                memDataTable.setItems(mem);
+            } else
+                System.out.println("Range: n/a");
 
             else if (instructions.get(currPC) instanceof DADDU) {
                 int register = Integer.parseInt(instructions.get(currPC).getRd(), 2);
@@ -400,7 +432,6 @@ public class Controller implements Initializable{
             while (memAdd.length() < 4)
                 memAdd = "0" + memAdd;
             memDataTableItems.add(new MemDataTableItem(memAdd, "00"));
-            dataSegments.put(memAdd, "00");
         }
 
         ObservableList<MemDataTableItem> initialMem = FXCollections.observableArrayList(memDataTableItems);
@@ -453,6 +484,7 @@ public class Controller implements Initializable{
                     ALUOutput = "0" + ALUOutput;
                 }
             }
+            ALUOutput = ALUOutput.toUpperCase();
             cond = 0;
         } else if (ins instanceof DADDU) {
             aluOut = a.add(b);
@@ -464,6 +496,7 @@ public class Controller implements Initializable{
                     ALUOutput = "0" + ALUOutput;
                 }
             }
+            ALUOutput = ALUOutput.toUpperCase();
             cond = 0;
         } else if (ins instanceof LD) {
             aluOut = a.add(imm);
@@ -475,6 +508,7 @@ public class Controller implements Initializable{
                     ALUOutput = "0" + ALUOutput;
                 }
             }
+            ALUOutput = ALUOutput.toUpperCase();
             cond = 0;
         } else if (ins instanceof SD) {
             aluOut = a.add(imm);
@@ -486,6 +520,7 @@ public class Controller implements Initializable{
                     ALUOutput = "0" + ALUOutput;
                 }
             }
+            ALUOutput = ALUOutput.toUpperCase();
             cond = 0;
         } else if (ins instanceof XORI) {
             aluOut = a.or(imm);
@@ -493,6 +528,7 @@ public class Controller implements Initializable{
             while(ALUOutput.length() < 16){
                 ALUOutput = "0" + ALUOutput;
             }
+            ALUOutput = ALUOutput.toUpperCase();
             cond = 0;
         } else if (ins instanceof BC) {
             BigInteger nNPC = new BigInteger(Integer.toString(NPC));
@@ -501,6 +537,7 @@ public class Controller implements Initializable{
             while (ALUOutput.length() < 16){
                 ALUOutput = "0" + ALUOutput;
             }
+            ALUOutput = ALUOutput.toUpperCase();
             cond = 1;
         } else if (ins instanceof BEQC) {
             BigInteger nNPC = new BigInteger(Integer.toString(NPC));
@@ -509,6 +546,7 @@ public class Controller implements Initializable{
             while (ALUOutput.length() < 16){
                 ALUOutput = "0" + ALUOutput;
             }
+            ALUOutput = ALUOutput.toUpperCase();
             if (registers.get("R" + Integer.parseInt(A, 16)).equals(registers.get("R" + Integer.parseInt(B, 16))))
                 cond = 1;
             else cond = 0;
@@ -588,9 +626,6 @@ public class Controller implements Initializable{
                 } catch (Exception e) {
                     return false;
                 }
-
-//                for (String c : codeParts)
-//                    System.out.println(c);
 
                 // Assuming all is correct
                 try {
@@ -689,9 +724,6 @@ public class Controller implements Initializable{
                 } catch (Exception e) {
                     return false;
                 }
-
-//                for (String c : codeParts)
-//                    System.out.println(c);
 
                 // Assuming all is correct
                 try {
