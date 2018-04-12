@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.math.BigInteger;
 import java.net.URL;
@@ -36,7 +37,7 @@ public class Controller implements Initializable{
 
     @FXML private TableColumn<OpcodeTableItem, String>  colBit15to11;
 
-    @FXML private TableColumn<OpcodeTableItem, String>  colBit10t06;
+    @FXML private TableColumn<OpcodeTableItem, String>  colBit10to6;
 
     @FXML private TableColumn<OpcodeTableItem, String>  colBit5to0;
 
@@ -131,25 +132,36 @@ public class Controller implements Initializable{
 
         opcodeTableItems = new ArrayList<>();
 
-//        for (int i = 0; i < instructions.size(); i++){
-//            Instruction ins = instructions.get(i);
-//
-//            if (ins instanceof DADDIU)
-//                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-//                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
-//            else if (ins instanceof DADDU)
-//                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-//                                                         ins.getRt(), ins.getRd(), ins.getSa(), ins.getFunc()));
-//            else if (ins instanceof LD)
-//                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-//                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
-//            else if (ins instanceof SD)
-//                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-//                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
-//            else if (ins instanceof XORI)
-//                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
-//                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
-//        }
+        for (int i = 0; i < instructions.size(); i++){
+            Instruction ins = instructions.get(i);
+
+            if (ins instanceof DADDIU)
+                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
+            else if (ins instanceof DADDU)
+                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                                                         ins.getRt(), ins.getRd(), ins.getSa(), ins.getFunc()));
+            else if (ins instanceof LD)
+                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
+            else if (ins instanceof SD)
+                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
+            else if (ins instanceof XORI)
+                opcodeTableItems.add(new OpcodeTableItem(savedCode[i], ins.toHex(), ins.getOPCode(), ins.getRs(),
+                                                         ins.getRt(), ins.getImm().substring(0, 5), ins.getImm().substring(5, 10), ins.getImm().substring(10, 16)));
+        }
+
+        ObservableList<OpcodeTableItem> data = FXCollections.observableArrayList(opcodeTableItems);
+        colInstruction.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("instruction"));
+        colHexOpcode.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("opcodeHex"));
+        colBit31to26.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit26to31"));
+        colBit25to21.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit21to25"));
+        colBit20to16.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit16to20"));
+        colBit15to11.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit11to15"));
+        colBit10to6.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit6to10"));
+        colBit5to0.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit0to5"));
+        opcodeTable.setItems(data);
     }
 
     @FXML
@@ -177,12 +189,11 @@ public class Controller implements Initializable{
         System.out.println("ALUOUTPUT: " + ALUOutput);
         System.out.println("COND: " + cond);
 
-        if (getNewPC(instructions.get(currPC))) {
-            PC = ALUOutput;
-            System.out.println("PC: " + PC);
+        if (getNewPC(instructions.get(currPC))) {}
+
+        else {
+            System.out.println("PC:x` " + NPC);
         }
-        else
-            System.out.println("PC: " + NPC);
 
         if (instructions.get(currPC) instanceof LD) {
             LMD = ALUOutput;
