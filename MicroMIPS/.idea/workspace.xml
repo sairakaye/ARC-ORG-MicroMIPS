@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4ee8ce20-4814-4418-abfd-d6cc51424b29" name="Default" comment="Added temporary if else for SD and LD">
+    <list default="true" id="4ee8ce20-4814-4418-abfd-d6cc51424b29" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Controller.java" afterPath="$PROJECT_DIR$/src/sample/Controller.java" />
-      <change beforePath="$PROJECT_DIR$/src/sample/DADDIU.java" afterPath="$PROJECT_DIR$/src/sample/DADDIU.java" />
-      <change beforePath="$PROJECT_DIR$/src/sample/MicroMIPSview.fxml" afterPath="$PROJECT_DIR$/src/sample/MicroMIPSview.fxml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -329,7 +326,7 @@
       <workItem from="1523447187199" duration="45000" />
       <workItem from="1523451621457" duration="1600000" />
       <workItem from="1523459723985" duration="342000" />
-      <workItem from="1523494391842" duration="5200000" />
+      <workItem from="1523494391842" duration="5339000" />
     </task>
     <task id="LOCAL-00001" summary="Made the registers and changed the instructions to a hashmap">
       <created>1523462616433</created>
@@ -366,11 +363,18 @@
       <option name="project" value="LOCAL" />
       <updated>1523476131014</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added temporary if else for SD and LD">
+      <created>1523527087168</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1523527087168</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26611000" />
+    <option name="totallyTimeSpent" value="26750000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
