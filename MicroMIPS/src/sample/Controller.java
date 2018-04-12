@@ -71,6 +71,8 @@ public class Controller implements Initializable{
                 isValid = checkingDADDIU(code);
             else if (code.contains("XORI"))
                 isValid = checkingXORI(code);
+
+            System.out.println(isValid);
         }
 
         /*
@@ -145,7 +147,6 @@ public class Controller implements Initializable{
     public boolean checkingDADDIU(String codeLine) {
         ArrayList<String> codeParts = new ArrayList<String>();
         String[] splitter = codeLine.split(",");
-        StringBuilder errorMessage = new StringBuilder();
 
         try {
             if (splitter[0].contains(":")) {
@@ -245,7 +246,6 @@ public class Controller implements Initializable{
     public boolean checkingXORI(String codeLine) {
         ArrayList<String> codeParts = new ArrayList<String>();
         String[] splitter = codeLine.split(",");
-        StringBuilder errorMessage = new StringBuilder();
 
         try {
             if (splitter[0].contains(":")) {
@@ -321,7 +321,7 @@ public class Controller implements Initializable{
 
             // Assuming all is correct
             try {
-                int rt = 0, rs = 0;
+                int rt, rs;
                 if (!codeParts.get(0).equalsIgnoreCase("XORI")) {
                     rt = Integer.parseInt(codeParts.get(2).substring(codeParts.get(2).indexOf("R") + 1));
                     rs = Integer.parseInt(codeParts.get(3).substring(codeParts.get(3).indexOf("R") + 1));
