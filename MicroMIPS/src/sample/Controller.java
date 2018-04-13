@@ -742,12 +742,23 @@ public class Controller implements Initializable{
             cond = 0;
 
         } else if (ins instanceof XORI) {
-            aluOut = a.or(imm);
-            ALUOutput = aluOut.toString(16);
-            while(ALUOutput.length() < 16){
-                ALUOutput = "0" + ALUOutput;
+            aluOut = a.xor(imm);
+
+            if (aluOut.intValue() > 0) {
+                ALUOutput = aluOut.toString(16);
+                while (ALUOutput.length() < 16)
+                    ALUOutput = "0" + ALUOutput;
+            }
+            else {
+                ALUOutput = aluOut.toString(16);
+                while (ALUOutput.length() < 16)
+                    ALUOutput = "f" + ALUOutput;
             }
             ALUOutput = ALUOutput.toUpperCase();
+
+            if (Integer.parseInt(ins.getRt()) <= 0)
+                ALUOutput = "0000000000000000";
+
             registers.put("R" + Integer.parseInt(ins.getRt(),2), ALUOutput);
             cond = 0;
 

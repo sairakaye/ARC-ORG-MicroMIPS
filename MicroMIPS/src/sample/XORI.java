@@ -15,11 +15,24 @@ public class XORI extends Instruction {
         in = Integer.parseInt(rs);
         setRs(Integer.toString(in, 2));
 
-        StringBuilder imm = new StringBuilder(Integer.toString(Integer.parseInt(reg[0].replaceAll("\\D+", ""), 16), 2));
+        String[] immediate = null;
+
+        if (reg[2].indexOf("#") > 0)
+            immediate = reg[2].split("#");
+        else if (reg[2].indexOf("x") > 0)
+            immediate = reg[2].split("x");
+
+        String imm = Integer.toString(Integer.parseInt(immediate[1], 16), 2);
         while (imm.length() < 16){
-            imm.insert(0, "0");
+            imm = "0" + imm;
         }
-        setImm(imm.toString());
+        setImm(imm);
+
+//        StringBuilder imm = new StringBuilder(Integer.toString(Integer.parseInt(reg[0].replaceAll("\\D+", ""), 16), 2));
+//        while (imm.length() < 16){
+//            imm.insert(0, "0");
+//        }
+//        setImm(imm.toString());
 
         String[] first = reg[0].split(" ");
 
@@ -60,7 +73,22 @@ public class XORI extends Instruction {
             nString = nString + "0";
         }
         nString += hex.substring(4, 8);
+        if (hex.substring(4,8).charAt(0) >= '8'){
+            nString = "";
+            while (nString.length() < 12){
+                nString = nString + "f";
+            }
+            nString += hex.substring(4, 8);
+        }
 
         return nString;
+//        String nString = "";
+//
+//        while (nString.length() < 12){
+//            nString = nString + "0";
+//        }
+//        nString += hex.substring(4, 8);
+//
+//        return nString;
     }
 }
