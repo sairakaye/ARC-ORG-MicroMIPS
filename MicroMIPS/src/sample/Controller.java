@@ -75,6 +75,8 @@ public class Controller implements Initializable{
 
     @FXML private TableColumn<OpcodeTableItem, String>  colBit5to0;
 
+    @FXML private TextArea pipelineArea;
+
     @FXML
     private void showCyclePane() {
         values = FXCollections.observableArrayList();
@@ -290,12 +292,8 @@ public class Controller implements Initializable{
         colBit5to0.setCellValueFactory(new PropertyValueFactory<OpcodeTableItem, String>("bit0to5"));
         opcodeTable.setItems(data2);
 
-        for (int i = 0; i < 256; i++){
-            String memAdd = Integer.toHexString(i).toUpperCase();
-            while (memAdd.length() < 4)
-                memAdd = "0" + memAdd;
-            memDataTableItems.add(new MemDataTableItem(memAdd, "00"));
-        }
+        for (int i = 0; i < memDataTableItems.size(); i++)
+            memDataTableItems.get(i).setRepresentation("00");
 
         ObservableList<MemDataTableItem> initialMem = FXCollections.observableArrayList(memDataTableItems);
         memAddrCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("address"));
@@ -303,6 +301,7 @@ public class Controller implements Initializable{
         memDataTable.setItems(initialMem);
 
         errorField.clear();
+        pipelineArea.clear();
     }
 
     @FXML
@@ -312,26 +311,27 @@ public class Controller implements Initializable{
                 currPC = NPC;
             else
                 currPC = Integer.parseInt(PC);
-            System.out.println("IR: " + instructions.get(NPC).toHex());
+            pipelineArea.appendText(instructions.get(NPC).toHex() + "\n");
+            pipelineArea.appendText("IR: " + instructions.get(NPC).toHex() + "\n");
             NPC += 4;
-            System.out.println("NPC: " + NPC);
+            pipelineArea.appendText("NPC: " + NPC + "\n");
 
             A = registers.get("R" + instructions.get(currPC).getIR21to25());
-            System.out.println("A: " + A);
+            pipelineArea.appendText("A: " + A + "\n");
             B = registers.get("R" + instructions.get(currPC).getIR16to20());
-            System.out.println("B: " + B);
+            pipelineArea.appendText("B: " + B + "\n");
             Imm = instructions.get(currPC).getR15to0();
-            System.out.println("IMM: " + Imm);
+            pipelineArea.appendText("IMM: " + Imm + "\n");
 
             performOperation(instructions.get(currPC));
-            System.out.println("ALUOUTPUT: " + ALUOutput);
-            System.out.println("COND: " + cond);
+            pipelineArea.appendText("ALUOUTPUT: " + ALUOutput + "\n");
+            pipelineArea.appendText("COND: " + cond + "\n");
 
             if (instructions.get(currPC) instanceof BC || instructions.get(currPC) instanceof BEQC) {
                 PC = ALUOutput;
-                System.out.println("PC: " + PC);
+                pipelineArea.appendText("PC: " + PC + "\n");
             } else
-                System.out.println("PC: " + NPC);
+                pipelineArea.appendText("PC: " + NPC + "\n");
 
             if (instructions.get(currPC) instanceof LD) {
                 //start with address i + 7 because little endian
@@ -347,9 +347,9 @@ public class Controller implements Initializable{
                         break;
                     }
                 }
-                System.out.println("LMD: " + LMD);
+                pipelineArea.appendText("LMD: " + LMD);
             } else
-                System.out.println("LMD: n/a");
+                pipelineArea.appendText("LMD: n/a");
 
             if (instructions.get(currPC) instanceof SD) {
                 int ctr = 0;
@@ -393,18 +393,18 @@ public class Controller implements Initializable{
                 memDataTable.setItems(mem);
                 memDataTable.refresh();
             } else
-                System.out.println("Range: n/a");
+                pipelineArea.appendText("Range: n/a");
 
             if (instructions.get(currPC) instanceof LD) {
                 int register = instructions.get(currPC).getIR16to20();
-                System.out.println(register);
+                pipelineArea.appendText(Integer.toString(register));
                 String target = "R" + register;
                 registers.put(target, LMD);
-                System.out.println("Rn: " + ALUOutput);
+                pipelineArea.appendText("Rn: " + ALUOutput);
             }
 
             else if (instructions.get(currPC) instanceof BC || instructions.get(currPC) instanceof BEQC)
-                System.out.println("Rn: n/a");
+                pipelineArea.appendText("Rn: n/a");
 
             else if (instructions.get(currPC) instanceof SD) {
                 int memory = instructions.get(currPC).getIR16to20();
@@ -412,17 +412,17 @@ public class Controller implements Initializable{
 
             } else if (instructions.get(currPC) instanceof DADDIU || instructions.get(currPC) instanceof XORI) {
                 int register = instructions.get(currPC).getIR16to20();
-                System.out.println(register);
+                pipelineArea.appendText(register + "");
                 String target = "R" + register;
                 registers.put(target, ALUOutput);
-                System.out.println("Rn: " + ALUOutput);
+                pipelineArea.appendText("Rn: " + ALUOutput);
             }
 
             else if (instructions.get(currPC) instanceof DADDU) {
                 int register = Integer.parseInt(instructions.get(currPC).getRd(), 2);
                 String target = "R" + register;
                 registers.put(target, ALUOutput);
-                System.out.println("Rn: " + ALUOutput);
+                pipelineArea.appendText("Rn: " + ALUOutput);
             }
             refreshRegisters();
             currIns++;
@@ -556,6 +556,7 @@ public class Controller implements Initializable{
         selectedR = selectedR.replaceAll("\\s", "");
 
         registers.put(selectedR, temp);
+        newValueField.clear();
 
         refreshRegisters();
     }
@@ -575,6 +576,7 @@ public class Controller implements Initializable{
                 memAddrCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("address"));
                 memDataCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("representation"));
                 memDataTable.setItems(initialMem);
+                memInputField.clear();
                 memDataTable.refresh();
             }
         }catch (Exception e){

@@ -80,7 +80,7 @@
                         <Font name="System Bold" size="15.0" />
                     </font>
                 </Label>
-                <TextArea editable="false" layoutX="596.0" layoutY="41.0" prefHeight="564.0" prefWidth="741.0" style="-fx-border-color: #000000;" />
+                <TextArea fx:id="pipelineArea" editable="false" layoutX="596.0" layoutY="41.0" prefHeight="564.0" prefWidth="741.0" style="-fx-border-color: #000000;" />
                 <Button layoutX="356.0" layoutY="571.0" mnemonicParsing="false" onAction="#runOneCycle" prefHeight="26.0" prefWidth="218.0" style="-fx-border-color: #000000;" text="Run Single Step">
                     <font>
                         <Font name="System Bold" size="12.0" />
