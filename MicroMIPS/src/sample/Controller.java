@@ -17,6 +17,7 @@ import java.math.BigInteger;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
@@ -91,15 +92,17 @@ public class Controller implements Initializable{
 
     @FXML
     private void processCode() {
+        int count = 0;
         boolean isValid = false;
         savedCode = codingArea.getText().split("\\n");
-        ArrayList<String> labels = new ArrayList<>();
+        labels = new HashMap<>();
 
         if (savedCode.length <= 127) {
 
             for (String code : savedCode) {
                 if (code.contains(":"))
-                    labels.add(code.substring(0, code.indexOf(":")));
+                    labels.put(count, code.substring(0, code.indexOf(":")));
+                count += 4;
             }
 
             for (String code : savedCode) {
@@ -146,7 +149,7 @@ public class Controller implements Initializable{
                         return;
                     }
                 } else if (toUse.startsWith("BC")) {
-                    isValid = checkingBC(labels, code);
+                    isValid = checkingBC(new ArrayList<String>(labels.values()), code);
 
                     if (!isValid) {
                         errorField.appendText("Error in line: " + code + "\n");
@@ -154,7 +157,7 @@ public class Controller implements Initializable{
                         return;
                     }
                 } else if (toUse.startsWith("BEQC")) {
-                    isValid = checkingBEQC(labels, code);
+                    isValid = checkingBEQC(new ArrayList<String>(labels.values()), code);
 
 
                     if (!isValid) {
@@ -299,7 +302,7 @@ public class Controller implements Initializable{
         memAddrCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("address"));
         memDataCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("representation"));
         memDataTable.setItems(initialMem);
-
+        memDataTable.refresh();
         errorField.clear();
         pipelineArea.clear();
     }
@@ -311,7 +314,6 @@ public class Controller implements Initializable{
                 currPC = NPC;
             else
                 currPC = Integer.parseInt(PC);
-            pipelineArea.appendText(instructions.get(NPC).toHex() + "\n");
             pipelineArea.appendText("IR: " + instructions.get(NPC).toHex() + "\n");
             NPC += 4;
             pipelineArea.appendText("NPC: " + NPC + "\n");
@@ -327,7 +329,23 @@ public class Controller implements Initializable{
             pipelineArea.appendText("ALUOUTPUT: " + ALUOutput + "\n");
             pipelineArea.appendText("COND: " + cond + "\n");
 
+            System.out.println("NPC: " + NPC);
+            try {
+                System.out.println();
+                A = registers.get("R" + instructions.get(currPC).getIR21to25());
+                System.out.println("A: " + A);
+                B = registers.get("R" + instructions.get(currPC).getIR16to20());
+                System.out.println("B: " + B);
+                Imm = instructions.get(currPC).getR15to0();
+                System.out.println("IMM: " + Imm);
+
+                performOperation(instructions.get(currPC));
+            } catch (Exception e) {
+                //do nothing
+            }
+
             if (instructions.get(currPC) instanceof BC || instructions.get(currPC) instanceof BEQC) {
+
                 PC = ALUOutput;
                 pipelineArea.appendText("PC: " + PC + "\n");
             } else
@@ -347,9 +365,9 @@ public class Controller implements Initializable{
                         break;
                     }
                 }
-                pipelineArea.appendText("LMD: " + LMD);
+                pipelineArea.appendText("LMD: " + LMD + " ");
             } else
-                pipelineArea.appendText("LMD: n/a");
+                pipelineArea.appendText("LMD: n/a ");
 
             if (instructions.get(currPC) instanceof SD) {
                 int ctr = 0;
@@ -393,19 +411,18 @@ public class Controller implements Initializable{
                 memDataTable.setItems(mem);
                 memDataTable.refresh();
             } else
-                pipelineArea.appendText("Range: n/a");
+                pipelineArea.appendText("Range: n/a ");
 
             if (instructions.get(currPC) instanceof LD) {
                 int register = instructions.get(currPC).getIR16to20();
-                pipelineArea.appendText(Integer.toString(register));
                 String target = "R" + register;
                 registers.put(target, LMD);
-                pipelineArea.appendText("Rn: " + ALUOutput);
+                pipelineArea.appendText("Rn: " + ALUOutput + "\n");
             }
 
-            else if (instructions.get(currPC) instanceof BC || instructions.get(currPC) instanceof BEQC)
-                pipelineArea.appendText("Rn: n/a");
-
+            else if (instructions.get(currPC) instanceof BC || instructions.get(currPC) instanceof BEQC) {
+                pipelineArea.appendText("Rn: n/a\n");
+            }
             else if (instructions.get(currPC) instanceof SD) {
                 int memory = instructions.get(currPC).getIR16to20();
                 System.out.println("Memory for SD " + memory);
@@ -415,14 +432,14 @@ public class Controller implements Initializable{
                 pipelineArea.appendText(register + "");
                 String target = "R" + register;
                 registers.put(target, ALUOutput);
-                pipelineArea.appendText("Rn: " + ALUOutput);
+                pipelineArea.appendText("Rn: " + ALUOutput + "\n");
             }
 
             else if (instructions.get(currPC) instanceof DADDU) {
                 int register = Integer.parseInt(instructions.get(currPC).getRd(), 2);
                 String target = "R" + register;
                 registers.put(target, ALUOutput);
-                pipelineArea.appendText("Rn: " + ALUOutput);
+                pipelineArea.appendText("Rn: " + ALUOutput + "\n");
             }
             refreshRegisters();
             currIns++;
@@ -447,7 +464,6 @@ public class Controller implements Initializable{
         for(String line : savedCode) {
             String[] temp = null;
 
-            // Medyo buggy pag may space from the label to the instruction.
             if (line.contains(":")) {
                 temp = line.trim().substring(line.indexOf(":")+1).split("\\s+");
             } else {
@@ -469,36 +485,30 @@ public class Controller implements Initializable{
             } else if (temp[0].equalsIgnoreCase("BC")) {
                 System.out.println("BC executed");
                 int dist = 0;
-                for (int i = 0; i < savedCode.length; i++){
-                    if (savedCode[i].contains(":")){
-                        String code[] = savedCode[i].split(":");
-                        if (temp[1].equals(code[0])){
-                            dist = i - counter;
-                            if (dist < 0)
-                                dist += 1;
-                            else
-                                dist -= 1;
-                            break;
-                        }
+                Map<Integer, String> labelsMap = labels;
+
+                for(Map.Entry<Integer, String> label: labelsMap.entrySet()) {
+                    if (label.getValue().trim().equalsIgnoreCase(temp[1].trim())) {
+                        dist = label.getKey();
                     }
                 }
+
+                dist = (dist / 4) - 1;
                 instructions.put(NPC, new BC(line, dist));
             } else if (temp[0].equalsIgnoreCase("BEQC")) {
-                System.out.println("BEQC");
+                temp = line.trim().split("\\s+");
+
+                System.out.println(temp[3].trim());
                 int dist = 0;
-                for (int i = 0; i < savedCode.length; i++){
-                    if (savedCode[i].contains(":")){
-                        String code[] = savedCode[i].split(":");
-                        if (temp[2].equals(code[0])){
-                            dist = i - counter;
-                            if (dist < 0)
-                                dist += 1;
-                            else
-                                dist -= 1;
-                            break;
-                        }
+                Map<Integer, String> labelsMap = labels;
+
+                for(Map.Entry<Integer, String> label: labelsMap.entrySet()) {
+                    if (label.getValue().trim().equalsIgnoreCase(temp[3].trim())) {
+                        dist = label.getKey();
                     }
                 }
+
+                dist = (dist / 4) - 1;
                 instructions.put(NPC, new BEQC(line, dist));
             } else if (temp[0].equalsIgnoreCase("XORI")) {
                 System.out.println("XORI");
@@ -578,6 +588,7 @@ public class Controller implements Initializable{
                 memDataTable.setItems(initialMem);
                 memInputField.clear();
                 memDataTable.refresh();
+                memInputField.clear();
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -799,18 +810,20 @@ public class Controller implements Initializable{
 
         } else if (ins instanceof BC) {
             BigInteger nNPC = new BigInteger(Integer.toString(NPC));
-            aluOut = nNPC.add(imm.divide(new BigInteger("4")));
+            aluOut = new BigInteger(Integer.toString(((BC) ins).getAddr()));
             ALUOutput = aluOut.toString(16);
             while (ALUOutput.length() < 16){
+                if (ALUOutput.length() == 2)
+                    ALUOutput = "1" + ALUOutput;
+                else
                 ALUOutput = "0" + ALUOutput;
             }
             ALUOutput = ALUOutput.toUpperCase();
-
             cond = 1;
 
         } else if (ins instanceof BEQC) {
             BigInteger nNPC = new BigInteger(Integer.toString(NPC));
-            aluOut = nNPC.add(imm.divide(new BigInteger("4")));
+            aluOut = new BigInteger(Integer.toString(((BC) ins).getAddr()));
             ALUOutput = aluOut.toString(16);
             while (ALUOutput.length() < 16){
                 ALUOutput = "0" + ALUOutput;
@@ -1369,4 +1382,5 @@ public class Controller implements Initializable{
     private String PC;
     private String LMD;
     private String selectedR;
+    private HashMap<Integer, String> labels;
 }

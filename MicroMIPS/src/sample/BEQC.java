@@ -3,9 +3,15 @@ package sample;
 import java.math.BigInteger;
 
 public class BEQC extends Instruction {
+    private int addr;
+
+    public int getAddr() {
+        return addr;
+    }
+
     BEQC(String line, int dist) {
         int in;
-
+        addr = (dist + 1) * 4;
         setOPCode("001000");
 
         String reg[] = line.split(",");
@@ -13,12 +19,13 @@ public class BEQC extends Instruction {
         String[] temp = reg[0].split(" ");
 
         // TODO fix this
-        String rs = temp[0].replaceAll("\\D+", "");
+        String rs = temp[1].trim().substring(1);
+        System.out.println(temp[1]);
         in = Integer.parseInt(rs);
         System.out.println();
         setRs(Integer.toString(in, 2));
 
-        String rt = temp[1].replaceAll("\\D+", "");
+        String rt = reg[1].trim().substring(1);
         in = Integer.parseInt(rt);
         setRt(Integer.toString(in, 2));
 
@@ -30,7 +37,6 @@ public class BEQC extends Instruction {
                 binString = "0" + binString;
         }
         setImm(binString);
-
     }
 
     @Override

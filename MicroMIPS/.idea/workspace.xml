@@ -38,32 +38,57 @@
       <file leaf-file-name="SD.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/SD.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
+            <state relative-caret-position="17">
               <caret line="25" column="81" selection-start-line="25" selection-start-column="81" selection-end-line="25" selection-end-column="81" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="370" selection-start-line="370" selection-end-line="388" selection-end-column="19" />
+            <state relative-caret-position="327">
+              <caret line="315" column="46" selection-start-line="315" selection-start-column="46" selection-end-line="315" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#35002#35010#0" expanded="true" />
-                <element signature="e#38928#38936#0" expanded="true" />
-                <element signature="e#42846#42854#0" expanded="true" />
-                <element signature="e#45061#45069#0" expanded="true" />
-                <element signature="e#47279#47287#0" expanded="true" />
-                <element signature="e#50367#50375#0" expanded="true" />
-                <element signature="e#51553#51561#0" expanded="true" />
+                <element signature="e#35776#39698#0" />
+                <element signature="e#35877#35885#0" expanded="true" />
+                <element signature="e#39704#43618#0" />
+                <element signature="e#39803#39811#0" expanded="true" />
+                <element signature="e#43624#45833#0" />
+                <element signature="e#43721#43729#0" expanded="true" />
+                <element signature="e#45839#48048#0" />
+                <element signature="e#45936#45944#0" expanded="true" />
+                <element signature="e#48054#51113#0" />
+                <element signature="e#48154#48162#0" expanded="true" />
+                <element signature="e#51119#52297#0" />
+                <element signature="e#51242#51250#0" expanded="true" />
+                <element signature="e#52303#55543#0" />
+                <element signature="e#52428#52436#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OpcodeTableItem.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BEQC.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/BEQC.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="544">
+              <caret line="34" selection-start-line="34" selection-end-line="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BC.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/BC.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="14" column="30" lean-forward="true" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OpcodeTableItem.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/OpcodeTableItem.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
@@ -106,6 +131,8 @@
       <find>insert</find>
       <find>Memory</find>
       <find>refreshReg</find>
+      <find>runOne</find>
+      <find>performO</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -139,7 +166,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
     <option name="width" value="978" />
     <option name="height" value="1040" />
@@ -194,6 +221,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/Rhei Justin Juan/Desktop/IntelliJ Projects/ARC-ORG-MicroMIPS/MicroMIPS/src/sample/InvalidController.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -202,7 +230,6 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/Rhei Justin Juan/Desktop/IntelliJ Projects/ARC-ORG-MicroMIPS/MicroMIPS/src/sample/InvalidController.java" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -313,7 +340,7 @@
       <workItem from="1523556436207" duration="6825000" />
       <workItem from="1523571625331" duration="6277000" />
       <workItem from="1523582216609" duration="1379000" />
-      <workItem from="1523587621529" duration="435000" />
+      <workItem from="1523587621529" duration="2406000" />
     </task>
     <task id="LOCAL-00001" summary="Made the registers and changed the instructions to a hashmap">
       <created>1523462616433</created>
@@ -417,15 +444,16 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72104000" />
+    <option name="totallyTimeSpent" value="74075000" />
   </component>
   <component name="TodoView" selected-index="2" />
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
@@ -433,7 +461,7 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49791667" weight="0.32827586" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49791667" visible="true" weight="0.32827586" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
@@ -452,7 +480,6 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32965517" />
-      <window_info anchor="bottom" id="Messages" order="7" />
     </layout>
     <layout-to-restore>
       <window_info id="Designer" order="1" />
@@ -550,13 +577,20 @@
           <caret line="558" column="30" selection-start-line="558" selection-start-column="30" selection-end-line="558" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#35002#35010#0" expanded="true" />
-            <element signature="e#38928#38936#0" expanded="true" />
-            <element signature="e#42846#42854#0" expanded="true" />
-            <element signature="e#45061#45069#0" expanded="true" />
-            <element signature="e#47279#47287#0" expanded="true" />
-            <element signature="e#50367#50375#0" expanded="true" />
-            <element signature="e#51553#51561#0" expanded="true" />
+            <element signature="e#35776#39698#0" />
+            <element signature="e#35877#35885#0" expanded="true" />
+            <element signature="e#39704#43618#0" />
+            <element signature="e#39803#39811#0" expanded="true" />
+            <element signature="e#43624#45833#0" />
+            <element signature="e#43721#43729#0" expanded="true" />
+            <element signature="e#45839#48048#0" />
+            <element signature="e#45936#45944#0" expanded="true" />
+            <element signature="e#48054#51113#0" />
+            <element signature="e#48154#48162#0" expanded="true" />
+            <element signature="e#51119#52297#0" />
+            <element signature="e#51242#51250#0" expanded="true" />
+            <element signature="e#52303#55543#0" />
+            <element signature="e#52428#52436#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -807,20 +841,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/BEQC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="884">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/BC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="702">
-          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Instruction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1846">
@@ -835,18 +855,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/SD.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="81" selection-start-line="25" selection-start-column="81" selection-end-line="25" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/InvalidAddrInput.java" />
     <entry file="file://$PROJECT_DIR$/src/sample/InvalidAddrInputController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -854,6 +870,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -861,6 +880,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="14" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -871,27 +893,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="370" selection-start-line="370" selection-end-line="388" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#35002#35010#0" expanded="true" />
-            <element signature="e#38928#38936#0" expanded="true" />
-            <element signature="e#42846#42854#0" expanded="true" />
-            <element signature="e#45061#45069#0" expanded="true" />
-            <element signature="e#47279#47287#0" expanded="true" />
-            <element signature="e#50367#50375#0" expanded="true" />
-            <element signature="e#51553#51561#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/OpcodeTableItem.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="21" column="34" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/BEQC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/SD.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="25" column="81" selection-start-line="25" selection-start-column="81" selection-end-line="25" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/BC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="14" column="30" lean-forward="true" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="315" column="46" selection-start-line="315" selection-start-column="46" selection-end-line="315" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#35776#39698#0" />
+            <element signature="e#35877#35885#0" expanded="true" />
+            <element signature="e#39704#43618#0" />
+            <element signature="e#39803#39811#0" expanded="true" />
+            <element signature="e#43624#45833#0" />
+            <element signature="e#43721#43729#0" expanded="true" />
+            <element signature="e#45839#48048#0" />
+            <element signature="e#45936#45944#0" expanded="true" />
+            <element signature="e#48054#51113#0" />
+            <element signature="e#48154#48162#0" expanded="true" />
+            <element signature="e#51119#52297#0" />
+            <element signature="e#51242#51250#0" expanded="true" />
+            <element signature="e#52303#55543#0" />
+            <element signature="e#52428#52436#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
