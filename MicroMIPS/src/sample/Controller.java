@@ -256,7 +256,7 @@ public class Controller implements Initializable{
         B = new String();
         Imm = new String();
         ALUOutput = new String();
-        PC = new String();
+        PC = new String("100");
         LMD = new String();
         NPC = 100;
 
@@ -306,7 +306,7 @@ public class Controller implements Initializable{
     @FXML
     private void runOneCycle() {
         if (currIns < instructions.size()) {
-            if (cond == 1)
+            if (cond == 0)
                 currPC = NPC;
             else
                 currPC = Integer.parseInt(PC);
@@ -388,10 +388,6 @@ public class Controller implements Initializable{
             else if (instructions.get(currPC) instanceof SD) {
                 int memory = instructions.get(currPC).getIR16to20();
                 System.out.println(memory);
-
-
-
-
 
             } else if (instructions.get(currPC) instanceof DADDIU || instructions.get(currPC) instanceof XORI) {
                 int register = instructions.get(currPC).getIR16to20();
@@ -613,7 +609,7 @@ public class Controller implements Initializable{
         B = new String("");
         Imm = new String("");
         ALUOutput = new String("");
-        PC = new String("");
+        PC = new String("100");
         LMD = new String("");
 
         for (int i = 0; i < 256; i++){
@@ -657,7 +653,7 @@ public class Controller implements Initializable{
         opcodeTable.setItems(data2);
     }
 
-    private void performOperation(Instruction ins){
+    private void performOperation(Instruction ins) {
         BigInteger aluOut;
         BigInteger a = new BigInteger(A, 16);
         BigInteger b = new BigInteger(B, 16);
@@ -665,24 +661,24 @@ public class Controller implements Initializable{
 
         if (ins instanceof DADDIU) {
             aluOut = a.add(imm);
-            if (aluOut.intValue() > 0){
+            if (aluOut.intValue() > 0) {
                 ALUOutput = aluOut.toString(16);
                 while (ALUOutput.length() < 16)
                     ALUOutput = "0" + ALUOutput;
             }
-            else{
+            else {
                 ALUOutput = aluOut.toString(16);
-                while (ALUOutput.length() < 16){
+                while (ALUOutput.length() < 16)
                     ALUOutput = "f" + ALUOutput;
-                }
             }
             ALUOutput = ALUOutput.toUpperCase();
 
-            if (Integer.parseInt(ins.getRt()) <= 0) {
+            if (Integer.parseInt(ins.getRt()) <= 0)
                 ALUOutput = "0000000000000000";
-            }
 
+            registers.put("R" + Integer.parseInt(ins.getRt(),2), ALUOutput);
             cond = 0;
+
         } else if (ins instanceof DADDU) {
             aluOut = a.add(b);
             ALUOutput = aluOut.toString(16);
@@ -695,11 +691,9 @@ public class Controller implements Initializable{
             }
             ALUOutput = ALUOutput.toUpperCase();
 
-            if (Integer.parseInt(ins.getRd()) <= 0) {
-                ALUOutput = "0000000000000000";
-            }
-
+            registers.put("R" + Integer.parseInt(ins.getRt(),2), ALUOutput);
             cond = 0;
+
         } else if (ins instanceof LD) {
             aluOut = a.add(imm);
             ALUOutput = aluOut.toString(16);
@@ -711,8 +705,9 @@ public class Controller implements Initializable{
                 }
             }
             ALUOutput = ALUOutput.toUpperCase();
-
+            registers.put("R" + Integer.parseInt(ins.getRt(),2), ALUOutput);
             cond = 0;
+
         } else if (ins instanceof SD) {
             aluOut = a.add(imm);
             ALUOutput = aluOut.toString(16);
@@ -724,12 +719,9 @@ public class Controller implements Initializable{
                 }
             }
             ALUOutput = ALUOutput.toUpperCase();
-
-            if (Integer.parseInt(ins.getRt()) <= 0) {
-                ALUOutput = "0000000000000000";
-            }
-
+            registers.put("R" + Integer.parseInt(ins.getRt(),2), ALUOutput);
             cond = 0;
+
         } else if (ins instanceof XORI) {
             aluOut = a.or(imm);
             ALUOutput = aluOut.toString(16);
@@ -737,12 +729,9 @@ public class Controller implements Initializable{
                 ALUOutput = "0" + ALUOutput;
             }
             ALUOutput = ALUOutput.toUpperCase();
-
-            if (Integer.parseInt(ins.getRt()) <= 0) {
-                ALUOutput = "0000000000000000";
-            }
-
+            registers.put("R" + Integer.parseInt(ins.getRt(),2), ALUOutput);
             cond = 0;
+
         } else if (ins instanceof BC) {
             BigInteger nNPC = new BigInteger(Integer.toString(NPC));
             aluOut = nNPC.add(imm.divide(new BigInteger("4")));
@@ -751,7 +740,9 @@ public class Controller implements Initializable{
                 ALUOutput = "0" + ALUOutput;
             }
             ALUOutput = ALUOutput.toUpperCase();
+
             cond = 1;
+
         } else if (ins instanceof BEQC) {
             BigInteger nNPC = new BigInteger(Integer.toString(NPC));
             aluOut = nNPC.add(imm.divide(new BigInteger("4")));
@@ -763,6 +754,7 @@ public class Controller implements Initializable{
             if (registers.get("R" + Integer.parseInt(A, 16)).equals(registers.get("R" + Integer.parseInt(B, 16))))
                 cond = 1;
             else cond = 0;
+
         }
     }
 
