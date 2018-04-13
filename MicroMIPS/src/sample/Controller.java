@@ -345,29 +345,46 @@ public class Controller implements Initializable{
                         break;
                     }
                 }
-
                 System.out.println("LMD: " + LMD);
             } else
                 System.out.println("LMD: n/a");
 
             if (instructions.get(currPC) instanceof SD) {
                 int ctr = 0;
-                int llimit = A.length() - 2;
-                int ulimit = A.length();
+                int llimit = B.length() - 2;
+                int ulimit = B.length();
+
                 //String reg = registers.get("R" + instructions.get(currPC).getIR16to20());
-                //B = registers.get("R" + instructions.get(currPC).getIR16to20());
-                for (int i = 0; i < memDataTableItems.size(); i++){
-                    if (ALUOutput.substring(12).equalsIgnoreCase(memDataTableItems.get(i).getAddress())){
+                for (int i = 0; i < memDataTableItems.size(); i++) {
+                    if (ALUOutput.substring(12).equalsIgnoreCase(memDataTableItems.get(i).getAddress())) {
                         System.out.println("found");
-                        while (ctr < 7) {
+                        while (ctr < 8) {
                             memDataTableItems.get(i + ctr).setRepresentation(B.substring(llimit, ulimit));
                             llimit -= 2;
                             ulimit -= 2;
                             ctr++;
                         }
-                        break;
                     }
                 }
+                
+                /*String reg = registers.get("R" + instructions.get(currPC).getIR16to20());
+                for (int i = 0; i < memDataTableItems.size(); i++){
+                    if (ALUOutput.substring(12).equalsIgnoreCase(memDataTableItems.get(i).getAddress())){
+                        System.out.println("found");
+                        StringBuilder sb = new StringBuilder();
+                        while (ctr < 8) {
+                            sb.append(memDataTableItems.get(i+ctr).getRepresentation());
+                            //memDataTableItems.get(i + ctr).setRepresentation(reg.substring(llimit, ulimit));
+                         //   llimit -= 2;
+                          //  ulimit -= 2;
+                            ctr++;
+                        }
+                        System.out.println("R" + instructions.get(currPC).getIR16to20());
+                        System.out.println(sb.toString());
+                        registers.put("R" + instructions.get(currPC).getIR16to20(), sb.toString());
+                        break;
+                    }
+                }*/
                 ObservableList<MemDataTableItem> mem = FXCollections.observableArrayList(memDataTableItems);
                 memAddrCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("address"));
                 memDataCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("representation"));
@@ -378,8 +395,9 @@ public class Controller implements Initializable{
 
             if (instructions.get(currPC) instanceof LD) {
                 int register = instructions.get(currPC).getIR16to20();
+                System.out.println(register);
                 String target = "R" + register;
-                registers.put(target, ALUOutput);
+                registers.put(target, LMD);
                 System.out.println("Rn: " + ALUOutput);
             }
 
@@ -388,7 +406,7 @@ public class Controller implements Initializable{
 
             else if (instructions.get(currPC) instanceof SD) {
                 int memory = instructions.get(currPC).getIR16to20();
-                System.out.println(memory);
+                System.out.println("Memory for SD " + memory);
 
             } else if (instructions.get(currPC) instanceof DADDIU || instructions.get(currPC) instanceof XORI) {
                 int register = instructions.get(currPC).getIR16to20();
@@ -720,7 +738,7 @@ public class Controller implements Initializable{
                 }
             }
             ALUOutput = ALUOutput.toUpperCase();
-            registers.put("R" + Integer.parseInt(ins.getRt(),2), ALUOutput);
+            //registers.put("R" + Integer.parseInt(ins.getRt(),2), ALUOutput);
             cond = 0;
 
         } else if (ins instanceof XORI) {
