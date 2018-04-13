@@ -37,6 +37,8 @@ public class Controller implements Initializable{
 
     @FXML private TextField gotoField;
 
+    @FXML private TextField memInputField;
+
     @FXML private Button gotoButton;
 
     @FXML private Button insertButton;
@@ -560,7 +562,24 @@ public class Controller implements Initializable{
 
     @FXML
     private void setContentInMemory() {
+        try {
+            if (Integer.parseInt(memInputField.getText(), 16) > 255) {
+                final Stage invalid = new Stage();
+                invalid.initModality(Modality.APPLICATION_MODAL);
 
+                popUpInvalidInput(invalid);
+            } else {
+                memDataTableItems.get(memDataTable.getSelectionModel().getSelectedIndex()).setRepresentation(memInputField.getText());
+
+                ObservableList<MemDataTableItem> initialMem = FXCollections.observableArrayList(memDataTableItems);
+                memAddrCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("address"));
+                memDataCol.setCellValueFactory(new PropertyValueFactory<MemDataTableItem, String>("representation"));
+                memDataTable.setItems(initialMem);
+                memDataTable.refresh();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -607,6 +626,20 @@ public class Controller implements Initializable{
         Parent viewParent;
         try {
             viewParent = FXMLLoader.load(getClass().getResource("InvalidGoTo.fxml"));
+            Scene sc = new Scene(viewParent);
+
+            invalid.setScene(sc);
+            invalid.show();
+
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void popUpInvalidInput(Stage invalid){
+        Parent viewParent;
+        try {
+            viewParent = FXMLLoader.load(getClass().getResource("InvalidAddrInput.fxml"));
             Scene sc = new Scene(viewParent);
 
             invalid.setScene(sc);

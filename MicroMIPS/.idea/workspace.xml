@@ -30,7 +30,7 @@
         <entry file="file://$PROJECT_DIR$/src/sample/LD.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="197">
-              <caret line="28" column="9" lean-forward="true" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
+              <caret line="28" column="9" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -39,7 +39,7 @@
         <entry file="file://$PROJECT_DIR$/src/sample/SD.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="221">
-              <caret line="25" column="81" lean-forward="true" selection-start-line="25" selection-start-column="81" selection-end-line="25" selection-end-column="81" />
+              <caret line="25" column="81" selection-start-line="25" selection-start-column="81" selection-end-line="25" selection-end-column="81" />
             </state>
           </provider>
         </entry>
@@ -47,19 +47,10 @@
       <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="381" column="29" selection-start-line="381" selection-start-column="16" selection-end-line="381" selection-end-column="29" />
+            <state relative-caret-position="259">
+              <caret line="586" column="46" lean-forward="true" selection-start-line="586" selection-start-column="46" selection-end-line="586" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#18761#19126#0" />
-                <element signature="e#19132#21932#0" />
-                <element signature="e#21938#22294#0" />
-                <element signature="e#22300#22849#0" />
-                <element signature="e#22855#23220#0" />
-                <element signature="e#23226#23278#0" />
-                <element signature="e#23284#24746#0" />
-                <element signature="e#24752#25120#0" />
-                <element signature="e#25126#28009#0" />
                 <element signature="e#31811#35733#0" />
                 <element signature="e#35739#39653#0" />
                 <element signature="e#39659#41868#0" />
@@ -75,8 +66,8 @@
       <file leaf-file-name="InvalidGoToController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/InvalidGoToController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+            <state relative-caret-position="170">
+              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -88,7 +79,7 @@
         <entry file="file://$PROJECT_DIR$/src/sample/OpcodeTableItem.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="34">
-              <caret line="8" column="43" lean-forward="true" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
+              <caret line="8" column="43" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -154,6 +145,8 @@
       <find>PC =</find>
       <find>B</find>
       <find>performOper</find>
+      <find>setContent</find>
+      <find>popUpInv</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -175,6 +168,8 @@
         <option value="$PROJECT_DIR$/src/sample/InvalidGoTo.fxml" />
         <option value="$PROJECT_DIR$/src/sample/LD.java" />
         <option value="$PROJECT_DIR$/src/sample/SD.java" />
+        <option value="$PROJECT_DIR$/src/sample/InvalidAddrInput.java" />
+        <option value="$PROJECT_DIR$/src/sample/InvalidAddrInputController.java" />
         <option value="$PROJECT_DIR$/src/sample/Controller.java" />
       </list>
     </option>
@@ -462,7 +457,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="68999000" />
+    <option name="totallyTimeSpent" value="70440000" />
   </component>
   <component name="TodoView" selected-index="2" />
   <component name="ToolWindowManager">
@@ -575,13 +570,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/sample/BC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/DADDU.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -811,10 +799,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="26" column="48" selection-start-line="26" selection-start-column="48" selection-end-line="26" selection-end-column="48" />
-          <folding>
-            <element signature="e#428#429#0" />
-            <element signature="e#464#465#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -860,36 +844,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/MicroMIPSview.fxml">
-      <provider selected="true" editor-type-id="text-editor" />
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/InvalidRegister.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="250" selection-start-line="7" selection-start-column="210" selection-end-line="7" selection-end-column="250" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/InvalidGoTo.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/InvalidGoToController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/InvalidController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -903,7 +857,7 @@
     <entry file="file://$PROJECT_DIR$/src/sample/OpcodeTableItem.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
-          <caret line="8" column="43" lean-forward="true" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
+          <caret line="8" column="43" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
         </state>
       </provider>
     </entry>
@@ -917,32 +871,62 @@
     <entry file="file://$PROJECT_DIR$/src/sample/LD.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="197">
-          <caret line="28" column="9" lean-forward="true" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
+          <caret line="28" column="9" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/SD.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="25" column="81" lean-forward="true" selection-start-line="25" selection-start-column="81" selection-end-line="25" selection-end-column="81" />
+          <caret line="25" column="81" selection-start-line="25" selection-start-column="81" selection-end-line="25" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/MicroMIPSview.fxml">
+      <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/InvalidGoTo.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/InvalidAddrInput.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="29" lean-forward="true" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/InvalidAddrInputController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/InvalidGoToController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="381" column="29" selection-start-line="381" selection-start-column="16" selection-end-line="381" selection-end-column="29" />
+        <state relative-caret-position="259">
+          <caret line="586" column="46" lean-forward="true" selection-start-line="586" selection-start-column="46" selection-end-line="586" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#18761#19126#0" />
-            <element signature="e#19132#21932#0" />
-            <element signature="e#21938#22294#0" />
-            <element signature="e#22300#22849#0" />
-            <element signature="e#22855#23220#0" />
-            <element signature="e#23226#23278#0" />
-            <element signature="e#23284#24746#0" />
-            <element signature="e#24752#25120#0" />
-            <element signature="e#25126#28009#0" />
             <element signature="e#31811#35733#0" />
             <element signature="e#35739#39653#0" />
             <element signature="e#39659#41868#0" />
