@@ -723,6 +723,9 @@ public class Controller implements Initializable{
             cond = 0;
 
         } else if (ins instanceof XORI) {
+            String binary = imm.toString(2);
+            System.out.println("Binary value: " + binary);
+            System.out.println("Immediate: " + imm);
             aluOut = a.or(imm);
             ALUOutput = aluOut.toString(16);
             while(ALUOutput.length() < 16){
