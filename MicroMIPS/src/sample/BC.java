@@ -3,11 +3,16 @@ package sample;
 import java.math.BigInteger;
 
 public class BC extends Instruction {
+    private int addr;
+
+    public int getAddr() {
+        return addr;
+    }
 
     BC(String line, int dist) {
 
         setOPCode("110010");
-
+        addr = (dist + 1) * 4;
         // TODO fix this
         String binString = Integer.toBinaryString(dist);
         if (binString.length() > 26){
