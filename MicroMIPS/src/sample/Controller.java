@@ -345,7 +345,6 @@ public class Controller implements Initializable{
                         break;
                     }
                 }
-
                 System.out.println("LMD: " + LMD);
             } else
                 System.out.println("LMD: n/a");
@@ -377,8 +376,9 @@ public class Controller implements Initializable{
 
             if (instructions.get(currPC) instanceof LD) {
                 int register = instructions.get(currPC).getIR16to20();
+                System.out.println(register);
                 String target = "R" + register;
-                registers.put(target, ALUOutput);
+                registers.put(target, LMD);
                 System.out.println("Rn: " + ALUOutput);
             }
 
