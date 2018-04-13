@@ -691,7 +691,7 @@ public class Controller implements Initializable{
             }
             ALUOutput = ALUOutput.toUpperCase();
 
-            registers.put("R" + Integer.parseInt(ins.getRt(),2), ALUOutput);
+            registers.put("R" + Integer.parseInt(ins.getRd(),2), ALUOutput);
             cond = 0;
 
         } else if (ins instanceof LD) {
