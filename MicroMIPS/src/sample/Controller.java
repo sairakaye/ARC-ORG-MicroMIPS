@@ -354,12 +354,13 @@ public class Controller implements Initializable{
                 int ctr = 0;
                 int llimit = A.length() - 2;
                 int ulimit = A.length();
-                String reg = registers.get("R" + Integer.parseInt(B, 16));
+                //String reg = registers.get("R" + instructions.get(currPC).getIR16to20());
+                //B = registers.get("R" + instructions.get(currPC).getIR16to20());
                 for (int i = 0; i < memDataTableItems.size(); i++){
                     if (ALUOutput.substring(12).equalsIgnoreCase(memDataTableItems.get(i).getAddress())){
                         System.out.println("found");
                         while (ctr < 7) {
-                            memDataTableItems.get(i + ctr).setRepresentation(reg.substring(llimit, ulimit));
+                            memDataTableItems.get(i + ctr).setRepresentation(B.substring(llimit, ulimit));
                             llimit -= 2;
                             ulimit -= 2;
                             ctr++;

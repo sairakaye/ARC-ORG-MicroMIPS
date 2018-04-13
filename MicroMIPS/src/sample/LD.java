@@ -23,7 +23,7 @@ class LD extends Instruction{
         setRs(Integer.toString(in, 2));
 
         //TODO: fix set imm for LD, it can accept hex letters
-        String imm = Integer.toString(Integer.parseInt(second[0].replaceAll("\\D+",""), 16), 2);
+        String imm = Integer.toString(Integer.parseInt(second[0].trim(), 16), 2);
         while (imm.length() < 16){
             imm = "0" + imm;
         }

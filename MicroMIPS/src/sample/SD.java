@@ -23,7 +23,7 @@ public class SD extends Instruction {
         setRs(Integer.toString(in, 2));
 
         // store area can have letters since hex
-        String imm = Integer.toString(Integer.parseInt(second[0].replaceAll("\\D+",""), 16), 2);
+        String imm = Integer.toString(Integer.parseInt(second[0].trim(), 16), 2);
         while (imm.length() < 16){
             imm = "0" + imm;
         }
